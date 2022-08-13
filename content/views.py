@@ -3,8 +3,19 @@ from django.views import generic
 from .models import Topic
 
 
-class TopicList(generic.ListView):
-    model = Topic
-    template_name = 'index.html'
-    paginate_by = 4
+def LoadIndex(request):
+    topic_items = Topic.objects.all()
+    context = {
+        'topic_items': topic_items 
+    }
+
+    # model = Topic
+    # template_name = 'index.html'
+    # paginate_by = 4
+    return render(request, 'content/index.html', context)
+
+def LoadHealth(request):
+    return render(request, 'content/health.html')
+
+
 

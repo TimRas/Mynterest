@@ -58,8 +58,10 @@ class Topic(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def amount_of_posts_in_total(self):
-        return self.amount_of_posts.count()
+    # def amount_of_posts_in_total(self):
+    #     return self.amount_of_posts.count()
 
-    def amount_of_comments_in_total(self):
-        return self.amount_of_comments.count()
+    # def amount_of_comments_in_total(self):
+    #     return self.amount_of_comments.count()
+
+    

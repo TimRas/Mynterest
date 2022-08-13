@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from content.views import LoadIndex, LoadHealth
 
 
 urlpatterns = [
+    path('', LoadIndex, name='LoadIndex'),
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
+    path('health/', LoadHealth, name='LoadHealth')
+    
+
 ]
