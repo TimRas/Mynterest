@@ -9,9 +9,9 @@ def LoadIndex(request):
         'topic_items': topic_items 
     }
 
-    # model = Topic
-    # template_name = 'index.html'
-    # paginate_by = 4
+    model = Topic
+    template_name = 'index.html'
+    paginate_by = 4
     return render(request, 'content/index.html', context)
 
 def LoadHealth(request):
