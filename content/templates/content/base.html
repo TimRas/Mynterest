@@ -3,26 +3,45 @@
 <html lang="en">
 
 <head>
+    {% block meta %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type='text/css' href="{% static 'css/clean-blog.min.css' %}">
-	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    {% endblock %}
 
-    <title>Mynterest | Home</title>
+    {% block extra_meta %}
+    {% endblock%}
+
+    {% block core_css %}
+    <link rel="stylesheet" type='text/css' href="{% static 'css/clean-blog.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    {% endblock %}
+
+    {% block core_js %}
+    {% endblock%}
+
+    {% block extra_js %}
+    {% endblock %}
+
+    <title>Mynterest | Home {% block extra_title %}{% endblock %} </title>
 </head>
 
+<body>
 
-	<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    
-    
-    
-	
+{% block content %}
+{% endblock %}
 
-	<script src="{% static 'js/clean-blog.min.js' %}"></script>
-    
+{% block page_header %}
+{% endblock %}
+
+{% block postload_js %}
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/clean-blog.min.js' %}"></script>
+{% endblock %}
+
 
 </body>
+
 
 </html>
