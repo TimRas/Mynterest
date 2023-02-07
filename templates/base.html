@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block meta %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
+
+    {% block extra_meta %}
+    {% endblock%}
+
+    {% block core_css %}
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    {% endblock %}
+
+    {% block core_js %}
+    {% endblock%}
+
+    {% block extra_js %}
+    {% endblock %}
+
+    <title>Mynterest | Home {% block extra_title %}{% endblock %} </title>
+</head>
+
+<body>
+    <header class="header-container">
+        <div class="row">
+            <table>
+                {% for topic in topics %}
+                <thead>
+                    <div class="col-33">
+                        <button>
+                            <a href="*">
+                                <H2><strong>{{ topic.title }}</strong></H2>
+                            </a>
+                        </button>
+                    </div>
+                </thead>
+                {% endfor %}
+            </table>
+        </div>
+    </header>
+
+{% block content %}
+{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block postload_js %}
+{% endblock %}
+
+
+</body>
+
+
+</html>
