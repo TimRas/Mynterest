@@ -11,7 +11,6 @@ def LoadIndex(request):
 
     model = Topic
     template_name = 'index.html'
-    paginate_by = 4
     return render(request, 'index.html', context)
 
 def LoadHealth(request):

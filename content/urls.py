@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.LoadHealth, name='home')
+    path('', views.LoadIndex, name='home')
 ]
