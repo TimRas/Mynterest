@@ -7,7 +7,7 @@
     {% block meta %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
 
     {% block extra_meta %}
@@ -15,47 +15,49 @@
 
     {% block core_css %}
     <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300&family=Comic+Neue:wght@300&display=swap"
+        rel="stylesheet">
     {% endblock %}
 
     {% block core_js %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+    </script>
     {% endblock%}
-
-    {% block extra_js %}
-    {% endblock %}
 
     <title>Mynterest | Home {% block extra_title %}{% endblock %} </title>
 </head>
 
 <body>
-    <header class="header-container">
-        <div class="row">
-            <table>
-                {% for topic in topics %}
-                <thead>
-                    <div class="col-33">
-                        <button>
-                            <a href="*">
-                                <H2><strong>{{ topic.title }}</strong></H2>
-                            </a>
-                        </button>
-                    </div>
-                </thead>
-                {% endfor %}
-            </table>
-        </div>
+    <header class="header-container mt-2">
+        <a class="logo-link" href="*">
+            <h2><strong>Mynterest</strong></h2>
+        </a>
     </header>
 
-{% block content %}
-{% endblock %}
+    {% block content %} 
+    {% endblock %}
 
-{% block page_header %}
-{% endblock %}
+    <footer class="footer-container fixed-bottom mb-2">
+        <div class="footer-info">
+            <h2><footer>&copy; Copyright 2023 Tim Ras</footer>
+            </h2>
+        </div>
+    </footer>
 
-{% block postload_js %}
-{% endblock %}
+    {% block page_header %}
+    {% endblock %}
+
+    {% block postload_js %}
+    {% endblock %}
 
 
 </body>
-
 
 </html>

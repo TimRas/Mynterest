@@ -1,19 +1,108 @@
-* {
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-
-html, body {
+html,
+body {
     height: 100%;
-    background-color: red;
-    background: blue;
+    min-height: calc(100vh - 189px);
+    background-color: black;
+    background: white;
+    font-family: 'Bitter', serif;
+    font-family: 'Comic Neue', cursive;
+
 }
 
+
+/* ---- Header ----*/
 
 .header-container {
     width: 80%;
-    height: 40%;
+    height: 15%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: grey;
     text-decoration: none;
+    border-radius: 8px;
 }
+
+.logo-link {
+    text-decoration: none;
+    color: white;
+    transition-duration: 0.4s;
+}
+
+.logo-link:hover {
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+/* ---- Main content container ----*/
+
+.main-section {
+    width: 80%;
+    height: 60%;
+    margin: auto;
+}
+
+/* ---- Topic main index.html ----*/
+
+.topic-container {
+    height: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topic-item {
+    font-size: 24px;
+    padding: 14px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    margin: auto;
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+.topic-item:hover {
+    background-color: grey;
+    color: white;
+}
+
+/* .topic-itemcontainer {
+
+} */
+
+/* ---- Footer container ----*/
+
+.footer-container {
+    width: 80%;
+    height: 10%; 
+    margin: auto;
+    background-color: grey;
+    text-decoration: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-container {
+    height: 40%; 
+    margin: auto;
+}
+
+.intro-message {
+    text-align: center;
+}
+
+/* .intro-text {
+    text-align: left;
+} */
+
+.footer-info {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+}
+
