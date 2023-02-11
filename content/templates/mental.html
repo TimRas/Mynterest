@@ -1,21 +1,32 @@
-{% extends "content/base.html" %}
+{% extends "base.html" %}
 
+{% load static %}
 
 {% block content %}
-<section class="main-section">
-    <div>
-        <div>
-                <p class="navbar"></p>
+<div class="main-section mt-5">
+    <div class="row post-container">
+        {% for post in post_items %}
+        <div class="col-4 pt-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4><strong>{{ post.title }}</strong></h4>
+
+                    </div>
+                    <div class="post-excerpt">
+                        <p>{{ post.excerpt }}</p>
+                    </div>
+                    <hr>
+                    <div class="row post-links">
+                        <p class="col card-text text-muted h6">{{ post.created_date}}</p>
+                        <button class="col btn btn-primay">
+                            <a href="">View Post</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-
-        </div>
+        {% endfor %}
     </div>
-
-    <div>
-        
-    </div>
-</section>
-
-
+</div>
 {% endblock %}

@@ -1,7 +1,8 @@
 from django.urls import path
-from . import views
+from content.views import LoadIndex, LoadMental
 
 
 urlpatterns = [
-    path('', views.LoadIndex, name='home')
+    path('', LoadIndex, name='home'),
+    path('mental/', LoadMental, name='mental'),
 ]

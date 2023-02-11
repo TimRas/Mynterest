@@ -106,3 +106,12 @@ body {
     text-align: center;
 }
 
+/* ---- Mental post page ----*/
+
+.post-container {
+    align-items: center;
+}
+
+.post-links {
+    align-items: center;
+}
