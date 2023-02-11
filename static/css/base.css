@@ -114,4 +114,33 @@ body {
 
 .post-links {
     align-items: center;
+    text-align: right;
+}
+
+.post-button {
+
+
+
+    padding: 7px 15px;
+    border-radius: 8px;
+    border: 2px solid grey;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    margin: auto;
+    margin-left: 3em;
+    margin-right: 3em;
+    background-color: white;
+}
+
+.post-button > a {
+    color:grey;
+}
+
+.post-button > a:hover {
+    color:white;
+    text-decoration: none;
+}
+
+.post-button:hover {
+    background-color: grey;
 }
