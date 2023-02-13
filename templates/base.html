@@ -31,33 +31,35 @@
     </script>
     {% endblock%}
 
-    <title>Mynterest | Home {% block extra_title %}{% endblock %} </title>
+    <title>Mynterest | {% block extra_title %}{% endblock %} </title>
 </head>
 
 <body>
-    <header class="header-container mt-2">
-        <a class="logo-link" href="*">
-            <h2><strong>Mynterest</strong></h2>
-        </a>
-    </header>
+    <div class="wrapper">
+        <header class="header-container mt-4">
+            <a class="logo-link" href="*">
+                <h2><strong>Mynterest</strong></h2>
+            </a>
+        </header>
 
-    {% block content %} 
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
 
-    <footer class="footer-container fixed-bottom mb-2">
-        <div class="footer-info">
-            <h2><footer>&copy; Copyright 2023 Tim Ras</footer>
-            </h2>
-        </div>
-    </footer>
+        <footer class="footer-container mb-4 mt-4">
+            <div class="footer-info"> 
+                <h2>
+                    <footer>&copy; Copyright 2023 Tim Ras</footer>
+                </h2>
+            </div>
+        </footer>
 
-    {% block page_header %}
-    {% endblock %}
+        {% block page_header %}
+        {% endblock %}
 
-    {% block postload_js %}
-    {% endblock %}
+        {% block postload_js %}
+        {% endblock %}
 
-
+    </div>
 </body>
 
 </html>

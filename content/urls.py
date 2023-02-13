@@ -1,8 +1,8 @@
 from django.urls import path
-from content.views import LoadIndex, LoadMental
-
+from . import views
 
 urlpatterns = [
-    path('', LoadIndex, name='home'),
-    path('mental/', LoadMental, name='mental'),
+    path('', views.TopicList.as_view(), name='home'),
+    path('mental/', views.PostList.as_view(), name='mental'),
+    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail')
 ]

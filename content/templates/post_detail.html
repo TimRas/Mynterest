@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-section mt-4">
+    <div class="row post-container">
+        <div class="col-12 pt-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4><strong>{{ post.title }}</strong></h4>
+                        <p class="card-text text-muted">{{ post.created_date }}</p>
+                    </div>
+                    <hr>
+                    <div class="post-body">
+                        {{ post.content|safe }}
+                    </div>
+                    <div class="post-likes">
+                        <p class="card-text text-muted">{{ post.likes.count }} likes</p>
+                        <button class="btn btn-sm btn-secondary" id="like-btn">
+                            {% if liked %}
+                            Unlike
+                            {% else %}
+                            Like
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <h5 class="card-title mt-2">Comments:</h5>
+            {% for comment in comments %}
+            <div class="card mt-2 pt-2">
+                <div class="card-body">
+                    <div class="post-comments">
+                        <ul class="list-unstyled">
+                            <li class="media my-4">
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">{{ comment.author.username }} <small class="text-muted">
+                                            <hr>{{ comment.created_date }}</small></h6>
+                                    <p>{{ comment.body|safe }}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No comments yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

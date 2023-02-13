@@ -5,7 +5,7 @@
 {% block content %}
 <div class="main-section mt-5">
     <div class="row post-container">
-        {% for post in post_items %}
+        {% for post in post_list%}
         <div class="col-4 pt-2">
             <div class="card">
                 <div class="card-body">
@@ -20,7 +20,7 @@
                     <div class="row post-links">
                         <p class="col card-text text-muted h6">{{ post.created_date}}</p>
                         <button class="col post-button">
-                            <a href=""><h6>View Post</h6></a>
+                            <a href="{% url 'post_detail' post.slug %}">View post details</a>
                         </button>
                     </div>
                 </div>

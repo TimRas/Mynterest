@@ -1,7 +1,6 @@
 html,
 body {
     height: 100%;
-    min-height: calc(100vh - 189px);
     background-color: black;
     background: white;
     font-family: 'Bitter', serif;
@@ -9,12 +8,22 @@ body {
 
 }
 
+/* ---- Wrapper ----*/
+
+.wrapper {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
 
 /* ---- Header ----*/
 
 .header-container {
     width: 80%;
-    height: 15%;
+    height: 20%;
     margin: auto;
     display: flex;
     align-items: center;
@@ -41,6 +50,9 @@ body {
     width: 80%;
     height: 60%;
     margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ---- Topic main index.html ----*/
@@ -77,18 +89,23 @@ body {
 
 .footer-container {
     width: 80%;
-    height: 10%; 
-    margin: auto;
+    height: 50px;
+    margin: auto 0;
     background-color: grey;
     text-decoration: none;
     border-radius: 8px;
+    bottom: 0;
+    /* display: flex;
+    align-items: center;
+    justify-content: center;  */
+    /* min-height: calc(100vh - 50px); */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .intro-container {
-    height: 40%; 
+    height: 40%;
     margin: auto;
 }
 
@@ -118,9 +135,6 @@ body {
 }
 
 .post-button {
-
-
-
     padding: 7px 15px;
     border-radius: 8px;
     border: 2px solid grey;
@@ -132,15 +146,30 @@ body {
     background-color: white;
 }
 
-.post-button > a {
-    color:grey;
+.post-button>a {
+    color: grey;
 }
 
-.post-button > a:hover {
-    color:white;
+.post-button>a:hover {
+    color: white;
     text-decoration: none;
 }
 
 .post-button:hover {
     background-color: grey;
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0.25rem;
+    height: 30%;
 }
