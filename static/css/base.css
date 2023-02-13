@@ -173,3 +173,11 @@ body {
     border-radius: 0.25rem;
     height: 30%;
 }
+
+.nav-items {
+    justify-content: right;
+}
+
+.logo-item {
+    justify-content: center;
+}
