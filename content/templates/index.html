@@ -20,17 +20,18 @@ Topics
     <div class="topic-container">
         <div class="topic-itemcontainer">
             <button type="button" class="topic-item">
-                <a href="{% url 'mental' %}"><strong>Mental</strong></a>
+                <a href="{% url 'posts' topic='mental' %}"><strong>Mental</strong></a>
             </button>
             <button type="button" class="topic-item">
-                <a href=""><strong>Games</strong></a>
+                <a href="{% url 'posts' topic='games' %}"><strong>Games</strong></a>
             </button>
             <button type="button" class="topic-item">
-                <a href=""><strong>Sports</strong></a>
+                <a href="{% url 'posts' topic='sports' %}"><strong>Sports</strong></a>
             </button>
             <button type="button" class="topic-item">
-                <a href=""><strong>Fitness</strong></a>
+                <a href="{% url 'posts' topic='nature' %}"><strong>Nature</strong></a>
             </button>
+            
         </div>
     </div>
 </section>

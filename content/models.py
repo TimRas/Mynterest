@@ -2,7 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class Topic(models.Model):
+    title = models.CharField(max_length=70, unique=True)
+    slug = models.SlugField(max_length=70, unique=True)
+    image = models.URLField(max_length=200, blank=True)
+    amount_of_posts = models.ManyToManyField(User, related_name='all_posts', blank=True)
+    amount_of_comments = models.ManyToManyField(User, related_name='all_comments', blank=True)
+
+    def __str__(self):
+        return str(self.title)
+
+
 class Post(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='topics', default='Topics')
     title = models.CharField(max_length=70, unique=True)
     slug = models.SlugField(max_length=70, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_posts')
@@ -48,15 +60,6 @@ class Comment(models.Model):
 
 
 
-class Topic(models.Model):
-    title = models.CharField(max_length=70, unique=True)
-    slug = models.SlugField(max_length=70, unique=True)
-    image = models.URLField(max_length=200, blank=True)
-    amount_of_posts = models.ManyToManyField(User, related_name='all_posts', blank=True)
-    amount_of_comments = models.ManyToManyField(User, related_name='all_comments', blank=True)
-
-    def __str__(self):
-        return str(self.title)
 
     # def amount_of_posts_in_total(self):
     #     return self.amount_of_posts.count()

@@ -37,8 +37,34 @@ class TopicList(generic.ListView):
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.all()
-    template_name = "mental.html"
+    template_name = "posts.html"
     paginate_by = 6
+
+    def get_queryset(self):
+        topic = self.kwargs['topic'] 
+        return Post.objects.filter(topic__slug=topic)
+
+
+# class Postlist(View):
+
+#     def get(self, request, slug, *args, **kwargs):
+#         queryset = Post.objects.filter()
+#         posts = get_object_or_404(queryset, topic=topic)
+#         comments = post.comments.all().order_by("-created_date")
+#         liked = False
+#         if post.likes.filter(id=self.request.user.id).exists():
+#             liked = True
+
+#         return render(
+#             request,
+#             "posts.html",
+#             {
+#                 "post": post,
+#                 "comments": comments,
+#                 "liked": liked
+#             },
+#         )
+
 
 
 class PostDetail(View):
