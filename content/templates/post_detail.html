@@ -32,11 +32,13 @@
                 <div class="card-body">
                     <div class="post-comments">
                         <ul class="list-unstyled">
-                            <li class="media my-4">
+                            <li class="media">
                                 <div class="media-body">
-                                    <h6 class="mt-0 mb-1">{{ comment.author.username }} <small class="text-muted">
-                                            <hr>{{ comment.created_date }}</small></h6>
-                                    <p>{{ comment.body|safe }}</p>
+                                    <h6 class="mt-0">{{ comment.author.username }}</h6>
+                                    <hr>
+                                    <p class="mt-4">{{ comment.body|safe }}</p>
+                                    <small class="text-muted">
+                                        {{ comment.created_date }}</small>
                                 </div>
                             </li>
                         </ul>

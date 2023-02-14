@@ -46,9 +46,9 @@ body {
     width: 80%;
     height: 60%;
     margin: auto;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     font-family: 'Comic Neue', cursive;
 }
 
@@ -72,12 +72,25 @@ body {
     margin-left: 3em;
     margin-right: 3em;
     font-family: 'Bitter', serif;
+    font-weight: 600;   
+}
+
+.topic-item > a {
+    color: black;
+}
+
+.topic-item > a:hover {
+    color: white;
+    text-decoration: none;
 }
 
 .topic-item:hover {
     background-color: grey;
     color: white;
 }
+
+
+
 
 /* .topic-itemcontainer {
 
@@ -110,6 +123,8 @@ body {
 
 .intro-message {
     text-align: center;
+    font-family: 'Bitter', serif;
+    font-weight: 800;
 }
 
 /* .intro-text {
@@ -120,6 +135,11 @@ body {
     width: 60%;
     margin: auto;
     text-align: center;
+}
+
+.footer-info > h6 {
+    font-family: 'Bitter', serif;
+    font-weight: 800;
 }
 
 /* ---- Mental post page ----*/
@@ -136,7 +156,6 @@ body {
 .post-button {
     padding: 7px 15px;
     border-radius: 8px;
-    border: 2px solid grey;
     text-decoration: none;
     transition-duration: 0.4s;
     margin: auto;
@@ -144,10 +163,25 @@ body {
     margin-right: 3em;
     background-color: white;
     font-family: 'Bitter', serif;
+    font-weight: 600;
 }
 
+/* .topic-item {
+    font-size: 24px;
+    color: white1;
+    padding: 14px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    margin: auto;
+    margin-left: 3em;
+    margin-right: 3em;
+    font-family: 'Bitter', serif;
+    font-weight: 600;   
+} */
+
 .post-button > a {
-    color: grey;
+    color: black;
 }
 
 .post-button > a:hover {
@@ -157,7 +191,9 @@ body {
 
 .post-button:hover {
     background-color: grey;
+    color: white;
 }
+
 
 .card {
     position: relative;
@@ -172,6 +208,16 @@ body {
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: 0.25rem;
     height: 30%;
+}
+
+.card-title {
+    font-family: 'Bitter', serif;
+    font-weight: 800;
+}
+
+.card-title > h4 {
+    font-family: 'Bitter', serif;
+    font-weight: 800;
 }
 
 .nav-items {
