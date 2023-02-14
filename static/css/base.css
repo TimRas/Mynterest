@@ -267,6 +267,18 @@ body {
     width: 45%;
     margin: 0 auto;
     margin-right: 0;
+    border-radius: 8px;
+}
+
+.comment-form > div {
+    font-family: 'Bitter', serif;
+    font-weight: 800;
+    border-radius: 8px;
+}
+
+.comment-form > div > button {
+    display: block;
+    float: right;
 }
 
 /* deze tag nog gebruiken om de hoogte van de texteara mee te bepalen */
