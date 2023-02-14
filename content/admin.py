@@ -18,8 +18,8 @@ class CommentAdmin(SummernoteModelAdmin):
 
     summernote_fields = ('body')
     list_filter = ('created_date',)
-    search_fields = ['title', 'body']
-    list_display = ('title', 'body', 'created_date')
+    search_fields = ['body']
+    list_display = ('author', 'body', 'created_date')
 
 
 @admin.register(Topic)

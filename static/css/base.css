@@ -72,14 +72,14 @@ body {
     margin-left: 3em;
     margin-right: 3em;
     font-family: 'Bitter', serif;
-    font-weight: 600;   
+    font-weight: 600;
 }
 
-.topic-item > a {
+.topic-item>a {
     color: black;
 }
 
-.topic-item > a:hover {
+.topic-item>a:hover {
     color: white;
     text-decoration: none;
 }
@@ -137,7 +137,7 @@ body {
     text-align: center;
 }
 
-.footer-info > h6 {
+.footer-info>h6 {
     font-family: 'Bitter', serif;
     font-weight: 800;
 }
@@ -180,11 +180,11 @@ body {
     font-weight: 600;   
 } */
 
-.post-button > a {
+.post-button>a {
     color: black;
 }
 
-.post-button > a:hover {
+.post-button>a:hover {
     color: white;
     text-decoration: none;
 }
@@ -215,7 +215,7 @@ body {
     font-weight: 800;
 }
 
-.card-title > h4 {
+.card-title>h4 {
     font-family: 'Bitter', serif;
     font-weight: 800;
 }
@@ -228,12 +228,12 @@ body {
     justify-content: center;
 }
 
-.signup > p > label {
+.signup>p>label {
     font-family: 'Bitter', serif;
     font-weight: 800;
 }
 
-.signup > p > input {
+.signup>p>input {
     font-family: 'Comic Neue', cursive;
     font-weight: 600;
 }
@@ -258,7 +258,19 @@ body {
     font-weight: 600;
 }
 
-.registration-text > h3 {
+.registration-text>h3 {
     font-family: 'Bitter', serif;
     font-weight: 800;
 }
+
+.comment-form {
+    width: 45%;
+    margin: 0 auto;
+    margin-right: 0;
+}
+
+/* deze tag nog gebruiken om de hoogte van de texteara mee te bepalen */
+
+/* textarea.form-control {
+    height: 4em;
+} */
