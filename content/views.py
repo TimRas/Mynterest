@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View, generic
 from .models import Topic, Post, Comment
+from .forms import CommentForm
 
 
 # def LoadIndex(request):
@@ -83,6 +84,7 @@ class PostDetail(View):
             {
                 "post": post,
                 "comments": comments,
-                "liked": liked
+                "liked": liked,
+                "comment_form": CommentForm()
             },
         )
