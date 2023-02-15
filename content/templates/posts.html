@@ -28,6 +28,9 @@
                         <button class="col button post-button">
                             <a href="{% url 'post_detail' slug=post.slug %}">View post details</a>
                         </button>
+                        <button class="col button post-button">
+                            <a href="{% url 'edit_post' slug=post.slug %}">Edit Post</a>
+                        </button>                                             
                     </div>
                 </div>
             </div>

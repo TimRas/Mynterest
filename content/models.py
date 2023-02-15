@@ -59,6 +59,11 @@ class Comment(models.Model):
     def __str__(self):
         return str(self.title)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.post)
+        super(Comment, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return f'Comment {self.body} by {self.author}'

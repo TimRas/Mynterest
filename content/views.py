@@ -56,6 +56,7 @@ class PostList(View):
 
     def get(self, request, topic, *args, **kwargs):
         queryset = Post.objects.all()
+        topic = self.kwargs['topic'] 
         posts = queryset.filter(topic__slug=topic)
         post_form = PostForm()
 
@@ -66,6 +67,7 @@ class PostList(View):
                 "posts": posts,
                 'posted': False,
                 "post_form": post_form,
+                "topic": topic,
                 
             },
         )
@@ -103,6 +105,23 @@ class PostList(View):
 
         },
     )
+
+    # def edit_post(self, request, slug, topic):
+
+    #     queryset = Post.objects.all()
+    #     topic = self.kwargs['topic'] 
+    #     post = get_object_or_404(queryset, slug=slug, topic__slug=topic)
+
+    #     post_form = PostForm(instance=post)
+
+    #     return render(
+    #         request,
+    #         "edit_post.html",
+    #         {
+    #             "post_form": post_form,
+    #         },
+    #     )
+
 
 
     
@@ -159,6 +178,42 @@ class PostDetail(View):
                 "comment_form": comment_form,
             },
         )
+
+
+class EditPost(View):
+    def get(self, request, slug, *args, **kwargs):
+        topic = kwargs['topic']
+        post = get_object_or_404(Post, slug=slug, topic__slug=topic)
+        post_form = PostForm(instance=post)
+        return render(request, "edit_post.html", {"post_form": post_form})
+
+
+class EditComment(View):
+    def get(self, request, slug, *args, **kwargs):
+        slug = kwargs['slug']
+        comment = get_object_or_404(Comment, post=slug)
+        comment_form = CommentForm(instance=comment)
+
+        return render(request, "edit_comment.html", {"comment_form": comment_form})
+
+    def post(self, request, slug, *args, **kwargs):
+        slug = kwargs['slug']
+        comment = get_object_or_404(Comment, post=slug)
+        comment_form = CommentForm(data=request.POST)
+
+        if comment_form.is_valid():
+            comment_form.instance.email = request.user.email
+            comment_form.instance.name = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+            messages.success(request, 'Your comment was successfully submitted!')
+        else:
+            comment_form = CommentForm()
+
+        return render(request, "edit_comment.html", {"comment_form": comment_form})
+
 
 
 class PostLike(View):
