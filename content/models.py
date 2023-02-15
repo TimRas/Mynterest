@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 
@@ -14,7 +15,7 @@ class Topic(models.Model):
 
 
 class Post(models.Model):
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='topics', default='Topics')
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='topics', default='1')
     title = models.CharField(max_length=70, unique=True)
     slug = models.SlugField(max_length=70, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_posts')
@@ -32,6 +33,11 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
 
     def amount_of_likes(self):

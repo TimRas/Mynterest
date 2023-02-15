@@ -286,3 +286,32 @@ body {
 /* textarea.form-control {
     height: 4em;
 } */
+
+
+/* Success message */
+.messages .alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+  }
+  
+  /* Info message */
+  .messages .alert-info {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+  }
+  
+  /* Warning message */
+  .messages .alert-warning {
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    color: #8a6d3b;
+  }
+  
+  /* Error message */
+  .messages .alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+  }

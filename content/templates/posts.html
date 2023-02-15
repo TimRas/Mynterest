@@ -6,11 +6,12 @@
 
 {% endblock %}
 
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="main-section mt-5">
     <div class="row post-container">
-        {% for post in post_list%}
+        {% for post in posts %}
         <div class="col-4 pt-2">
             <div class="card">
                 <div class="card-body">
@@ -23,15 +24,33 @@
                     </div>
                     <hr>
                     <div class="row post-links">
-                        <p class="col card-text text-muted h6">{{ post.created_date}}</p>
+                        <p class="col card-text text-muted h6">{{ post.created_date }}</p>
                         <button class="col button post-button">
-                            <a href="{% url 'post_detail' post.slug %}">View post details</a>
+                            <a href="{% url 'post_detail' slug=post.slug %}">View post details</a>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
+        <div class="row-md-6 card mt-5 mr-0 comment-form">
+            <div class="card-body bg-dark text-white">
+                {% if user.is_authenticated %}
+                <h3>Create your own post!</h3>
+                <p>Posting as: {{ user.username }}</p>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ post_form|crispy }}
+                    <input class="right" type="submit" value="Add Post">
+                </form>
+                {% else %}
+                <h3>Sign up now and write your own posts and comments!</h3>
+                <button class="button post-button ml-5">
+                    <a href="{% url 'account_signup' %}">Register</a>
+                </button>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
