@@ -14,6 +14,7 @@
     <div class="card-body bg-dark text-white">
         {% if user.is_authenticated %}
         <h3>Edit post:</h3>
+        <hr>
         <p>Posting as: {{ user.username }}</p>
         <form method="post">
             {% csrf_token %}
