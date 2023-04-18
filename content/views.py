@@ -131,7 +131,7 @@ class EditPost(View):
         post = get_object_or_404(Post, slug=slug)
         post_form = PostForm(request.POST, instance=post)
         if post_form.is_valid():
-            post_form.instance.email = request.user.email
+            post_form.instance.name = request.user.username
             post_form.save()
             posts = Post.objects.filter(topic__slug=post.topic.slug)
             post_form = PostForm()         
@@ -150,33 +150,30 @@ class EditPost(View):
             return render(request, "edit_post.html", {"post_form": post_form})
         
 
-
 class EditComment(View):
-    def get(self, request, slug, *args, **kwargs):
-        slug = kwargs['slug']
-        comment = get_object_or_404(Comment, post=slug)
+
+    def get(self, request, comment_id, *args, **kwargs):
+
+        comment = get_object_or_404(Comment, id=comment_id)
         comment_form = CommentForm(instance=comment)
 
         return render(request, "edit_comment.html", {"comment_form": comment_form})
 
-    def post(self, request, slug, *args, **kwargs):
-        slug = kwargs['slug']
-        comment = get_object_or_404(Comment, post=slug)
-        comment_form = CommentForm(data=request.POST)
+    def post(self, request, comment_id, *args, **kwargs):
+
+        comment = get_object_or_404(Comment, id=comment_id)
+        comment_form = CommentForm(request.POST, instance=comment)
 
         if comment_form.is_valid():
-            comment_form.instance.email = request.user.email
             comment_form.instance.name = request.user.username
-            comment = comment_form.save(commit=False)
-            comment.post = post
-            comment.author = request.user
-            comment.save()
-            messages.success(request, 'Your comment was successfully submitted!')
-        else:
+            comment_form.save()
+            post = comment.post
             comment_form = CommentForm()
-
-        return render(request, "edit_comment.html", {"comment_form": comment_form})
-
+            return redirect("post_detail", slug=post.slug)
+        else:
+            comment_form = CommentForm(request.POST, instance=comment)
+            messages.error(request, 'There was something wrong with your sumbission, please try again')
+            return render(request, "edit_comment.html", {"comment_form": comment_form})
 
 
 class PostLike(View):

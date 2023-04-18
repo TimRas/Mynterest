@@ -51,7 +51,7 @@
                                     <small class="text-muted">
                                         {{ comment.created_date }}</small>
                                     <button class="col button post-button">
-                                        <a href="{% url 'edit_comment' slug=post.slug topic=post.topic.slug %}">Edit Post</a>
+                                        <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit Post</a>
                                     </button>   
                                 </div>
                             </li>
