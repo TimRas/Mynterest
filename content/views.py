@@ -7,6 +7,8 @@ from .forms import CommentForm, PostForm
 
 
 class TopicList(generic.ListView):
+
+    """ Displays a list of all topics """
     model = Topic
     queryset = Topic.objects.all()
     template_name = "index.html"
@@ -14,6 +16,7 @@ class TopicList(generic.ListView):
 
 class PostList(View):
 
+    """ Renders all all posts related to the given topic. Validates the submitted form, saves the new post in the database and redirects the user back to the post page with the given topic"""
     def get(self, request, topic, *args, **kwargs):
         queryset = Post.objects.all()
         topic = self.kwargs['topic'] 
@@ -30,7 +33,7 @@ class PostList(View):
                 
             },
         )
-   
+    
     def post(self, request, topic, **kwargs):
         queryset = Post.objects.all()
         topic = self.kwargs['topic'] 
@@ -65,7 +68,7 @@ class PostList(View):
 
     
 class PostDetail(View):
-
+    """ Renders post retreived form database and renders comment form. Validates the submitted form, saves the comment and redirects user to the details page of given post"""
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
@@ -80,7 +83,6 @@ class PostDetail(View):
             {
                 "post": post,
                 "comments": comments,
-                'commented': False,
                 "liked": liked,
                 "comment_form": CommentForm()
             },
@@ -121,6 +123,7 @@ class PostDetail(View):
 
 class EditPost(View):
 
+    """ Render a form in the edit post html of the given post. Validates the submitted form, update in the database and redirects to the given topic page"""
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         post_form = PostForm(instance=post)
@@ -151,19 +154,18 @@ class EditPost(View):
         
 
 class EditComment(View):
+    """ Renders a form in the edit comment html of the given comment. validates the submitted form, update in the database and redirects to the post the comments belongs to"""
 
     def get(self, request, comment_id, *args, **kwargs):
 
         comment = get_object_or_404(Comment, id=comment_id)
         comment_form = CommentForm(instance=comment)
-
         return render(request, "edit_comment.html", {"comment_form": comment_form})
 
     def post(self, request, comment_id, *args, **kwargs):
 
         comment = get_object_or_404(Comment, id=comment_id)
         comment_form = CommentForm(request.POST, instance=comment)
-
         if comment_form.is_valid():
             comment_form.instance.name = request.user.username
             comment_form.save()
