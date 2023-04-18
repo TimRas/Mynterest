@@ -12,46 +12,6 @@ class TopicList(generic.ListView):
     template_name = "index.html"
 
 
-
-# class PostList(generic.ListView):
-#     model = Post
-#     template_name = "posts.html"
-#     paginate_by = 6
-
-#     def get_queryset(self):
-#         topic = self.kwargs['topic'] 
-#         return Post.objects.filter(topic__slug=topic)
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["post_form"] = PostForm()
-#         context["slug"] = self.kwargs["slug"]
-#         return context
-
-#     def post(self, request, topic, **kwargs):
-
-#         topic = self.kwargs['topic'] 
-#         post_form = PostForm(data=request.POST)
-
-#         if post_form.is_valid():
-#             post_form.instance.email = request.user.email
-#             post_form.instance.name = request.user.username
-#             post = post_form.save(commit=False)
-#             post.post = post
-#             post.author = request.user
-#             post.save()
-#             messages.success(request, 'Your comment was successfully submitted!')
-#             return redirect('post_detail', topic=topic)
-#         else:
-#             post_form = PostForm()
-
-#         context = {
-#             "post": post,
-#             "post_form": post_form,
-#         }
-
-#         return render(request, "posts.html", context)
-
 class PostList(View):
 
     def get(self, request, topic, *args, **kwargs):
@@ -65,14 +25,12 @@ class PostList(View):
             "posts.html",
             {
                 "posts": posts,
-                'posted': False,
                 "post_form": post_form,
                 "topic": topic,
                 
             },
         )
-
-    
+   
     def post(self, request, topic, **kwargs):
         queryset = Post.objects.all()
         topic = self.kwargs['topic'] 
@@ -100,29 +58,10 @@ class PostList(View):
         {   
             "post_form": post_form,
             "topic": topic,
-            'posted': True,
             "posts": posts,
 
         },
     )
-
-    # def edit_post(self, request, slug, topic):
-
-    #     queryset = Post.objects.all()
-    #     topic = self.kwargs['topic'] 
-    #     post = get_object_or_404(queryset, slug=slug, topic__slug=topic)
-
-    #     post_form = PostForm(instance=post)
-
-    #     return render(
-    #         request,
-    #         "edit_post.html",
-    #         {
-    #             "post_form": post_form,
-    #         },
-    #     )
-
-
 
     
 class PostDetail(View):
@@ -181,11 +120,35 @@ class PostDetail(View):
 
 
 class EditPost(View):
+
     def get(self, request, slug, *args, **kwargs):
-        topic = kwargs['topic']
-        post = get_object_or_404(Post, slug=slug, topic__slug=topic)
+        post = get_object_or_404(Post, slug=slug)
         post_form = PostForm(instance=post)
         return render(request, "edit_post.html", {"post_form": post_form})
+
+    def post(self, request, slug, *args, **kwargs):
+       
+        post = get_object_or_404(Post, slug=slug)
+        post_form = PostForm(request.POST, instance=post)
+        if post_form.is_valid():
+            post_form.instance.email = request.user.email
+            post_form.save()
+            posts = Post.objects.filter(topic__slug=post.topic.slug)
+            post_form = PostForm()         
+            return render(
+                request,
+                "posts.html",
+                {
+                    "posts": posts,
+                    "post_form": post_form,
+                    "topic": post.topic.slug,
+                },
+            )
+        else:
+            post_form = PostForm(request.POST, instance=post)
+            messages.error(request, 'There was something wrong with your sumbission, please try again')
+            return render(request, "edit_post.html", {"post_form": post_form})
+        
 
 
 class EditComment(View):

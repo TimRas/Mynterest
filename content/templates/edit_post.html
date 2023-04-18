@@ -16,7 +16,7 @@
         <h3>Edit post:</h3>
         <hr>
         <p>Posting as: {{ user.username }}</p>
-        <form method="post">
+        <form method="POST">
             {% csrf_token %}
             {{ post_form|crispy }}
             <input class="right" type="submit" value="Update Post">
