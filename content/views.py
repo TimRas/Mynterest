@@ -188,3 +188,12 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class DeletePost(View):
+
+    def get(self, request, slug,):
+        post = get_object_or_404(Post, slug=slug)
+        topic = post.topic.slug
+        post.delete()
+        return redirect(reverse("posts", kwargs={"topic": topic}))

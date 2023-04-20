@@ -82,17 +82,10 @@
             </div>
         </div>
 
-        <!-- <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="row">
-              <div class="alert">
-              {{ message | safe }}
-             </div>
-              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-          </div> -->
-
-        {% block content %}
-        {% endblock %}
+        <section class="main-content">
+            {% block content %}
+            {% endblock %}
+        </section>
 
         <footer class="footer-container mb-4 mt-4">
             <div class="footer-info">

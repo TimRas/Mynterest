@@ -42,13 +42,10 @@ body {
 
 /* ---- Main content container ----*/
 
-.main-section {
+.main-content {
     width: 80%;
     height: 60%;
     margin: auto;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     font-family: 'Comic Neue', cursive;
 }
 
@@ -90,12 +87,6 @@ body {
 }
 
 
-
-
-/* .topic-itemcontainer {
-
-} */
-
 /* ---- Footer container ----*/
 
 .footer-container {
@@ -106,10 +97,6 @@ body {
     text-decoration: none;
     border-radius: 8px;
     bottom: 0;
-    /* display: flex;
-    align-items: center;
-    justify-content: center;  */
-    /* min-height: calc(100vh - 50px); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,10 +114,6 @@ body {
     font-weight: 800;
 }
 
-/* .intro-text {
-    text-align: left;
-} */
-
 .footer-info {
     width: 60%;
     margin: auto;
@@ -142,7 +125,7 @@ body {
     font-weight: 800;
 }
 
-/* ---- Mental post page ----*/
+/* ---- Post page ----*/
 
 .post-container {
     align-items: center;
@@ -165,20 +148,6 @@ body {
     font-family: 'Bitter', serif;
     font-weight: 600;
 }
-
-/* .topic-item {
-    font-size: 24px;
-    color: white1;
-    padding: 14px 40px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition-duration: 0.4s;
-    margin: auto;
-    margin-left: 3em;
-    margin-right: 3em;
-    font-family: 'Bitter', serif;
-    font-weight: 600;   
-} */
 
 .post-button>a {
     color: black;
@@ -281,12 +250,8 @@ body {
     float: right;
 }
 
-/* deze tag nog gebruiken om de hoogte van de texteara mee te bepalen */
 
-/* textarea.form-control {
-    height: 4em;
-} */
-
+/* ---- Error messages ----*/
 
 /* Success message */
 .messages .alert-success {
@@ -315,3 +280,10 @@ body {
     border-color: #ebccd1;
     color: #a94442;
   }
+
+
+  /* deze tag nog gebruiken om de hoogte van de texteara mee te bepalen */
+
+/* textarea.form-control {
+    height: 4em;
+} */
