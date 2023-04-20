@@ -192,8 +192,18 @@ class PostLike(View):
 
 class DeletePost(View):
 
-    def get(self, request, slug,):
+    def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         topic = post.topic.slug
         post.delete()
         return redirect(reverse("posts", kwargs={"topic": topic}))
+
+
+class DeleteComment(View):
+
+    def get(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+        post = comment.post
+        slug = post.slug
+        comment.delete()
+        return redirect(reverse("post_detail", kwargs={"slug": slug}))
