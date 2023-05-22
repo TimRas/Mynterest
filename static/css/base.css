@@ -42,6 +42,21 @@ body {
     color: antiquewhite;
 }
 
+.home-link {
+    color: white;
+    padding-top: 0.1em;
+}
+
+.home-link:hover {
+    text-decoration: none;
+    color: darkgrey;
+}
+
+.register-link {
+    background-color: purple;
+    border-radius: 5px;
+}
+
 /* ---- Header and Banner ----*/
 
 .header-container, .banner {
