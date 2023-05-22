@@ -6,27 +6,29 @@ body {
 
 }
 
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    color: darkgrey;
+}
+
 /* ---- Wrapper ----*/
 
 .wrapper {
     min-height: 100vh;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
 }
 
 /* ---- Header ----*/
 
 .header-container {
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: grey;
+    width: 100%;
     text-decoration: none;
-    border-radius: 8px;
+    margin: auto;
+
 }
 
 .logo-link {
@@ -40,12 +42,23 @@ body {
     color: antiquewhite;
 }
 
+/* ---- Header and Banner ----*/
+
+.header-container, .banner {
+    background-color: black;
+    color: white;
+}
+
 /* ---- Main content container ----*/
 
 .main-content {
-    width: 80%;
+    width: 100%;
     height: 60%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     font-family: 'Comic Neue', cursive;
 }
 
@@ -92,8 +105,8 @@ body {
 .footer-container {
     width: 80%;
     height: 50px;
-    margin: auto 0;
-    background-color: grey;
+    margin: auto;
+    background-color: black;
     text-decoration: none;
     border-radius: 8px;
     bottom: 0;
@@ -103,12 +116,17 @@ body {
     font-family: 'Bitter', serif;
 }
 
-.intro-container {
-    height: 40%;
+.banner {
+    height: 22em;
+    width: 100%;
+    padding-top: 4.5em;
+}
+
+.banner p {
     margin: auto;
 }
 
-.intro-message {
+.intro-title {
     text-align: center;
     font-family: 'Bitter', serif;
     font-weight: 800;

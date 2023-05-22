@@ -8,17 +8,17 @@ Topics
 
 {% block content %}
 
-<section class="main-section">
-    <div class="intro-container mb-4 pb-2">
-        <h2 class="intro-message mt-2">Welcome to Mynterest!</h2>
-        <hr>
-        <p class="mb-4 mt-5">Greetings! Welcome to my own personal blog application 'Mynterest'. This
-            application
-            will
-            be a meeting point for certain like minded people to conversate and discuss four big topics in life.
-            Sports!, Games!, Music! and Mental!!. All of these topics are dear to my hearth and I know they will be with
-            alot of you guys. Don't wait any longer and join us!</p>
-    </div>
+<div class="banner pb-2">
+    <h2 class="intro-title mt-2">Welcome to Mynterest!</h2>
+    <p class="mb-4 mt-5 w-75">Greetings! Welcome to my own personal blog application 'Mynterest'. This
+        application
+        will
+        be a meeting point for certain like minded people to conversate and discuss four big topics in life.
+        Sports!, Games!, Music! and Mental!!. All of these topics are dear to my hearth and I know they will be with
+        alot of you guys. Don't wait any longer and join us!</p>
+</div>
+
+<section class="main-section">   
     <div class="topic-container mt-4 pt-2">
         <button type="button post-button" class="topic-item">
             <a href="{% url 'posts' topic='mental' %}"><strong>Mental</strong></a>
