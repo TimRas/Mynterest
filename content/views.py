@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import View, generic
 from django.http import HttpResponseRedirect
-from django.contrib import messages
+from django.utils.text import slugify
 from .models import Topic, Post, Comment
 from .forms import CommentForm, PostForm
 
@@ -29,8 +29,7 @@ class PostList(View):
             {
                 "posts": posts,
                 "post_form": post_form,
-                "topic": topic,
-                
+                "topic": topic,              
             },
         )
     
@@ -41,12 +40,10 @@ class PostList(View):
         post_form = PostForm(data=request.POST)
           
         if post_form.is_valid():
-            post_form.instance.name = request.user.username
             post = post_form.save(commit=False)
             post.author = request.user
-            post.slug = post.title
+            post.slug = slugify(post.title)
             post.save()
-            messages.success(request, 'Your comment was successfully submitted!')
         else:
             post_form = PostForm()
 
@@ -86,12 +83,10 @@ class PostDetail(View):
         comment_form = CommentForm(data=request.POST)
 
         if comment_form.is_valid():
-            comment_form.instance.name = request.user.username
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.author = request.user
             comment.save()
-            messages.success(request, 'Your comment was successfully submitted!')
         else:
             comment_form = CommentForm()
         
@@ -122,20 +117,21 @@ class EditPost(View):
         if post_form.is_valid():
             post_form.instance.name = request.user.username
             post_form.save()
-            posts = Post.objects.filter(topic__slug=post.topic.slug)
             post_form = PostForm()
         else:
             post_form = PostForm(request.POST, instance=post)
+        
+        posts = Post.objects.filter(topic__slug=post.topic.slug)
 
-            return render(
-                request,
-                "posts.html",
-                {
-                    "posts": posts,
-                    "post_form": post_form,
-                    "topic": post.topic.slug,
-                },
-            )
+        return render(
+            request,
+            "posts.html",
+            {
+                "posts": posts,
+                "post_form": post_form,
+                "topic": post.topic.slug,
+            },
+        )
 
 
 class EditComment(View):
@@ -156,12 +152,13 @@ class EditComment(View):
         if comment_form.is_valid():
             comment_form.instance.name = request.user.username
             comment_form.save()
-            post = comment.post
             comment_form = CommentForm()
         else:
             comment_form = CommentForm(request.POST, instance=comment)
 
-            return redirect("post_detail", slug=post.slug)
+        post = comment.post
+        
+        return redirect("post_detail", slug=post.slug)
 
 
 class PostLike(View):
@@ -199,3 +196,5 @@ class DeleteComment(View):
         comment.delete()
 
         return redirect(reverse("post_detail", kwargs={"slug": slug}))
+
+    
