@@ -15,6 +15,10 @@ body {
     color: darkgrey;
 }
 
+hr {
+    background-color: rgb(83, 83, 83);
+}
+
 /* ---- Wrapper ----*/
 
 .wrapper {
@@ -61,7 +65,7 @@ body {
 
 .header-container,
 .banner {
-    background-color: #1a2e32;
+    background-color: #081616;
     color: white;
 }
 
@@ -81,6 +85,7 @@ body {
 .main-section {
     min-height: 50.3vh;
     width: 100%;
+    background-color: #081616;
 }
 
 
@@ -91,47 +96,60 @@ body {
 }
 
 .sports-image {
-    background-image: url('../../media/but_sports.jpg');
+    background-image: url('../../media/new_sport.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
     border-width: 3em 1.5em 0.5em 1.5em;
-    border-color: #1a2e32;
+    border-color: #081616;
     border-style: solid;
+    filter: brightness(95%);
 }
 
 .nature-image {
-    background-image: url('../../media/but_nature.jpg');
+    background-image: url('../../media/new_nature.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
     border-width: 3em 3em 0.5em 1.5em;
-    border-color: #1a2e32;
+    border-color: #081616;
     border-style: solid;
+    filter: brightness(95%);
 }
 
 .games-image {
-    background-image: url('../../media/but_games.jpg');
+    background-image: url('../../media/new_games.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
     border-width: 3em 1.5em 0.5em 1.5em;
-    border-color: #1a2e32;
+    border-color: #081616;
     border-style: solid;
+    filter: brightness(95%);
 }
 
 .mental-image {
-    background-image: url('../../media/but_mental.jpg');
+    background-image: url('../../media/new_mental.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
     border-width: 3em 1.5em 0.5em 3em;
-    border-color: #1a2e32;
+    border-color: #081616;
     border-style: solid;
+    filter: brightness(95%);
+    /* transition: all ease-in-out 0.5s; */
+}
+
+.nature-image:hover,
+.sports-image:hover,
+.games-image:hover,
+.mental-image:hover {
+    filter: brightness(120%);
+    /* transition: all ease-in-out 0.5s; */
 }
 
 
@@ -141,7 +159,7 @@ body {
 .footer-container {
     height: 50px;
     margin: auto;
-    background-color: #1a2e32;
+    background-color: #081616;
     color: white;
     text-decoration: none;
     font-family: 'Bitter', serif;
@@ -187,6 +205,62 @@ body {
 
 /* ---- Post page ----*/
 
+.banner-sports {
+    height: 22em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_sports.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-games {
+    height: 22em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_games.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-nature {
+    height: 22em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_nature.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-mental {
+    height: 22em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_mental.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-mental,
+.banner-sports,
+.banner-nature,
+.banner-games {
+
+    background-color: #081616;
+    color: white;
+}
+
+.banner-mental > P,
+.banner-sports > P,
+.banner-nature > P,
+.banner-games > p {
+    margin: auto;
+}
+
 .post-container {
     align-items: center;
 }
@@ -205,28 +279,15 @@ body {
     justify-content: center;
     height: 100%;
     padding-bottom: 1em;
+    /* z-index: -9999; */
 }
 
 .topic-container>a>.topic-text:hover {
-    color: darkgrey;
+    color: white;
+    font-size: 5em;
     transition-duration: 0.6s;
 }
 
-
-.card {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: 0.25rem;
-    height: 30%;
-}
 
 .card-title {
     font-family: 'Bitter', serif;
@@ -236,6 +297,25 @@ body {
 .card-title>h4 {
     font-family: 'Bitter', serif;
     font-weight: 800;
+}
+
+.post-card {
+    color: white;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border-radius: 5px;
+    border-style: none;
+    height: 30%;
+}
+
+.post-card-body {
+    background-color: #292828;
 }
 
 .nav-items {
@@ -306,7 +386,7 @@ body {
 }
 
 .back-to-top-button {
-    background-color: #1a2e32;
+    background-color: #081616;
     color: white;
     text-decoration: none;
 }
