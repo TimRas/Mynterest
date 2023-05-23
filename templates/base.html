@@ -40,7 +40,8 @@
         <header class="header-container">
             <nav class="navbar navbar-expand-lg w-100">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="{% url 'home' %}"><span class="brand log-item text-white">Mynterest</span></a>
+                    <a class="navbar-brand" href="{% url 'home' %}"><span
+                            class="brand log-item text-white">Mynterest</span></a>
                     <a class="home-link ml-1" aria-current="page" href="{% url 'home' %}">Home</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +70,7 @@
                 </div>
             </nav>
         </header>
-        
+
 
         <div class="container">
             <div class="row">
@@ -77,7 +78,8 @@
                     {% for message in messages %}
                     <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
                         {{ message | safe }}
-                        <button type="button" class="btn-close post-button" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close post-button" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                     </div>
                     {% endfor %}
                 </div>
@@ -90,10 +92,15 @@
         </section>
 
         <footer class="footer-container">
-            <div class="footer-info">
-                <h6>
+            <div class="col-6 float-left">
+                <h6 class="footer-info">
                     &copy; Copyright 2023 Tim Ras
                 </h6>
+            </div>
+            <div class="back-to-top col-6">
+                <a href="#" class="back-to-top-button float-right pr-3">
+                    <h6>Back to Top</h6>
+                </a>
             </div>
         </footer>
 
@@ -107,6 +114,31 @@
                 let alert = new bootstrap.Alert(messages);
                 alert.close();
             }, 3000);
+        </script>
+        <script>
+            // Wait for the document to be fully loaded
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get the "Back to Top" button element
+                var backToTopButton = document.querySelector('.back-to-top-button');
+
+                // Show the button when scrolling beyond a certain distance
+                window.addEventListener('scroll', function () {
+                    if (window.pageYOffset > 300) {
+                        backToTopButton.style.display = 'block';
+                    } else {
+                        backToTopButton.style.display = 'none';
+                    }
+                });
+
+                // Scroll to the top when the button is clicked
+                backToTopButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
         </script>
         {% endblock %}
 

@@ -96,6 +96,9 @@ body {
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
+    border-width: 3em 1.5em 0.5em 1.5em;
+    border-color: #1a2e32;
+    border-style: solid;
 }
 
 .nature-image {
@@ -104,6 +107,9 @@ body {
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
+    border-width: 3em 3em 0.5em 1.5em;
+    border-color: #1a2e32;
+    border-style: solid;
 }
 
 .games-image {
@@ -112,6 +118,9 @@ body {
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
+    border-width: 3em 1.5em 0.5em 1.5em;
+    border-color: #1a2e32;
+    border-style: solid;
 }
 
 .mental-image {
@@ -120,6 +129,9 @@ body {
     background-size: 100% 100%;
     width: 25vw;
     height: auto;
+    border-width: 3em 1.5em 0.5em 3em;
+    border-color: #1a2e32;
+    border-style: solid;
 }
 
 
@@ -135,8 +147,8 @@ body {
     font-family: 'Bitter', serif;
 
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
 }
 
 .banner {
@@ -165,9 +177,7 @@ body {
 }
 
 .footer-info {
-    width: 60%;
-    margin: auto;
-    text-align: center;
+    padding-left: 1em;
 }
 
 .footer-info>h6 {
@@ -287,6 +297,28 @@ body {
 .comment-form>div>button {
     display: block;
     float: right;
+}
+
+/* ---- Back to top button ----*/
+
+.back-to-top {
+    text-align: center;
+}
+
+.back-to-top-button {
+    background-color: #1a2e32;
+    color: white;
+    text-decoration: none;
+}
+
+.back-to-top-button:hover {
+    text-decoration: none;
+    color: darkgrey;
+}
+
+.back-to-top-button>h6 {
+    font-family: 'Bitter', serif;
+    font-weight: 800;
 }
 
 
