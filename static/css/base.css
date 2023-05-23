@@ -59,8 +59,9 @@ body {
 
 /* ---- Header and Banner ----*/
 
-.header-container, .banner {
-    background-color: black;
+.header-container,
+.banner {
+    background-color: #1a2e32;
     color: white;
 }
 
@@ -77,64 +78,75 @@ body {
     font-family: 'Comic Neue', cursive;
 }
 
+.main-section {
+    min-height: 50.3vh;
+    width: 100%;
+}
+
+
 /* ---- Topic main index.html ----*/
 
 .topic-container {
-    height: 80%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-height: 50.3vh;
 }
 
-.topic-item {
-    font-size: 24px;
-    padding: 14px 40px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition-duration: 0.4s;
-    margin: auto;
-    margin-left: 3em;
-    margin-right: 3em;
-    font-family: 'Bitter', serif;
-    font-weight: 600;
+.sports-image {
+    background-image: url('../../media/but_sports.jpg');
+    background-color: #000;
+    background-size: 100% 100%;
+    width: 25vw;
+    height: auto;
 }
 
-.topic-item>a {
-    color: black;
+.nature-image {
+    background-image: url('../../media/but_nature.jpg');
+    background-color: #000;
+    background-size: 100% 100%;
+    width: 25vw;
+    height: auto;
 }
 
-.topic-item>a:hover {
-    color: white;
-    text-decoration: none;
+.games-image {
+    background-image: url('../../media/but_games.jpg');
+    background-color: #000;
+    background-size: 100% 100%;
+    width: 25vw;
+    height: auto;
 }
 
-.topic-item:hover {
-    background-color: grey;
-    color: white;
+.mental-image {
+    background-image: url('../../media/but_mental.jpg');
+    background-color: #000;
+    background-size: 100% 100%;
+    width: 25vw;
+    height: auto;
 }
+
 
 
 /* ---- Footer container ----*/
 
 .footer-container {
-    width: 80%;
     height: 50px;
     margin: auto;
-    background-color: black;
+    background-color: #1a2e32;
+    color: white;
     text-decoration: none;
-    border-radius: 8px;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: 'Bitter', serif;
+
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
 }
 
 .banner {
     height: 22em;
     width: 100%;
     padding-top: 4.5em;
+
+    background-image: url('../../media/banner_landscape1.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .banner p {
@@ -145,6 +157,11 @@ body {
     text-align: center;
     font-family: 'Bitter', serif;
     font-weight: 800;
+}
+
+.intro-message {
+    text-align: center;
+    width: 40%;
 }
 
 .footer-info {
@@ -169,31 +186,20 @@ body {
     text-align: right;
 }
 
-.post-button {
-    padding: 7px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition-duration: 0.4s;
-    margin: auto;
-    margin-left: 3em;
-    margin-right: 3em;
-    background-color: white;
+.topic-text {
+    font-size: 2em;
+    color: white;
     font-family: 'Bitter', serif;
-    font-weight: 600;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 1em;
 }
 
-.post-button>a {
-    color: black;
-}
-
-.post-button>a:hover {
-    color: white;
-    text-decoration: none;
-}
-
-.post-button:hover {
-    background-color: grey;
-    color: white;
+.topic-container>a>.topic-text:hover {
+    color: darkgrey;
+    transition-duration: 0.6s;
 }
 
 
@@ -272,13 +278,13 @@ body {
     border-radius: 8px;
 }
 
-.comment-form > div {
+.comment-form>div {
     font-family: 'Bitter', serif;
     font-weight: 800;
     border-radius: 8px;
 }
 
-.comment-form > div > button {
+.comment-form>div>button {
     display: block;
     float: right;
 }
@@ -291,31 +297,31 @@ body {
     background-color: #dff0d8;
     border-color: #d6e9c6;
     color: #3c763d;
-  }
-  
-  /* Info message */
-  .messages .alert-info {
+}
+
+/* Info message */
+.messages .alert-info {
     background-color: #d9edf7;
     border-color: #bce8f1;
     color: #31708f;
-  }
-  
-  /* Warning message */
-  .messages .alert-warning {
+}
+
+/* Warning message */
+.messages .alert-warning {
     background-color: #fcf8e3;
     border-color: #faebcc;
     color: #8a6d3b;
-  }
-  
-  /* Error message */
-  .messages .alert-danger {
+}
+
+/* Error message */
+.messages .alert-danger {
     background-color: #f2dede;
     border-color: #ebccd1;
     color: #a94442;
-  }
+}
 
 
-  /* deze tag nog gebruiken om de hoogte van de texteara mee te bepalen */
+/* deze tag nog gebruiken om de hoogte van de texteara mee te bepalen */
 
 /* textarea.form-control {
     height: 4em;

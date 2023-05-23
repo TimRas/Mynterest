@@ -10,7 +10,7 @@ Topics
 
 <div class="banner pb-2">
     <h2 class="intro-title mt-2">Welcome to Mynterest!</h2>
-    <p class="mb-4 mt-5 w-75">Greetings! Welcome to my own personal blog application 'Mynterest'. This
+    <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
         application
         will
         be a meeting point for certain like minded people to conversate and discuss four big topics in life.
@@ -18,20 +18,20 @@ Topics
         alot of you guys. Don't wait any longer and join us!</p>
 </div>
 
-<section class="main-section">   
-    <div class="topic-container mt-4 pt-2">
-        <button type="button post-button" class="topic-item">
-            <a href="{% url 'posts' topic='mental' %}"><strong>Mental</strong></a>
-        </button>
-        <button type="button post-button" class="topic-item">
-            <a href="{% url 'posts' topic='games' %}"><strong>Games</strong></a>
-        </button>
-        <button type="button post-button" class="topic-item">
-            <a href="{% url 'posts' topic='sports' %}"><strong>Sports</strong></a>
-        </button>
-        <button type="button post-button" class="topic-item">
-            <a href="{% url 'posts' topic='nature' %}"><strong>Nature</strong></a>
-        </button>
+<section class="main-section">
+    <div class="row no-gutters topic-container">
+        <a href="{% url 'posts' topic='mental' %}" class="mental-image text-decoration-none col-3">
+            <strong class="topic-text">Mental</strong>
+        </a>
+        <a href="{% url 'posts' topic='games' %}" class="games-image text-decoration-none col-3">
+            <strong class="topic-text">Games</strong>
+        </a>
+        <a href="{% url 'posts' topic='sports' %}" class="sports-image text-decoration-none col-3">
+            <strong class="topic-text">Sports</strong>
+        </a>
+        <a href="{% url 'posts' topic='nature' %}" class="nature-image text-decoration-none col-3">
+            <strong class="topic-text">Nature</strong>
+        </a>
     </div>
 </section>
 
