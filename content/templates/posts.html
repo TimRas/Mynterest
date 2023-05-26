@@ -53,10 +53,10 @@
 {% endif %}
 
 
-<div class="main-section">
+<section class="main-section">
     <div class="post-container">
         {% if user.is_authenticated %}
-        <div class="row pt-2">
+        <div class="row mx-0 pt-2">
             <div class="col-11">
                 <P class="text-white float-right pt-2">Create your own post!
                 </P>
@@ -68,7 +68,7 @@
             </div>
         </div>
         {% else %}
-        <div class="row pt-2">
+        <div class="row mx-0 pt-2">
             <div class="col-11">
                 <P class="text-white float-right pt-2">You need to register in order to create your own Posts. Sign up
                     here!
@@ -104,6 +104,5 @@
         </div>
         {% endfor %}
     </div>
-</div>
-</div>
+</section>
 {% endblock %}

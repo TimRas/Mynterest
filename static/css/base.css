@@ -254,10 +254,10 @@ hr {
     color: white;
 }
 
-.banner-mental > P,
-.banner-sports > P,
-.banner-nature > P,
-.banner-games > p {
+.banner-mental>P,
+.banner-sports>P,
+.banner-nature>P,
+.banner-games>p {
     margin: auto;
 }
 
@@ -279,12 +279,12 @@ hr {
     font-weight: 800;
 }
 
-.post-register-button > a {
+.post-register-button>a {
     text-decoration: none;
     color: white;
 }
 
-.post-register-button > a:hover {
+.post-register-button>a:hover {
     text-decoration: none;
     color: darkgrey;
 }
@@ -298,12 +298,12 @@ hr {
     font-weight: 800;
 }
 
-.post-create-button > a {
+.post-create-button>a {
     text-decoration: none;
     color: white;
 }
 
-.post-create-button > a:hover {
+.post-create-button>a:hover {
     text-decoration: none;
     color: darkgrey;
 }
@@ -353,6 +353,89 @@ hr {
     height: 30%;
 }
 
+/* ---- Post details page ----*/
+
+.banner-sports-detail {
+    height: 14em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_sports.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-games-detail {
+    height: 14em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_games.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-nature-detail {
+    height: 14em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_nature.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-mental-detail {
+    height: 14em;
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/banner_mental.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-mental-detail>h2,
+.banner-sports-detail>h2,
+.banner-nature-detail>h2,
+.banner-games-detail>h2 {
+    margin-top: 0.5em;
+    color: white;
+}
+
+.post-body {
+    min-height: 8em;
+}
+
+.comment-body {
+    min-height: 3em;
+}
+
+.post-detail-buttons {
+    background-color: purple;
+    border-radius: 5px;
+    border-style: none;
+    height: 2.8em;
+    font-weight: 800;
+}
+
+.post-detail-buttons>a {
+    text-decoration: none;
+    color: white;
+}
+
+.post-detail-buttons>a:hover {
+    text-decoration: none;
+    color: darkgrey;
+}
+
+.btn-like {
+    background: purple;
+    color: white;
+    border-radius: 5px;
+}
+
+
 .post-card-body {
     background-color: #292828;
 }
@@ -401,11 +484,11 @@ hr {
 }
 
 .comment-form {
-    width: 45%;
+    width: 50%;
     border-radius: 5px;
 }
 
-.comment-form>div {
+/* .comment-form>div {
     font-family: 'Bitter', serif;
     font-weight: 800;
     border-radius: 5px;
@@ -414,7 +497,7 @@ hr {
 .comment-form>div>button {
     display: block;
     float: right;
-}
+} */
 
 /* ---- Back to top button ----*/
 

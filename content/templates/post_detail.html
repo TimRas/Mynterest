@@ -4,74 +4,104 @@
 
 {% load crispy_forms_tags %}
 
+{% if post.topic.title == "Sports" %}
+<div class="banner-sports-detail">
+    <h2 class="intro-title">{{ post.topic.title }}</h2>
+</div>
+{% elif post.topic.title == "Games" %}
+<div class="banner-games-detail">
+    <h2 class="intro-title">{{ post.topic.title }}</h2>
+</div>
+{% elif post.topic.title == "Nature" %}
+<div class="banner-nature-detail">
+    <h2 class="intro-title">{{ post.topic.title }}</h2>
+</div>
+{% elif post.topic.title == "Mental" %}
+<div class="banner-mental-detail">
+    <h2 class="intro-title">{{ post.topic.title }}</h2>
+</div>
+{% endif %}
 
-<div class="main-section mt-5">
-    <div class="row post-container">
+<section class="main-section">
+    <div class="row post-container mt-3 w-75 mx-auto">
         <div class="col-12 pt-2">
-            <div class="card">
-                <div class="card-body">
+            <div class="card border-0">
+                <div class="card-body post-card-body text-white">
                     <div class="card-title">
-                        <h4><strong>{{ post.title }}</strong></h4>
-                        <p class="card-text text-muted">{{ post.created_date }}</p>
+                        <div class="row mx-0 pl-1">
+                            <h4><strong>{{ post.title }}</strong></h4>
+                        </div>
                     </div>
                     <hr>
-                    <div class="post-body">
+                    <div class="post-body pl-1">
                         {{ post.content|safe }}
                     </div>
-                    <div class="post-interaction row">
-                        <div class="post-likes col-4">
+                    <hr>
+                    <div class="row">
+                        <div class="post-likes col-1">
                             <p class="card-text text-muted">{{ post.likes.count }} likes</p>
                             {% if user.is_authenticated %}
                             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like border-0"><i
                                         class="fas fa-heart"></i></button>
                                 {% else %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like"><i
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like border-0"><i
                                         class="far fa-heart"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
                             <span class="text-secondary"><i class="far fa-heart"></i></span>
-                            {% endif %}
+                            {% endif %}                           
                         </div>
-                        <div class="col-6">
-                            <button class="button post-button float-right">
+                        <div class="col-3 pt-2 pl-1">
+                            <h6><strong>{{ post.author }}</strong></h6>
+                            <p class="card-text text-muted">{{ post.created_date }}</p>                          
+                        </div>
+                        <div class="col-8 pt-4">
+                            <button class="button post-detail-buttons float-right">
                                 <a href="{% url 'edit_post' slug=post.slug %}">Edit Post</a>
-                            </button> 
-                        </div>
-                        <div class="col-2">
-                            <button class="button post-button">
+                            </button>
+                            <button class="button post-detail-buttons float-right mr-3">
                                 <a href="{% url 'delete_post' slug=post.slug %}">Delete Post</a>
-                            </button> 
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <h5 class="card-title mt-4">Comments:</h5>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <h5 class="text-white">Comments:</h5>
+                </div>
+                <div class="col-6">
+                    <p class="text-white float-right"><strong>Leave your own comment below!</strong></p>
+                </div>
+            </div>
             {% for comment in comments %}
-            <div class="card mt-2 pt-2">
-                <div class="card-body pb-0">
-                    <div class="post-comments">
-                        <ul class="list-unstyled">
+            <div class="card mt-2 mb-3 border-0">
+                <div class="card-body post-card-body text-white">
+                    <div>
+                        <ul class="list-unstyled my-0">
                             <li class="media">
                                 <div class="media-body">
-                                    <h6 class="mt-0">{{ comment.author.username }}</h6>
+                                    <h6 class="mt-0"><strong>{{ comment.author.username }}</strong></h6>
                                     <hr>
-                                    <p class="mt-4">{{ comment.body|safe }}</p>
-                                    <small class="text-muted">
-                                        {{ comment.created_date }}</small>
-                                    <div class="row pt-2">
-                                        <div class="col-9">
-                                            <button class="button post-button float-right mr-0">
-                                                <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit Comment</a>
-                                            </button>
+                                    <div class="comment-body">{{ comment.body|safe }}</div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-3 pt-2">
+                                            <p class="card-text text-muted">{{ comment.created_date }}</p>                          
                                         </div>
-                                        <div class="col-3">
-                                            <button class="button post-button float-right">
-                                                <a href="{% url 'delete_comment' comment_id=comment.id %}">Delete Comment</a>
-                                            </button>    
+                                        <div class="col-9">
+                                            <button class="button post-detail-buttons float-right">
+                                                <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit
+                                                    Comment</a>
+                                            </button>
+                                            <button class="button post-detail-buttons float-right mr-3">
+                                                <a href="{% url 'delete_comment' comment_id=comment.id %}">Delete
+                                                    Comment</a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +113,7 @@
             {% empty %}
             <p>No comments yet.</p>
             {% endfor %}
-            <div class="row-md-6 card mt-4 comment-form">
+            <div class="row-md-6 card mt-4 mb-3 comment-form mx-auto border-0">
                 <div class="card-body bg-dark text-white">
                     {% if user.is_authenticated %}
                     <h3>Leave a comment:</h3>
@@ -103,5 +133,5 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}

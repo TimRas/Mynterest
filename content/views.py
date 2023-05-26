@@ -65,6 +65,7 @@ class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
+        topic = post.topic
         comments = post.comments.all().order_by("-created_date")
 
         return render(
@@ -72,6 +73,7 @@ class PostDetail(View):
             "post_detail.html",
             {
                 "post": post,
+                "topic": topic,
                 "comments": comments,
                 "comment_form": CommentForm()
             },
