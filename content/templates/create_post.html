@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_title %}
+
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="main-section">
+    <div class="row-md-6 card mt-4 mb-4 comment-form mx-auto">
+        <div class="card-body bg-dark text-white">
+            <h3>Create post:</h3>
+            <hr>
+            <p>Posting as: {{ user.username }}</p>
+            <form method="POST">
+                {% csrf_token %}
+                {{ post_form|crispy }}
+                <input type="text" name="topic" value="{{ topic.name }}" readonly>
+                <input class="right" type="submit" value="Update Post">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

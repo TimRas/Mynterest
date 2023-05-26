@@ -101,6 +101,31 @@ class PostDetail(View):
         )
 
 
+class CreatePost(View):
+    """Render a post form in the given URL. Validate the submitted form, update the database, and redirect to the given topic page."""
+
+    def get(self, request, topic, *args, **kwargs):
+        topic_field = get_object_or_404(Topic, slug=topic)
+        post_form = PostForm(initial={"topic": topic_field})  
+
+        return render(request, "create_post.html", {"topic": topic_field, "post_form": post_form})
+
+    def post(self, request):
+        post_form = PostForm(request.POST)  # Instantiate the form with request.POST data
+
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+            post.author = request.user
+            post.slug = slugify(post.title)
+            post.save()
+            # Redirect to the respective page (replace "posts" and "topic" with the appropriate URL names and parameters)
+            return redirect(reverse("posts", kwargs={"topic": topic}))
+        else:
+            # Form is not valid, handle the error condition
+            return render(request, "create_post.html", {"form": post_form})
+
+
+
 class EditPost(View):
     """ Render a form in the edit post html of the given post. Validates the submitted form, update in the database and redirects to the given topic page"""
     

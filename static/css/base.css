@@ -270,6 +270,45 @@ hr {
     text-align: right;
 }
 
+.post-register-button {
+    background-color: purple;
+    border-radius: 5px;
+    border-style: none;
+    height: 2.8em;
+    width: 5em;
+    font-weight: 800;
+}
+
+.post-register-button > a {
+    text-decoration: none;
+    color: white;
+}
+
+.post-register-button > a:hover {
+    text-decoration: none;
+    color: darkgrey;
+}
+
+.post-create-button {
+    background-color: purple;
+    border-radius: 5px;
+    border-style: none;
+    height: 3.2em;
+    width: 5em;
+    font-weight: 800;
+}
+
+.post-create-button > a {
+    text-decoration: none;
+    color: white;
+}
+
+.post-create-button > a:hover {
+    text-decoration: none;
+    color: darkgrey;
+}
+
+
 .topic-text {
     font-size: 2em;
     color: white;
@@ -363,15 +402,13 @@ hr {
 
 .comment-form {
     width: 45%;
-    margin: 0 auto;
-    margin-right: 0;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .comment-form>div {
     font-family: 'Bitter', serif;
     font-weight: 800;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .comment-form>div>button {

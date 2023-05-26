@@ -11,53 +11,79 @@
 {% block content %}
 
 {% if topic.title == "Sports" %}
-    <div class="banner-sports pb-2">
-        <h2 class="intro-title mt-2">{{ topic.title }}</h2>
-        <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
+<div class="banner-sports pb-2">
+    <h2 class="intro-title mt-2">{{ topic.title }}</h2>
+    <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
         application
         will
         be a meeting point for certain like-minded people to converse and discuss four big topics in life.
         Sports!, Games!, Music! and Mental!!. All of these topics are dear to my heart and I know they will be with
         a lot of you guys. Don't wait any longer and join us!</p>
-    </div>
+</div>
 {% elif topic.title == "Games" %}
-    <div class="banner-games pb-2">
-        <h2 class="intro-title mt-2">{{ topic.title }}</h2>
-        <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
+<div class="banner-games pb-2">
+    <h2 class="intro-title mt-2">{{ topic.title }}</h2>
+    <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
         application
         will
         be a meeting point for certain like-minded people to converse and discuss four big topics in life.
         Sports!, Games!, Music! and Mental!!. All of these topics are dear to my heart and I know they will be with
         a lot of you guys. Don't wait any longer and join us!</p>
-    </div>
+</div>
 {% elif topic.title == "Nature" %}
-    <div class="banner-nature pb-2">
-        <h2 class="intro-title mt-2">{{ topic.title }}</h2>
-        <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
+<div class="banner-nature pb-2">
+    <h2 class="intro-title mt-2">{{ topic.title }}</h2>
+    <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
         application
         will
         be a meeting point for certain like-minded people to converse and discuss four big topics in life.
         Sports!, Games!, Music! and Mental!!. All of these topics are dear to my heart and I know they will be with
         a lot of you guys. Don't wait any longer and join us!</p>
-    </div>
+</div>
 {% elif topic.title == "Mental" %}
-    <div class="banner-mental pb-2">
-        <h2 class="intro-title mt-2">{{ topic.title }}</h2>
-        <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
+<div class="banner-mental pb-2">
+    <h2 class="intro-title mt-2">{{ topic.title }}</h2>
+    <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
         application
         will
         be a meeting point for certain like-minded people to converse and discuss four big topics in life.
         Sports!, Games!, Music! and Mental!!. All of these topics are dear to my heart and I know they will be with
         a lot of you guys. Don't wait any longer and join us!</p>
-    </div>
+</div>
 {% endif %}
-    
+
 
 <div class="main-section">
     <div class="post-container">
+        {% if user.is_authenticated %}
+        <div class="row pt-2">
+            <div class="col-11">
+                <P class="text-white float-right pt-2">Create your own post!
+                </P>
+            </div>
+            <div class="col-1">
+                <button class="post-create-button float-left">
+                    <a href="{% url 'create_post' topic=topic %}">Create Post</a>
+                </button>
+            </div>
+        </div>
+        {% else %}
+        <div class="row pt-2">
+            <div class="col-11">
+                <P class="text-white float-right pt-2">You need to register in order to create your own Posts. Sign up
+                    here!
+                </P>
+            </div>
+            <div class="col-1">
+                <button class="post-register-button float-left">
+                    <a href="{% url 'account_signup' %}">Register</a>
+                </button>
+            </div>
+        </div>
+        {% endif %}
         {% for post in posts %}
-        <div class="pt-2 w-75 mx-auto">
-            <div class="post-card mt-4">
+        <div class="row pt-2 w-75 mx-auto">
+            <div class="post-card w-100">
                 <div class="card-body post-card-body">
                     <div class="card-title">
                         <h4><strong>{{ post.title }}</strong></h4>
@@ -77,24 +103,7 @@
             </div>
         </div>
         {% endfor %}
-        <div class="row-md-6 card mt-5 mr-0 comment-form">
-            <div class="card-body bg-dark text-white">
-                {% if user.is_authenticated %}
-                <h3>Create your own post!</h3>
-                <p>Posting as: {{ user.username }}</p>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ post_form|crispy }}
-                    <input class="right" type="submit" value="Add Post">
-                </form>
-                {% else %}
-                <h3>Sign up now and write your own posts and comments!</h3>
-                <button class="button post-button ml-5">
-                    <a href="{% url 'account_signup' %}">Register</a>
-                </button>
-                {% endif %}
-            </div>
-        </div>
     </div>
+</div>
 </div>
 {% endblock %}
