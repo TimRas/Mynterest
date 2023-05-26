@@ -308,6 +308,25 @@ hr {
     color: darkgrey;
 }
 
+.pagination-container {
+    height: 3em;
+    background-color: purple;
+    border-radius: 5px;
+    font-family: 'Bitter', serif;
+    color: white;
+    align-items: center;
+}
+
+.pagination-link {
+    color: white;
+}
+
+.pagination-link:hover {
+    color: darkgrey;
+    text-decoration: none;
+}
+
+
 
 .topic-text {
     font-size: 2em;

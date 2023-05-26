@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import View, generic
 from django.http import HttpResponseRedirect
@@ -18,9 +19,11 @@ class PostList(View):
     """ Renders all all posts related to the given topic. Validates the submitted form, saves the new post in the database and redirects the user back to the post page with the given topic"""
     
     def get(self, request, topic, *args, **kwargs):
-        queryset = Post.objects.all()
+        queryset = Post.objects.filter(topic__slug=topic)
+        paginator = Paginator(queryset, 1) 
+        page_number = request.GET.get('page')
+        posts = paginator.get_page(page_number)  
         topic = self.kwargs['topic'] 
-        posts = queryset.filter(topic__slug=topic)
         post_form = PostForm()
 
         return render(
@@ -66,7 +69,11 @@ class PostDetail(View):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, slug=slug)
         topic = post.topic
-        comments = post.comments.all().order_by("-created_date")
+        all_comments = post.comments.all().order_by("-created_date")
+
+        paginator = Paginator(all_comments, 6)
+        page_number = request.GET.get("page")
+        comments = paginator.get_page(page_number)
 
         return render(
             request,

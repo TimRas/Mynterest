@@ -83,7 +83,7 @@
         {% endif %}
         {% for post in posts %}
         <div class="row pt-2 w-75 mx-auto">
-            <div class="post-card w-100">
+            <div class="post-card w-100 mb-3">
                 <div class="card-body post-card-body">
                     <div class="card-title">
                         <h4><strong>{{ post.title }}</strong></h4>
@@ -103,6 +103,24 @@
             </div>
         </div>
         {% endfor %}
-    </div>
+
+        <div class="pagination">
+            <div class="row mx-auto pagination-container">
+                <div class="col-12 text-center">
+                    <span class="current-page">{{ posts.start_index }} - {{ posts.end_index }} of
+                        {{ posts.paginator.count }}</span>
+                </div>
+                <div class="col-12 text-center">
+                    {% if posts.has_next %}
+                    <a href="?page={{ posts.next_page_number }}" class="pagination-link">next</a>
+                    <a href="?page={{ posts.paginator.num_pages }}" class="pagination-link">last</a>
+                    {% endif %}
+                    {% if posts.has_previous %}
+                    <a href="?page=1" class="pagination-link">first</a>
+                    <a href="?page={{ posts.previous_page_number }}" class="pagination-link">previous</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 </section>
 {% endblock %}

@@ -3,6 +3,7 @@
 {% block content %}
 
 {% load crispy_forms_tags %}
+{% load custom_filters %}
 
 {% if post.topic.title == "Sports" %}
 <div class="banner-sports-detail">
@@ -44,20 +45,20 @@
                             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like border-0"><i
-                                        class="fas fa-heart"></i></button>
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}"
+                                    class="btn-like border-0"><i class="fas fa-heart"></i></button>
                                 {% else %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like border-0"><i
-                                        class="far fa-heart"></i></button>
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}"
+                                    class="btn-like border-0"><i class="far fa-heart"></i></button>
                                 {% endif %}
                             </form>
                             {% else %}
                             <span class="text-secondary"><i class="far fa-heart"></i></span>
-                            {% endif %}                           
+                            {% endif %}
                         </div>
                         <div class="col-3 pt-2 pl-1">
                             <h6><strong>{{ post.author }}</strong></h6>
-                            <p class="card-text text-muted">{{ post.created_date }}</p>                          
+                            <p class="card-text text-muted">{{ post.created_date }}</p>
                         </div>
                         <div class="col-8 pt-4">
                             <button class="button post-detail-buttons float-right">
@@ -70,6 +71,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row mt-3">
                 <div class="col-6">
                     <h5 class="text-white">Comments:</h5>
@@ -91,7 +93,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-3 pt-2">
-                                            <p class="card-text text-muted">{{ comment.created_date }}</p>                          
+                                            <p class="card-text text-muted">{{ comment.created_date }}</p>
                                         </div>
                                         <div class="col-9">
                                             <button class="button post-detail-buttons float-right">
@@ -111,8 +113,28 @@
                 </div>
             </div>
             {% empty %}
-            <p>No comments yet.</p>
+            <p class="text-white">No comments yet.</p>
             {% endfor %}
+
+            <div class="pagination">
+                <div class="row mx-auto pagination-container">
+                    <div class="col-12 text-center">
+                        <span class="current-page">{{ comments.start_index }} - {{ comments.end_index }} of
+                            {{ comments.paginator.count }}</span>
+                    </div>
+                    <div class="col-12 text-center">
+                        {% if comments.has_next %}
+                        <a href="?page={{ comments.next_page_number }}" class="pagination-link">next</a>
+                        <a href="?page={{ comments.paginator.num_pages }}" class="pagination-link">last</a>
+                        {% endif %}
+                        {% if comments.has_previous %}
+                        <a href="?page=1" class="pagination-link">first</a>
+                        <a href="?page={{ comments.previous_page_number }}" class="pagination-link">previous</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
             <div class="row-md-6 card mt-4 mb-3 comment-form mx-auto border-0">
                 <div class="card-body bg-dark text-white">
                     {% if user.is_authenticated %}
