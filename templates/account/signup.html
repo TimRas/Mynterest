@@ -2,31 +2,39 @@
 
 {% load i18n %}
 
+{% block extra_title %}
+Sign Up
+{% endblock %}
+
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 
 {% block content %}
-<div class="container">
-  <div class="row pb-4 mb-4">
-    <div class="col-md-8 mt-3 offset-md-2 registration-text">
-      <h3>{% trans "Sign Up" %}</h3>
-        <hr>
-      <p>{% blocktrans %}Welcome back to the Mynterest blog. Do you already have an account? Then please <a class="link"
-          href="{{ login_url }}">sign in</a> instead.{% endblocktrans %}</p>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-8 mt-3 offset-md-2">
-      <form class="signup ml-5 pl-2" id="signup_form" method="POST" action="{% url 'account_signup' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button class="signup-button mt-3 mr-4" type="submit">{% trans "Sign Up" %}</button>
-      </form>
+<section class="allauth-section">
+  <div class="allauth-container-sign-up text-white">
+    <div class="row pb-4 mb-4">
+      <div class="col mt-3 registration-text">
+        <h3 class="ml-3">{% trans "Sign Up" %}</h3>
+          <hr>
+        <p class="ml-3 mr-3">{% blocktrans %}Welcome back to the Mynterest blog. Do you already have an account? Then please <a class="link"
+            href="{{ login_url }}">sign in</a> instead.{% endblocktrans %}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col mt-3">
+        <form class="signup ml-3" id="signup_form" method="POST" action="{% url 'account_signup' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="allauth-buttons mb-3 mr-3 text-white float-right" type="submit">{% trans "Sign Up" %}</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
 {% endblock %}

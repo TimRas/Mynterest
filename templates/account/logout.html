@@ -2,28 +2,35 @@
 
 {% load i18n %}
 
+{% block extra_title %}
+Sign Out
+{% endblock %}
+
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 mt-3 offset-md-2">
-      <h3>{% trans "Sign Out" %}</h3>
-      <hr>
-      <p class="registration-text">{% trans 'Are you sure you want to sign out?' %}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8 mt-3 offset-md-2">
 
-      <form class="signup ml-5 pl-2" method="POST" action="{% url 'account_logout' %}">
-        {% csrf_token %}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button class="signup-button mt-3 mr-4" type="submit">{% trans 'Sign Out' %}</button>
-      </form>
+<section class="allauth-section-sign-out mx-0">
+  <div class="allauth-container-sign-out text-white">
+    <div class="row mx-auto">
+      <div class="col mt-3">
+        <h3 class="ml-3">{% trans "Sign Out" %}</h3>
+        <hr>
+        <p class="registration-text ml-3">{% trans 'Are you sure you want to sign out?' %}</p>
+      </div>
+    </div>
+    <div class="row mx-auto">
+      <div class="col mt-3">
+        <form class="signup ml-5 pl-2" method="POST" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="allauth-buttons mb-3 mr-3 text-white float-right" type="submit">{% trans 'Sign Out' %}</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
 {% endblock %}

@@ -131,7 +131,6 @@ hr {
     border-color: #081616;
     border-style: solid;
     filter: brightness(95%);
-    /* transition: all ease-in-out 0.5s; */
 }
 
 .nature-image:hover,
@@ -139,7 +138,6 @@ hr {
 .games-image:hover,
 .mental-image:hover {
     filter: brightness(120%);
-    /* transition: all ease-in-out 0.5s; */
 }
 
 
@@ -147,7 +145,7 @@ hr {
 /* ---- Footer container ----*/
 
 .footer-container {
-    height: 2.6em;
+    height: 3.1em;
     background-color: #081616;
     color: white;
     text-decoration: none;
@@ -457,7 +455,7 @@ hr {
 }
 
 
-.signup-button {
+/* .signup-button {
     padding: 7px 15px;
     border-radius: 8px;
     border: 2px solid grey;
@@ -468,8 +466,15 @@ hr {
     background-color: white;
     font-family: 'Bitter', serif;
     font-weight: 600;
-}
+} */
 
+.allauth-buttons {
+    background-color: purple;
+    border-radius: 5px;
+    border-style: none;
+    height: 2.8em;
+    font-weight: 800;
+}
 
 .registration-text {
     font-family: 'Bitter', serif;
@@ -509,6 +514,43 @@ hr {
     font-weight: 800;
 }
 
+
+/* ---- Allauth pages  ----*/
+
+.allauth-section {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.allauth-section-sign-out {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.allauth-section-sign-in {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.allauth-container-sign-out {
+    width: 40%;
+    border-radius: 5px;
+    background-color: #081616;   
+}
+
+.allauth-container-sign-up {
+    border-radius: 5px;
+    background-color: #081616;   
+}
+
+.allauth-container-sign-in {
+    width: 70%;
+    border-radius: 5px;
+    background-color: #081616;   
+}
 
 /* ---- Error messages ----*/
 
