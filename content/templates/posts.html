@@ -1,12 +1,11 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block extra_title %}
-
+{{ topic.title }}
 {% endblock %}
-
-{% load crispy_forms_tags %}
 
 {% block content %}
 
@@ -54,7 +53,7 @@
 
 
 <section class="main-section">
-    <div class="post-container">
+    <div class="post-container mt-3 w-75 mx-auto">
         {% if user.is_authenticated %}
         <div class="row mx-0 pt-2">
             <div class="col-11">
@@ -82,22 +81,29 @@
         </div>
         {% endif %}
         {% for post in posts %}
-        <div class="row pt-2 w-75 mx-auto">
-            <div class="post-card w-100 mb-3">
-                <div class="card-body post-card-body">
-                    <div class="card-title">
-                        <h4><strong>{{ post.title }}</strong></h4>
-                    </div>
-                    <hr>
-                    <div class="post-excerpt">
-                        <p>{{ post.excerpt }}</p>
-                    </div>
-                    <hr>
-                    <div class="row post-links">
-                        <p class="col card-text text-muted h6">{{ post.created_date }}</p>
-                        <button class="col button post-button">
-                            <a href="{% url 'post_detail' slug=post.slug %}">View post details</a>
-                        </button>
+        <div class="row pt-2 mb-3 w-75 mx-auto">
+            <div class="col-12 pt-2">
+                <div class="card border-0">
+                    <div class="card-body post-card-body text-white">
+                        <div class="row mx-0 pl-1">
+                            <h4><strong>{{ post.title }}</strong></h4>
+                        </div>
+                        <hr>
+                        <div class="post-excerpt pl-1">
+                            <p>{{ post.excerpt }}</p>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 pt-2 pl-3">
+                                <h6 class="pl-3"><strong>{{ post.author }}</strong></h6>
+                                <p class="card-text text-muted pl-3">{{ post.created_date }}</p>
+                            </div>
+                            <div class="col-8">
+                                <button class="button post-detail-buttons float-right">
+                                    <a href="{% url 'post_detail' slug=post.slug %}">View post</a>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,5 +128,6 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 {% endblock %}

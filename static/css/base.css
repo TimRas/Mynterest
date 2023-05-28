@@ -19,12 +19,6 @@ hr {
     background-color: rgb(83, 83, 83);
 }
 
-/* ---- Wrapper ----*/
-
-.wrapper {
-    min-height: 100vh;
-    position: relative;
-}
 
 /* ---- Header ----*/
 
@@ -72,20 +66,16 @@ hr {
 /* ---- Main content container ----*/
 
 .main-content {
-    width: 100%;
-    height: 60%;
-    margin: auto;
+    min-height: calc(100vh - 106px);  
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     font-family: 'Comic Neue', cursive;
 }
 
 .main-section {
-    min-height: 50.3vh;
-    width: 100%;
     background-color: #081616;
+    min-height: 52.7vh;
+
 }
 
 
@@ -157,8 +147,7 @@ hr {
 /* ---- Footer container ----*/
 
 .footer-container {
-    height: 50px;
-    margin: auto;
+    height: 2.6em;
     background-color: #081616;
     color: white;
     text-decoration: none;
@@ -303,6 +292,10 @@ hr {
     color: white;
 }
 
+.post-excerpt {
+    min-height: 6em;
+}
+
 .post-create-button>a:hover {
     text-decoration: none;
     color: darkgrey;
@@ -357,20 +350,6 @@ hr {
     font-weight: 800;
 }
 
-.post-card {
-    color: white;
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-clip: border-box;
-    border-radius: 5px;
-    border-style: none;
-    height: 30%;
-}
 
 /* ---- Post details page ----*/
 
@@ -507,16 +486,6 @@ hr {
     border-radius: 5px;
 }
 
-/* .comment-form>div {
-    font-family: 'Bitter', serif;
-    font-weight: 800;
-    border-radius: 5px;
-}
-
-.comment-form>div>button {
-    display: block;
-    float: right;
-} */
 
 /* ---- Back to top button ----*/
 
@@ -571,9 +540,3 @@ hr {
     color: #a94442;
 }
 
-
-/* deze tag nog gebruiken om de hoogte van de texteara mee te bepalen */
-
-/* textarea.form-control {
-    height: 4em;
-} */

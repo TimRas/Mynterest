@@ -20,7 +20,7 @@ class PostList(View):
     
     def get(self, request, topic, *args, **kwargs):
         queryset = Post.objects.filter(topic__slug=topic)
-        paginator = Paginator(queryset, 1) 
+        paginator = Paginator(queryset, 6) 
         page_number = request.GET.get('page')
         posts = paginator.get_page(page_number)  
         topic = self.kwargs['topic'] 

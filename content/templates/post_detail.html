@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
-
-{% block content %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 {% load custom_filters %}
+
+
+{% block extra_title %}
+Post Details
+{% endblock %}
+
+{% block content %}
 
 {% if post.topic.title == "Sports" %}
 <div class="banner-sports-detail">
