@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_title %}
+404s
+{% endblock %}
+
+{% block content %}
+
+<section class="main-section">
+    <div class="four-oh-four-image">
+        <div class="row h-75">
+            <div class="row mx-auto">
+                <h2 class="text-white text-center">
+                    <strong>
+                        Oops
+                    </strong>
+                </h2>
+            </div>
+            <div class="row mx-auto">
+                <p class="">
+                    the page you wont to reach doesn't exist or isn't availible.
+                </p>
+            </div>
+            <div class="row mx-auto">
+                <p class="text-white text-center">
+                    return to the home page here
+                </p>
+            </div>
+            <div class="row mx-auto">
+                <button class="four-oh-four-button text-white">
+                    Return to home
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

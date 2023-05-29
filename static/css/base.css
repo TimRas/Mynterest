@@ -552,33 +552,60 @@ hr {
     background-color: #081616;   
 }
 
+/* ---- 404 Page ----*/
+
+.four-oh-four-image {
+    width: 100%;
+    padding-top: 4.5em;
+
+    background-image: url('../../media/art_404.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.four-oh-four-button {
+    background-color: purple;
+    border-radius: 5px;
+    border-style: none;
+    height: 2.8em;
+    font-weight: 800;
+}
+
 /* ---- Error messages ----*/
+
+.messages-container {
+    position: fixed;
+    top: 4.5em;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
 
 /* Success message */
 .messages .alert-success {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #3c763d;
+    background-color: #0a8a0e;
+    border-color: #388E3C;
+    color: #FFFFFF;
 }
 
 /* Info message */
 .messages .alert-info {
-    background-color: #d9edf7;
-    border-color: #bce8f1;
-    color: #31708f;
+    background-color: #067ada;
+    border-color: #1976D2;
+    color: #FFFFFF;
 }
 
 /* Warning message */
 .messages .alert-warning {
-    background-color: #fcf8e3;
-    border-color: #faebcc;
-    color: #8a6d3b;
+    background-color: #fcbe03;
+    border-color: #FFA000;
+    color: #FFFFFF;
 }
 
 /* Error message */
 .messages .alert-danger {
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    color: #a94442;
+    background-color: #b61105;
+    border-color: #E53935;
+    color: #FFFFFF;
 }
 

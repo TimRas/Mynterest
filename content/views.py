@@ -230,5 +230,3 @@ class DeleteComment(View):
         comment.delete()
 
         return redirect(reverse("post_detail", kwargs={"slug": slug}))
-
-    
