@@ -86,7 +86,7 @@ hr {
 }
 
 .sports-image {
-    background-image: url('/media/new_sport.jpg');
+    background-image: url('../images/new_sport.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -98,7 +98,7 @@ hr {
 }
 
 .nature-image {
-    background-image: url('/media/new_nature.jpg');
+    background-image: url('../images/new_nature.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -110,7 +110,7 @@ hr {
 }
 
 .games-image {
-    background-image: url('/media/new_games.jpg');
+    background-image: url('../images/new_games.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -122,7 +122,7 @@ hr {
 }
 
 .mental-image {
-    background-image: url('/media/new_mental.jpg');
+    background-image: url('../images/new_mental.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -161,7 +161,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_landscape1.jpg');
+    background-image: url('../images/banner_landscape1.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -197,7 +197,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_sports.jpg');
+    background-image: url('../images/banner_sports.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -207,7 +207,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_games.jpg');
+    background-image: url('../images/banner_games.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -217,7 +217,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_nature.jpg');
+    background-image: url('../images/banner_nature.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -227,7 +227,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_mental.jpg');
+    background-image: url('../images/banner_mental.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -356,7 +356,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_sports.jpg');
+    background-image: url('../images/banner_sports.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -366,7 +366,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_games.jpg');
+    background-image: url('../images/banner_games.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -376,7 +376,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_nature.jpg');
+    background-image: url('../images/banner_nature.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -386,7 +386,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/banner_mental.jpg');
+    background-image: url('../images/banner_mental.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -558,7 +558,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('/media/art_404.jpg');
+    background-image: url('../images/art_404.jpg');
     background-size: cover;
     background-position: center;
 }
