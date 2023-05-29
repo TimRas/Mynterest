@@ -89,8 +89,15 @@
                             <h4><strong>{{ post.title }}</strong></h4>
                         </div>
                         <hr>
-                        <div class="post-excerpt pl-1">
-                            <p>{{ post.excerpt }}</p>
+                        <div class="row">
+                            <div class="col-6 post-excerpt pl-1">
+                                <p>{{ post.excerpt }}</p>
+                            </div>
+                            <div class="col-6">
+                                <div class="post-image">
+                                    {{ post.image }}
+                                </div>
+                            </div>
                         </div>
                         <hr>
                         <div class="row">
