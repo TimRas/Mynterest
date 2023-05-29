@@ -22,9 +22,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@300&family=Comic+Neue:wght@300&display=swap"
         rel="stylesheet">
-    <link rel="icon" href="/media/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="16x16" href="/media/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/media/favicon-32x32.png">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
     {% endblock %}
 
     {% block core_js %}
@@ -69,7 +69,7 @@
                                 <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                             </li>
                             <li>
-                                
+
                                 <p class="pt-2 ml-2">{{ request.user.username }}</p>
                             </li>
                             {% else %}
@@ -127,7 +127,7 @@
                 alert.close();
             }, 1500);
         </script>
-        
+
         <script>
             // Wait for the document to be fully loaded
             document.addEventListener('DOMContentLoaded', function () {
