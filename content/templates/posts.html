@@ -80,6 +80,17 @@
             </div>
         </div>
         {% endif %}
+        <div class="row mx-0 pt-2">
+            {% if most_liked %}
+            <button class="most-liked-buttons">
+                <a href="{% url 'posts' topic=topic %}">Show All Posts</a>
+            </button>
+            {% else %}
+            <button class="most-liked-buttons">
+                <a href="{% url 'posts' topic=topic %}?most_liked=true">Show Most Liked</a>
+            </button>
+            {% endif %}
+        </div>
         {% for post in posts %}
         <div class="row pt-2 mb-3 w-75 mx-auto">
             <div class="col-12 pt-2">

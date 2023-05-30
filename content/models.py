@@ -1,16 +1,24 @@
 from django.db import models
-from django.utils.text import slugify
-from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+# import cloudinary
+# from cloudinary.models import CloudinaryField
 
 
 class Topic(models.Model):  
     title = models.CharField(max_length=70, unique=True, null=False, blank=False)
     slug = models.SlugField(max_length=70, unique=True)
-    image = CloudinaryField('topic_images', blank=True)
+    image = models.URLField(max_length=1024, null=True, blank=True)
 
     def __str__(self):
         return str(self.title)
+    
+    # def save(self, *args, **kwargs):
+    #     try:
+    #         super().save(*args, **kwargs)
+    #     except cloudinary.exceptions.Error:
+    #         self.image = None
+    #         super().save(*args, **kwargs)
 
 
 class Post(models.Model):
@@ -19,7 +27,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=70)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_posts')
     content = models.TextField(max_length=500, null=False, blank=False)
-    image = CloudinaryField('post_images', blank=True)
+    image = models.URLField(max_length=1024, null=True, blank=True)
     excerpt = models.TextField(max_length=100, null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
@@ -30,13 +38,19 @@ class Post(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):   
         if not self.slug:
             self.slug = slugify(self.title, allow_unicode=True)
         super().save(*args, **kwargs)
 
     def amount_of_likes(self):
         return self.likes.count()
+
+        # try:
+        # super().save(*args, **kwargs)
+        # except cloudinary.exceptions.Error:
+        #     self.image = None
+        #     super().save(*args, **kwargs)
 
 
 class Comment(models.Model):

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import View, generic
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
+from django.db.models import Count
 from .models import Topic, Post, Comment
 from .forms import CommentForm, PostForm
 
@@ -16,14 +17,21 @@ class TopicList(generic.ListView):
 
 
 class PostList(View):
-    """ Renders all all posts related to the given topic. Validates the submitted form, saves the new post in the database and redirects the user back to the post page with the given topic"""
-    
+    """ Renders all all posts related to the given topic. Validates the submitted form, saves the new post in the database and redirects the user back to the post page with the given topic and handles the most-liked functionality"""
+
     def get(self, request, topic, *args, **kwargs):
         queryset = Post.objects.filter(topic__slug=topic)
-        paginator = Paginator(queryset, 6) 
+        most_liked = request.GET.get('most_liked', False) == 'true'
+
+        if most_liked:
+            queryset = queryset.annotate(num_likes=Count('likes')).filter(num_likes__gt=0).order_by('-num_likes')[:5]
+        else:
+            queryset = Post.objects.filter(topic__slug=topic)
+
+        paginator = Paginator(queryset, 6)
         page_number = request.GET.get('page')
-        posts = paginator.get_page(page_number)  
-        topic = self.kwargs['topic'] 
+        posts = paginator.get_page(page_number)
+        topic = self.kwargs['topic']
         post_form = PostForm()
 
         return render(
@@ -32,7 +40,8 @@ class PostList(View):
             {
                 "posts": posts,
                 "post_form": post_form,
-                "topic": topic,              
+                "topic": topic,
+                "most_liked": most_liked,
             },
         )
     
