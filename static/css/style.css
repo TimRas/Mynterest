@@ -308,7 +308,7 @@ hr {
     color: white;
 }
 
-.most-liked-buttons>a:hover {
+.most-liked-button>a:hover {
     text-decoration: none;
     color: darkgrey;
 }
@@ -499,6 +499,11 @@ hr {
 .registration-text>h3 {
     font-family: 'Bitter', serif;
     font-weight: 800;
+}
+
+.main-section-comment-form {
+    background-color: #081616;
+    min-height: 86vh;
 }
 
 .comment-form {

@@ -115,19 +115,20 @@ class CreatePost(View):
         except ObjectDoesNotExist as exc:
             raise Http404('The requested topic does not exist.') from exc
 
-    def post(self, request):
+    def post(self, request, topic, *args, **kwargs):
         try:
+            topic_field = get_object_or_404(Topic, slug=topic)
             post_form = PostForm(request.POST)
 
             if post_form.is_valid():
                 post = post_form.save(commit=False)
                 post.author = request.user
                 post.slug = slugify(post.title)
+                post.topic = topic_field
                 post.save()
 
                 return redirect(reverse("posts", kwargs={"topic": topic}))
-            else:              
-
+            else:
                 return render(request, "create_post.html", {"form": post_form})
         except ObjectDoesNotExist as exc:
             raise Http404('The requested topic does not exist.') from exc
@@ -141,7 +142,7 @@ class EditPost(View):
             post = get_object_or_404(Post, slug=slug)
             post_form = PostForm(instance=post)
 
-            return render(request, "edit_post.html", {"post_form": post_form})
+            return render(request, "edit_post.html", {"post_form": post_form, "post": post})
         except ObjectDoesNotExist as exc:
             raise Http404('The requested post does not exist.') from exc
 
@@ -180,7 +181,7 @@ class EditComment(View):
             comment = get_object_or_404(Comment, id=comment_id)
             comment_form = CommentForm(instance=comment)
 
-            return render(request, "edit_comment.html", {"comment_form": comment_form})
+            return render(request, "edit_comment.html", {"comment_form": comment_form, "comment": comment})
         except ObjectDoesNotExist as exc:
             raise Http404('The requested comment does not exist.') from exc
 

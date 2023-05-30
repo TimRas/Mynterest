@@ -65,6 +65,7 @@ Post Details
                             <h6><strong>{{ post.author }}</strong></h6>
                             <p class="card-text text-muted">{{ post.created_date }}</p>
                         </div>
+                        {% if post.author == request.user %}
                         <div class="col-8 pt-4">
                             <button class="button post-detail-buttons float-right">
                                 <a href="{% url 'edit_post' slug=post.slug %}">Edit Post</a>
@@ -73,6 +74,7 @@ Post Details
                                 <a href="{% url 'delete_post' slug=post.slug %}">Delete Post</a>
                             </button>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -101,6 +103,7 @@ Post Details
                                             <p class="card-text text-muted">{{ comment.created_date }}</p>
                                         </div>
                                         <div class="col-9">
+                                            {% if post.author == request.user %}
                                             <button class="button post-detail-buttons float-right">
                                                 <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit
                                                     Comment</a>
@@ -109,6 +112,7 @@ Post Details
                                                 <a href="{% url 'delete_comment' comment_id=comment.id %}">Delete
                                                     Comment</a>
                                             </button>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

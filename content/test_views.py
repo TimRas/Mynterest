@@ -3,6 +3,9 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
+from content.views import CreatePost
 from .models import Topic, Post, Comment
 from .forms import CommentForm, PostForm
 
@@ -46,60 +49,69 @@ class TestViews(TestCase):
         response = self.client.get(reverse("post_detail", kwargs={"slug": self.post.slug}))
         self.assertEqual(response.status_code, 200)
 
-    def test_post_list_post_valid_form(self):
-        """Test to see if a post can be made with a valid form"""
+    def test_get_request(self):
+        url = reverse("create_post", kwargs={"topic": self.topic.slug})
+        response = self.client.get(url)
 
-        self.client.force_login(self.user)
+        # Verify that the response is successful (status code 200)
+        self.assertEqual(response.status_code, 200)
+
+        # Verify that the correct form is rendered
+        post_form = response.context['post_form']
+        self.assertIsInstance(post_form, PostForm)
+        self.assertEqual(post_form.initial['topic'], self.topic)
+
+    def test_valid_post_request(self):
+        url = reverse("create_post", kwargs={"topic": self.topic.slug})
 
         post_data = {
             "topic": self.topic.id,
-            "title": "test title",
-            "content": "test content",
-            "excerpt": "test excerpt",
+            "title": "Test Title",
+            "content": "Test Content",
+            "excerpt": "Test Excerpt",
         }
 
-        response = self.client.post(
-            reverse("posts", kwargs={"topic": self.topic.slug}),
-            data=post_data,
-            follow=True
-        )
+        response = self.client.post(url, data=post_data)
 
+        # Verify that the response is a redirect (status code 302)
+        self.assertEqual(response.status_code, 302)
+
+        # Verify that the post is created in the database
         post = Post.objects.latest("id")
-
-        self.assertEqual(response.status_code, 200)
         self.assertEqual(post.title, post_data["title"])
         self.assertEqual(post.content, post_data["content"])
         self.assertEqual(post.excerpt, post_data["excerpt"])
         self.assertEqual(post.topic, self.topic)
         self.assertEqual(post.author, self.user)
-        self.assertEqual(post.slug, slugify(self.post.title))
+        self.assertEqual(post.slug, slugify(post.title))
 
-
-    def test_post_list_post_invalid_form(self):
-        """ Test to see if with a invalid form, a post can't be created """
-
-        self.client.force_login(self.user)
+    def test_invalid_post_request(self):
+        url = reverse("create_post", kwargs={"topic": self.topic.slug})
 
         post_data = {
-            "topic": self.topic,
+            "topic": self.topic.id,
             "title": "",
             "content": "",
             "excerpt": "",
         }
-        post_form = PostForm(data=post_data)
-        self.assertFalse(post_form.is_valid())
 
-        self.assertTrue("title" in post_form.errors)
-        self.assertTrue("content" in post_form.errors)
-        self.assertTrue("excerpt" in post_form.errors)
+        response = self.client.post(url, data=post_data)
 
-        response = self.client.post(
-            reverse("posts", kwargs={"topic": self.topic.slug}),
-            data=post_data,
-        )
-
-        self.assertFalse(Post.objects.filter(title=post_data["title"]).exists())
+        # Verify that the response is not a redirect (status code 200)
         self.assertEqual(response.status_code, 200)
+
+        # Verify that the form errors are present in the response
+        self.assertContains(response, "This field is required.", count=3)
+
+        # Verify that the post is not created in the database
+        self.assertFalse(Post.objects.filter(title=post_data["title"]).exists())
+
+    def test_topic_does_not_exist(self):
+        url = reverse("create_post", kwargs={"topic": "non-existent-topic"})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
 
     def test_post_detail_post_valid_form(self):
         """" Test to see if a comment can be made with a valid form """
@@ -115,7 +127,7 @@ class TestViews(TestCase):
         comment = comment_form.save(commit=False)
         comment.post = self.post
         comment.author = self.user
-        comment.created_date=timezone.now()
+        comment.created_date = timezone.now()
         comment.save()
 
         response = self.client.post(

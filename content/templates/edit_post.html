@@ -8,27 +8,22 @@ Edit Post
 {% endblock %}
 
 {% block content %}
-
-<div class="row-md-6 card mt-4 comment-form">
-    <div class="card-body bg-dark text-white">
-        {% if user.is_authenticated %}
-        <h3>Edit post:</h3>
-        <hr>
-        <p>Posting as: {{ user.username }}</p>
-        <form method="POST">
-            {% csrf_token %}
-            {{ post_form|crispy }}
-            <input class="right" type="submit" value="Update Post">
-        </form>
-        {% else %}
-        <h3>Sign up now and join us in the comments!</h3>
-        <button class="button post-button ml-5">
-            <a href="{% url 'account_signup' %}">Register</a>
-        </button>
-        {% endif %}
+<section class="main-section">
+    <div class="row-md-6 card mt-4 mb-4 comment-form mx-auto border-0">
+        <div class="card-body bg-dark text-white">
+            {% if post.author == request.user %}
+            <h3>Edit post:</h3>
+            <hr>
+            <p>Posting as: {{ user.username }}</p>
+            <form method="POST">
+                {% csrf_token %}
+                {{ post_form|crispy }}
+                <input class="right" type="submit" value="Update Post">
+            </form>
+            {% endif %}
+        </div>
     </div>
-</div>
-
+</section>
 {% endblock %}
 
 
