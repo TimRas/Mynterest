@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.views import View, generic
 from django.http import HttpResponseRedirect
@@ -47,11 +47,11 @@ class PostList(View):
             )
         except ObjectDoesNotExist as exc:
             raise Http404('The requested topic does not exist.') from exc
-    
-   
+
+
 class PostDetail(View):
     """ Renders post retreived form database and renders comment form. Validates the submitted form, saves the comment and redirects user to the details page of given post"""
-    
+
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.all()
         try:
@@ -89,7 +89,7 @@ class PostDetail(View):
                 comment.save()
             else:
                 comment_form = CommentForm()
-            
+
             return render(
                 request,
                 "post_detail.html",
@@ -124,9 +124,9 @@ class CreatePost(View):
                 post.author = request.user
                 post.slug = slugify(post.title)
                 post.save()
-                
+
                 return redirect(reverse("posts", kwargs={"topic": topic}))
-            else:               
+            else:              
 
                 return render(request, "create_post.html", {"form": post_form})
         except ObjectDoesNotExist as exc:
@@ -135,7 +135,7 @@ class CreatePost(View):
 
 class EditPost(View):
     """ Render a form in the edit post html of the given post. Validates the submitted form, update in the database and redirects to the given topic page"""
-    
+
     def get(self, request, slug, *args, **kwargs):
         try:
             post = get_object_or_404(Post, slug=slug)
@@ -156,7 +156,7 @@ class EditPost(View):
                 post_form = PostForm()
             else:
                 post_form = PostForm(request.POST, instance=post)
-            
+
             posts = Post.objects.filter(topic__slug=post.topic.slug)
 
             return render(
@@ -197,7 +197,7 @@ class EditComment(View):
                 comment_form = CommentForm(request.POST, instance=comment)
 
             post = comment.post
-            
+
             return redirect("post_detail", slug=post.slug)
         except ObjectDoesNotExist as exc:
             raise Http404('The requested comment does not exist.') from exc
@@ -205,7 +205,7 @@ class EditComment(View):
 
 class PostLike(View):
     """ The functionality for liking and unliking posts"""
-    
+
     def post(self, request, slug, *args, **kwargs):
         try:
             post = get_object_or_404(Post, slug=slug)
@@ -227,9 +227,13 @@ class DeletePost(View):
         try:
             post = get_object_or_404(Post, slug=slug)
             topic = post.topic.slug
-            post.delete()
 
-            return redirect(reverse("posts", kwargs={"topic": topic}))
+            if request.user == post.author: 
+                post.delete()
+                return redirect(reverse("posts", kwargs={"topic": topic}))
+            else:
+                return HttpResponse("Cannot delete this post.")  
+
         except ObjectDoesNotExist as exc:
             raise Http404('The requested post does not exist.') from exc
 
@@ -242,8 +246,12 @@ class DeleteComment(View):
             comment = get_object_or_404(Comment, id=comment_id)
             post = comment.post
             slug = post.slug
-            comment.delete()
 
-            return redirect(reverse("post_detail", kwargs={"slug": slug}))
+            if request.user == comment.author:
+                comment.delete()
+                return redirect(reverse("post_detail", kwargs={"slug": slug}))
+            else:
+                return HttpResponse("You are not authorized to delete this comment.")
+
         except ObjectDoesNotExist as exc:
             raise Http404('The requested comment does not exist.') from exc
