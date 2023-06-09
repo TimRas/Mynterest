@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
-import os
 from pathlib import Path
+import os
 from django.contrib.messages import constants as messages
 import dj_database_url
 if os.path.isfile("env.py"):
@@ -31,8 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["mynterest.herokuapp.com", "localhost"]
-
+ALLOWED_HOSTS = ['mynterest.herokuapp.com', 'localhost', '8000-timras-mynterest-oz55z3ucq47.ws-eu99.gitpod.io',]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
