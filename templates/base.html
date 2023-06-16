@@ -42,42 +42,45 @@
 <body>
     <div class="wrapper">
         <header class="header-container">
-            <nav class="navbar navbar-expand-lg w-100">
+            <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{% url 'home' %}"><span
                             class="brand log-item text-white">Mynterest</span></a>
-                    <a class="home-link ml-1" aria-current="page" href="{% url 'home' %}">Home</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <div class="navbar-toggler-icon">
+                            <img src="data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32'
+                                xmlns='http://www.w3.org/2000/svg' %3E%3Cpath stroke='rgba(255,255,255, 1)'
+                                stroke-width='2' stroke-linecap='round' stroke-miterlimit='10'
+                                d='M4 8h24M4 16h24M4 24h24' /%3E%3C/svg%3E">
+                        </div>
                     </button>
+
                     <div class="collapse navbar-collapse nav-items" id="navbarText">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link home-link" aria-current="page"
+                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link home-link nav-padding" aria-current="page"
                                     href="{% url 'posts' topic='mental' %}">Mental</a></li>
-                            <li class="nav-item"><a class="nav-link home-link" aria-current="page"
+                            <li class="nav-item"><a class="nav-link home-link nav-padding" aria-current="page"
                                     href="{% url 'posts' topic='games' %}">Games</a></li>
-                            <li class="nav-item"><a class="nav-link home-link" aria-current="page"
+                            <li class="nav-item"><a class="nav-link home-link nav-padding" aria-current="page"
                                     href="{% url 'posts' topic='sports' %}">Sports</a></li>
-                            <li class="nav-item"><a class="nav-link home-link" aria-current="page"
+                            <li class="nav-item"><a class="nav-link home-link nav-padding" aria-current="page"
                                     href="{% url 'posts' topic='nature' %}">Nature</a></li>
                         </ul>
-                    </div>
-                    <div class="collapse navbar-collapse nav-items" id="navbarText">
+
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             {% if user.is_authenticated %}
-                            <li class="nav-item">
+                            <li class="nav-item nav-padding">
                                 <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                             </li>
-                            <li>
-
+                            <li class="nav-padding">
                                 <p class="pt-2 ml-2">{{ request.user.username }}</p>
                             </li>
                             {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link register-link" href="{% url 'account_signup' %}">Register</a>
+                            <li class="nav-item nav-padding register-link">
+                                <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item nav-padding">
                                 <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                             </li>
                             {% endif %}

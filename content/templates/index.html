@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load cloudinary %}
 
 {% block extra_title %}
 Home
@@ -13,25 +13,49 @@ Home
     <p class="mb-4 mt-5 intro-message">Greetings! Welcome to my own personal blog application 'Mynterest'. This
         application
         will
-        be a meeting point for certain like minded people to conversate and discuss four big topics in life.
-        Sports!, Games!, Music! and Mental!!. All of these topics are dear to my hearth and I know they will be with
-        alot of you guys. Don't wait any longer and join us!</p>
+        be a meeting point for certain like-minded people to converse and discuss four big topics in life:
+        Sports!, Games!, Music!, and Mental!!. All of these topics are dear to my heart, and I know they will be with
+        a lot of you guys. Don't wait any longer and join us!</p>
 </div>
 
 <section class="main-section">
-    <div class="row no-gutters topic-container">
-        <a href="{% url 'posts' topic='mental' %}" class="mental-image text-decoration-none col-3">
-            <strong class="topic-text">Mental</strong>
-        </a>
-        <a href="{% url 'posts' topic='games' %}" class="games-image text-decoration-none col-3">
-            <strong class="topic-text">Games</strong>
-        </a>
-        <a href="{% url 'posts' topic='sports' %}" class="sports-image text-decoration-none col-3">
-            <strong class="topic-text">Sports</strong>
-        </a>
-        <a href="{% url 'posts' topic='nature' %}" class="nature-image text-decoration-none col-3">
-            <strong class="topic-text">Nature</strong>
-        </a>
+    <div class="row no-gutters topic-container text-center">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="topic-wrapper">
+                <a href="{% url 'posts' topic='mental' %}" class="text-decoration-none">
+                    <img src="{% cloudinary_url 'https://res.cloudinary.com/timr/image/upload/v1685404594/static/images/new_mental.f2e30a4b464d.jpg' %}"
+                        alt="Mental Image" class="topic-images">
+                    <div class="topic-text">Mental</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="topic-wrapper">
+                <a href="{% url 'posts' topic='games' %}" class="text-decoration-none">
+                    <img src="{% cloudinary_url 'https://res.cloudinary.com/timr/image/upload/v1685404594/static/images/new_games.2257f74e609c.jpg' %}"
+                        alt="Games Image" class="topic-images">
+                    <div class="topic-text">Games</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="topic-wrapper">
+                <a href="{% url 'posts' topic='sports' %}" class="text-decoration-none">
+                    <img src="{% cloudinary_url 'https://res.cloudinary.com/timr/image/upload/v1685404596/static/images/new_sport.bc2d0febbe9e.jpg' %}"
+                        alt="Sports Image" class="topic-images">
+                    <div class="topic-text">Sports</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="topic-wrapper">
+                <a href="{% url 'posts' topic='nature' %}" class="text-decoration-none">
+                    <img src="{% cloudinary_url 'https://res.cloudinary.com/timr/image/upload/v1685404595/static/images/new_nature.615c93d8835a.jpg' %}"
+                        alt="Nature Image" class="topic-images">
+                    <div class="topic-text">Nature</div>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 

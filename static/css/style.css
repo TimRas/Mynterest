@@ -55,6 +55,12 @@ hr {
     border-radius: 5px;
 }
 
+.nav-padding {
+    padding-left: 0.5em !important;
+    border-radius: 5px;
+}
+
+
 /* ---- Header and Banner ----*/
 
 .header-container,
@@ -63,103 +69,10 @@ hr {
     color: white;
 }
 
-/* ---- Main content container ----*/
-
-.main-content {
-    min-height: calc(100vh - 106px);  
-    display: flex;
-    flex-direction: column;
-    font-family: 'Comic Neue', cursive;
-}
-
-.main-section {
-    background-color: #081616;
-    min-height: 52.7vh;
-
-}
-
-
-/* ---- Topic main index.html ----*/
-
-.topic-container {
-    min-height: 50.3vh;
-}
-
-.sports-image {
-    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404596/static/images/new_sport.bc2d0febbe9e.jpg');
-    background-color: #000;
-    background-size: 100% 100%;
-    width: 25vw;
-    height: auto;
-    border-width: 3em 1.5em 0.5em 1.5em;
-    border-color: #081616;
-    border-style: solid;
-    filter: brightness(95%);
-}
-
-.nature-image {
-    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404595/static/images/new_nature.615c93d8835a.jpg');
-    background-color: #000;
-    background-size: 100% 100%;
-    width: 25vw;
-    height: auto;
-    border-width: 3em 3em 0.5em 1.5em;
-    border-color: #081616;
-    border-style: solid;
-    filter: brightness(95%);
-}
-
-.games-image {
-    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404594/static/images/new_games.2257f74e609c.jpg');
-    background-color: #000;
-    background-size: 100% 100%;
-    width: 25vw;
-    height: auto;
-    border-width: 3em 1.5em 0.5em 1.5em;
-    border-color: #081616;
-    border-style: solid;
-    filter: brightness(95%);
-}
-
-.mental-image {
-    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404594/static/images/new_mental.f2e30a4b464d.jpg');
-    background-color: #000;
-    background-size: 100% 100%;
-    width: 25vw;
-    height: auto;
-    border-width: 3em 1.5em 0.5em 3em;
-    border-color: #081616;
-    border-style: solid;
-    filter: brightness(95%);
-}
-
-.nature-image:hover,
-.sports-image:hover,
-.games-image:hover,
-.mental-image:hover {
-    filter: brightness(120%);
-}
-
-
-
-/* ---- Footer container ----*/
-
-.footer-container {
-    height: 3.1em;
-    background-color: #081616;
-    color: white;
-    text-decoration: none;
-    font-family: 'Bitter', serif;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .banner {
     height: 22em;
     width: 100%;
-    padding-top: 4.5em;
+    padding-top: 2em;
 
     background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404576/static/images/banner_landscape1.bdd0f5fb4887.jpg');
     background-size: cover;
@@ -179,6 +92,99 @@ hr {
 .intro-message {
     text-align: center;
     width: 40%;
+}
+
+
+/* ---- Main content container ----*/
+
+.main-content {
+    min-height: calc(100vh - 106px);  
+    display: flex;
+    flex-direction: column;
+    font-family: 'Comic Neue', cursive;
+}
+
+.main-section {
+    background-color: #081616;
+    min-height: 52.7vh;
+    padding-bottom: 0.3em;
+
+}
+
+
+/* ---- Topic main index.html ----*/
+
+
+.topic-container {
+    min-height: 50.3vh;
+}
+
+.topic-container>a>.topic-text:hover {
+    color: white;
+    font-size: 5em;
+    transition-duration: 0.6s;
+}
+
+.topic-wrapper {
+    position: relative;
+}
+
+.topic-images {
+    background-color: #000;
+    background-size: 100% 100%;
+    width: 23em;
+    height: 31em;
+    border-width: 3em 1.5em 0.5em 1.5em;
+    border-color: #081616;
+    border-style: solid;
+    object-fit: cover;
+    filter: brightness(95%);
+}
+
+.topic-images:hover {
+    filter: brightness(120%);
+}
+
+.topic-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: white;
+    font-family: 'Bitter', serif;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 1em;
+}
+
+/* .topic-text {
+    font-size: 2em;
+    color: white;
+    font-family: 'Bitter', serif;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 1em;
+    z-index: -9999;
+} */
+
+
+/* ---- Footer container ----*/
+
+.footer-container {
+    height: 3.1em;
+    background-color: #081616;
+    color: white;
+    text-decoration: none;
+    font-family: 'Bitter', serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer-info {
@@ -333,24 +339,6 @@ hr {
 .pagination-link:hover {
     color: darkgrey;
     text-decoration: none;
-}
-
-.topic-text {
-    font-size: 2em;
-    color: white;
-    font-family: 'Bitter', serif;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    height: 100%;
-    padding-bottom: 1em;
-    /* z-index: -9999; */
-}
-
-.topic-container>a>.topic-text:hover {
-    color: white;
-    font-size: 5em;
-    transition-duration: 0.6s;
 }
 
 .card-title {
@@ -632,3 +620,19 @@ hr {
 
 /* ---- Media Queries  ----*/
 
+
+@media (max-width: 991px) {
+    
+}
+
+@media (max-width: 800px) {
+    .intro-message {
+        width: 85%;
+    }
+}
+
+@media (min-width: 100vw) {
+    .topic-images {
+        width: 100%;
+    }
+}
