@@ -86,7 +86,7 @@ hr {
 }
 
 .sports-image {
-    background-image: url('../images/new_sport.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404596/static/images/new_sport.bc2d0febbe9e.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -98,7 +98,7 @@ hr {
 }
 
 .nature-image {
-    background-image: url('../images/new_nature.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404595/static/images/new_nature.615c93d8835a.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -110,7 +110,7 @@ hr {
 }
 
 .games-image {
-    background-image: url('../images/new_games.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404594/static/images/new_games.2257f74e609c.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -122,7 +122,7 @@ hr {
 }
 
 .mental-image {
-    background-image: url('../images/new_mental.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404594/static/images/new_mental.f2e30a4b464d.jpg');
     background-color: #000;
     background-size: 100% 100%;
     width: 25vw;
@@ -161,7 +161,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_landscape1.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404576/static/images/banner_landscape1.bdd0f5fb4887.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -197,7 +197,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_sports.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404579/static/images/banner_sports.d60d4d255a6c.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -207,7 +207,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_games.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404575/static/images/banner_games.edf6e4b46242.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -217,7 +217,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_nature.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404577/static/images/banner_nature.c8ffc960a751.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -227,7 +227,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_mental.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404577/static/images/banner_mental.156c4ba8a6f3.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -371,7 +371,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_sports.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404579/static/images/banner_sports.d60d4d255a6c.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -381,7 +381,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_games.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404575/static/images/banner_games.edf6e4b46242.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -391,7 +391,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_nature.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404577/static/images/banner_nature.c8ffc960a751.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -401,7 +401,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/banner_mental.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404577/static/images/banner_mental.156c4ba8a6f3.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -578,7 +578,7 @@ hr {
     width: 100%;
     padding-top: 4.5em;
 
-    background-image: url('../images/art_404.jpg');
+    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404573/static/images/art_404.e5fc6018e909.jpg');
     background-size: cover;
     background-position: center;
 }

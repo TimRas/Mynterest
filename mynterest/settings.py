@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['mynterest.herokuapp.com', 'localhost', '8000-timras-mynterest-oz55z3ucq47.ws-eu99.gitpod.io',]
+ALLOWED_HOSTS = ['mynterest.herokuapp.com', 'localhost', '8000-timras-mynterest-oz55z3ucq47.ws-eu100.gitpod.io', ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
