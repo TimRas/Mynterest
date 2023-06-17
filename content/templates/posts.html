@@ -10,14 +10,14 @@
 {% block content %}
 
 {% if topic.title == "Sports" %}
-<div class="banner-sports pb-2">
+<div class="banner banner-sports pb-2">
     <h2 class="intro-title mt-2">{{ topic.title }}</h2>
     <p class="mb-4 mt-5 intro-message">Greetings! Welcome to the sports section. I love to excersize! It is one of the
         ways I am able to keep my mind clear and ready to go! How do you feel about sports. Create a post to tell me or
         leave a comment on other peoples stories!</p>
 </div>
 {% elif topic.title == "Games" %}
-<div class="banner-games pb-2">
+<div class="banner banner-games pb-2">
     <h2 class="intro-title mt-2">{{ topic.title }}</h2>
     <p class="mb-4 mt-5 intro-message">Greetings! Welcome to the games section. Every since I was a small child I was
         clustered to a gaming device. Wheter it be a gameboy advance, color or the gamecube. You could always see me
@@ -25,7 +25,7 @@
         games. Leave a post or comment below!</p>
 </div>
 {% elif topic.title == "Nature" %}
-<div class="banner-nature pb-2">
+<div class="banner banner-nature pb-2">
     <h2 class="intro-title mt-2">{{ topic.title }}</h2>
     <p class="mb-4 mt-5 intro-message">Greetings! Welcome to the nature section. When I was younger, my head would
         sometimes explode with thoughts and emotions. Heck! even today It can be overwhelming. Luckily going outside and
@@ -33,7 +33,7 @@
         comments below!</p>
 </div>
 {% elif topic.title == "Mental" %}
-<div class="banner-mental pb-2">
+<div class="banner banner-mental pb-2">
     <h2 class="intro-title mt-2">{{ topic.title }}</h2>
     <p class="mb-4 mt-5 intro-message">Greetings! Welcome to the mental section. I love to meditate. It is one of those
         things that helps me disconnect from the big bad world. Just sitting still and focusing on my breathing for a
@@ -82,6 +82,38 @@
             </button>
             {% endif %}
         </div>
+        {% if posts|length == 0 %}
+        <div class="row pt-2 mb-3 w-75 mx-auto">
+            <div class="col-12 pt-2">
+                <div class="card border-0">
+                    <div class="card-body post-card-body text-white">
+                        <div class="row mx-0 pl-1">
+                            <h4><strong>Hi, Welcome!</strong></h4>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6 post-excerpt pl-1">
+                                <p>Be the first to write a post on this topic!</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 pt-2 pl-3">
+                                <h6 class="pl-3"><strong>{{ post.author }}</strong></h6>
+                            </div>
+                            {% if user.is_authenticated %}
+                            <div class="col-8">
+                                <button class="post-create-button float-left">
+                                    <a href="{% url 'create_post' topic=topic %}">Create Post</a>
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         {% for post in posts %}
         <div class="row pt-2 mb-3 w-75 mx-auto">
             <div class="col-12 pt-2">
@@ -92,18 +124,20 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-6 post-excerpt pl-1">
+                            <div class="col-6 post-excerpt pl-4">
                                 <p>{{ post.excerpt }}</p>
                             </div>
                             <div class="col-6">
-                                <div class="post-image">
-                                    {{ post.image.url }}
+                                <div class="post-image-container">
+                                    {% if post.image %}
+                                    <img src="{{ post.image.url }}" alt="Post Image" class="post-image pr-2">
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-4 pt-2 pl-3">
+                            <div class="col-4 pt-2 pl-2">
                                 <h6 class="pl-3"><strong>{{ post.author }}</strong></h6>
                                 <p class="card-text text-muted pl-3">{{ post.created_date }}</p>
                             </div>

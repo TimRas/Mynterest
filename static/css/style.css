@@ -199,43 +199,19 @@ hr {
 /* ---- Post page ----*/
 
 .banner-sports {
-    height: 22em;
-    width: 100%;
-    padding-top: 4.5em;
-
     background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404579/static/images/banner_sports.d60d4d255a6c.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
 .banner-games {
-    height: 22em;
-    width: 100%;
-    padding-top: 4.5em;
-
     background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404575/static/images/banner_games.edf6e4b46242.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
 .banner-nature {
-    height: 22em;
-    width: 100%;
-    padding-top: 4.5em;
-
     background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404577/static/images/banner_nature.c8ffc960a751.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
 .banner-mental {
-    height: 22em;
-    width: 100%;
-    padding-top: 4.5em;
-
     background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404577/static/images/banner_mental.156c4ba8a6f3.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
 .banner-mental,
@@ -256,6 +232,18 @@ hr {
 
 .post-container {
     align-items: center;
+}
+
+.post-image-container {
+    text-align: right;
+}
+
+.post-image {
+    width: 15em;
+    height: 15em;
+    border-radius: 5px;
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
 .post-links {
