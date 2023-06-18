@@ -1,8 +1,10 @@
 from django.core.paginator import Paginator
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.contrib import messages
 from django.http import Http404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseNotAllowed
 from django.views import View, generic
 from django.http import HttpResponseRedirect
 from django.utils.text import slugify
@@ -48,6 +50,20 @@ class PostList(View):
             )
         except ObjectDoesNotExist as exc:
             raise Http404('The requested topic does not exist.') from exc
+
+
+class AuthCheck(View):
+    """ Checks if user in logged in when trying to post. If not will redirect to login page else it will open up the post form."""
+    
+    def get(self, request, topic, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, "You need to sign in or register to create a post")
+            return redirect('account_login')
+        else:
+            return redirect(reverse("create_post", kwargs={"topic": topic}))
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponseNotAllowed(['GET'])
 
 
 class PostDetail(View):
@@ -118,6 +134,7 @@ class CreatePost(View):
 
     def post(self, request, topic, *args, **kwargs):
         try:
+            
             topic_field = get_object_or_404(Topic, slug=topic)
             post_form = PostForm(request.POST, request.FILES)
 
