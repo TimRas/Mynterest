@@ -98,7 +98,7 @@ hr {
 /* ---- Main content container ----*/
 
 .main-content {
-    min-height: calc(100vh - 106px);  
+    min-height: calc(100vh - 113.59px);  
     display: flex;
     flex-direction: column;
     font-family: 'Comic Neue', cursive;
@@ -106,7 +106,7 @@ hr {
 
 .main-section {
     background-color: #081616;
-    min-height: 52.7vh;
+    min-height: 52.8vh;
     padding-bottom: 0.3em;
 
 }
@@ -274,8 +274,8 @@ hr {
     background-color: purple;
     border-radius: 5px;
     border-style: none;
-    height: 3.2em;
-    width: 5em;
+    height: 3em;
+    width: 6.5em;
     font-weight: 800;
 }
 
@@ -311,13 +311,26 @@ hr {
     min-height: 6em;
 }
 
+.pagination {
+    padding-top: 3em;
+}
+
 .pagination-container {
     height: 3em;
-    background-color: purple;
+    width: 18em;
     border-radius: 5px;
     font-family: 'Bitter', serif;
     color: white;
     align-items: center;
+}
+
+.purple-background {
+    background-color: purple;
+}
+
+.pagination-counter {
+    min-width: 6em;
+    border-radius: 5px;
 }
 
 .pagination-link {
@@ -327,6 +340,10 @@ hr {
 .pagination-link:hover {
     color: darkgrey;
     text-decoration: none;
+}
+
+.no-padding-left {
+    padding-left: 0 !important;
 }
 
 .card-title {

@@ -45,42 +45,25 @@
 
 <section class="main-section">
     <div class="post-container mt-3 w-75 mx-auto">
-        {% if user.is_authenticated %}
-        <div class="row mx-0 pt-2">
-            <div class="col-11">
-                <P class="text-white float-right pt-2">Create your own post!
-                </P>
-            </div>
-            <div class="col-1">
-                <button class="post-create-button float-left">
-                    <a href="{% url 'create_post' topic=topic %}">Create Post</a>
-                </button>
-            </div>
-        </div>
-        {% else %}
-        <div class="row mx-0 pt-2">
-            <div class="col-11">
-                <P class="text-white float-right pt-2">You need to register in order to create your own Posts. Sign up
-                    here!
-                </P>
-            </div>
-            <div class="col-1">
-                <button class="post-register-button float-left">
-                    <a href="{% url 'account_signup' %}">Register</a>
-                </button>
-            </div>
-        </div>
-        {% endif %}
         <div class="row mx-0 pt-2">
             {% if most_liked %}
-            <button class="most-liked-buttons">
-                <a href="{% url 'posts' topic=topic %}">Show All Posts</a>
-            </button>
+            <div class="col">
+                <button class="most-liked-buttons">
+                    <a href="{% url 'posts' topic=topic %}">Show All Posts</a>
+                </button>
+            </div>
             {% else %}
-            <button class="most-liked-buttons">
-                <a href="{% url 'posts' topic=topic %}?most_liked=true">Show Most Liked</a>
-            </button>
+            <div class="col">
+                <button class="most-liked-buttons">
+                    <a href="{% url 'posts' topic=topic %}?most_liked=true">Show Most Liked</a>
+                </button>
+            </div>
             {% endif %}
+            <div class="col">
+                <button class="post-create-button float-right" onclick="location.href='{% url 'check_can_post' topic=topic %}'">
+                    <a href="#" >Create Post</a>
+                </button>
+            </div>
         </div>
         {% if posts|length == 0 %}
         <div class="row pt-2 mb-3 w-75 mx-auto">
@@ -92,7 +75,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-6 post-excerpt pl-1">
+                            <div class="col-6 post-excerpt pl-3">
                                 <p>Be the first to write a post on this topic!</p>
                             </div>
                         </div>
@@ -103,7 +86,7 @@
                             </div>
                             {% if user.is_authenticated %}
                             <div class="col-8">
-                                <button class="post-create-button float-left">
+                                <button class="post-create-button float-right">
                                     <a href="{% url 'create_post' topic=topic %}">Create Post</a>
                                 </button>
                             </div>
@@ -152,25 +135,42 @@
             </div>
         </div>
         {% endfor %}
+    </div>
 
-        <div class="pagination">
-            <div class="row mx-auto pagination-container">
-                <div class="col-12 text-center">
-                    <span class="current-page">{{ posts.start_index }} - {{ posts.end_index }} of
-                        {{ posts.paginator.count }}</span>
-                </div>
-                <div class="col-12 text-center">
-                    {% if posts.has_next %}
-                    <a href="?page={{ posts.next_page_number }}" class="pagination-link">next</a>
-                    <a href="?page={{ posts.paginator.num_pages }}" class="pagination-link">last</a>
-                    {% endif %}
-                    {% if posts.has_previous %}
-                    <a href="?page=1" class="pagination-link">first</a>
-                    <a href="?page={{ posts.previous_page_number }}" class="pagination-link">previous</a>
-                    {% endif %}
-                </div>
+    <div class="pagination container">
+        <div class="mx-auto row pagination-container">
+            
+            <div class="col-2 no-padding-left">   
+                {% if posts.has_previous %}            
+                <a href="?page=1" class="pagination-link">first</a>
+                {% endif %} 
             </div>
+            <div class="col-2 no-padding-left">
+                {% if posts.has_previous %}
+                <a href="?page={{ posts.previous_page_number }}" class="pagination-link">prev</a>  
+                {% endif %}               
+            </div>   
+                        
+                
+            <div class="col-4 purple-background pagination-counter">
+                <span class="current-page">{{ posts.start_index }} - {{ posts.end_index }} of
+                    {{ posts.paginator.count }}</span>
+            </div>
+
+            
+            <div class="col-2">    
+                {% if posts.has_next %}           
+                <a href="?page={{ posts.next_page_number }}" class="pagination-link">next</a>
+                {% endif %} 
+            </div>
+            <div class="col-2">
+                {% if posts.has_next %}
+                <a href="?page={{ posts.paginator.num_pages }}" class="pagination-link">last</a>    
+                {% endif %}            
+            </div>
+                                     
         </div>
     </div>
+
 </section>
 {% endblock %}
