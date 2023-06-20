@@ -237,11 +237,12 @@ hr {
 
 .post-image-container {
     text-align: right;
+    min-height: 6em;
 }
 
 .post-image {
-    width: 15em;
-    height: 15em;
+    max-width: 15em;
+    max-height: 15em;
     border-radius: 5px;
     margin-top: .5em;
     margin-bottom: .5em;
@@ -303,7 +304,7 @@ hr {
     color: white;
 }
 
-.most-liked-button>a:hover {
+.most-liked-buttons>a:hover {
     text-decoration: none;
     color: darkgrey;
 }
@@ -626,10 +627,7 @@ hr {
 
 /* ---- Media Queries  ----*/
 
-
-@media (max-width: 991px) {
-    
-}
+/* ---- Index Page  ----*/
 
 @media (max-width: 800px) {
     .intro-message {
@@ -642,3 +640,25 @@ hr {
         width: 100%;
     }
 }
+
+/* ---- Post Page  ----*/
+
+@media (max-width: 991px) {
+    .post-excerpt {
+        height: 15em;
+    }
+}
+
+@media (max-width: 990px) {
+    .post-image-container {
+        text-align: center;
+    }
+}
+
+@media (max-width: 991px) {
+    .post-image {
+        width: 75%;
+        height: 4em;
+    }
+}
+
