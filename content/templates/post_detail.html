@@ -34,11 +34,11 @@ Post Details
             <div class="card border-0">
                 <div class="card-body post-card-body text-white">
                     <div class="card-title">
-                        <div class="row mx-0 pl-1 d-flex justify-content-around">
+                        <div class="row mx-0 pl-1 d-flex justify-content-between justify-content-md-around">
                             <div class="col">
                                 <h4><strong>{{ post.title }}</strong></h4>
                             </div>
-                            <div class="post-likes col-1 text-right">
+                            <div class="post-likes col-2 col-md-1 text-right">
                                 {% if user.is_authenticated %}
                                 <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
                                     {% csrf_token %}
@@ -59,12 +59,12 @@ Post Details
                     <hr>
                     <div class="row">
                         {% if post.image %}
-                        <div class="col-6 post-body pl-4">
+                        <div class="col-12 col-md-6 post-body pl-4">
                             <p class="pl-2">{{ post.content|safe }}</p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="post-image-container">
-                                <img src="{{ post.image.url }}" alt="Post Image" class="post-image pr-2">
+                                <img src="{{ post.image.url }}" alt="Post Image" class="post-image pr-2 img-fluid">
                             </div>
                         </div>
                         {% else %}
@@ -75,11 +75,11 @@ Post Details
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-lg-6 col-md-3">
                             <h6 class="pl-3"><strong>{{ post.author }}</strong></h6>
                             <p class="card-text text-muted pl-3">{{ post.likes.count }} likes</p>
                         </div>
-                        <div class="col-9">
+                        <div class="col-lg-6 col-md-9">
                             {% if post.author == request.user %}
                             <button class="button post-detail-buttons float-right">
                                 <a href="{% url 'edit_post' slug=post.slug %}">Edit Post</a>
@@ -90,11 +90,14 @@ Post Details
                             {% endif %}
                         </div>
                     </div>
-                    <div class="row float-right">
-                        <p class="card-text text-muted pr-4">{{ post.created_date }}</p>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="card-text text-muted float-right">{{ post.created_date }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            
 
             <div class="row mt-3">
                 <div class="col-6">
@@ -105,6 +108,43 @@ Post Details
                 </div>
             </div>
             {% for comment in comments %}
+            <div class="card mt-2 mb-3 border-0">
+                <div class="card-body post-card-body text-white">
+                    <div>
+                        <ul class="list-unstyled my-0">
+                            <li class="media">
+                                <div class="media-body">
+                                    <h6 class="mt-0"><strong>{{ comment.author.username }}</strong></h6>
+                                    <hr>
+                                    <div class="comment-body">{{ comment.body|safe }}</div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12 col-md-3">
+                                            <p class="card-text text-muted">{{ comment.created_date }}</p>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            {% if post.author == request.user %}
+                                                <div class="align-buttons-right float-right">
+                                                    <button class="button post-detail-buttons comment-buttons-width">
+                                                        <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit Comment</a>
+                                                    </button>
+                                                    <button class="button post-detail-buttons comment-buttons-width">
+                                                        <a href="{% url 'delete_comment' comment_id=comment.id %}">Delete Comment</a>
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-white">No comments yet.</p>
+            {% endfor %}
+            <!-- {% for comment in comments %}
             <div class="card mt-2 mb-3 border-0">
                 <div class="card-body post-card-body text-white">
                     <div>
@@ -140,7 +180,7 @@ Post Details
             </div>
             {% empty %}
             <p class="text-white">No comments yet.</p>
-            {% endfor %}
+            {% endfor %} -->
 
             <div class="pagination container">
                 <div class="mx-auto row pagination-container">
@@ -177,22 +217,24 @@ Post Details
                 </div>
             </div>
 
-            <div class="row-md-6 card mt-4 mb-3 comment-form mx-auto border-0">
-                <div class="card-body bg-dark text-white">
-                    {% if user.is_authenticated %}
-                    <h3>Leave a comment:</h3>
-                    <p>Posting as: {{ user.username }}</p>
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ comment_form|crispy }}
-                        <input class="right" type="submit" value="Add Comment">
-                    </form>
-                    {% else %}
-                    <h3>Sign up now and join us in the comments!</h3>
-                    <button class="button post-button ml-5">
-                        <a href="{% url 'account_signup' %}">Register</a>
-                    </button>
-                    {% endif %}
+            <div class="row mt-4 mb-3">
+                <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 card border-0 mx-auto px-0">
+                    <div class="card-body bg-dark text-white">
+                        {% if user.is_authenticated %}
+                        <h3>Leave a comment:</h3>
+                        <p>Posting as: {{ user.username }}</p>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ comment_form|crispy }}
+                            <input type="submit" value="Add Comment">
+                        </form>
+                        {% else %}
+                        <h3>Sign up now and join us in the comments!</h3>
+                        <button class="button post-register-button ml-5 float-right">
+                            <a href="{% url 'account_signup' %}">Register</a>
+                        </button>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
