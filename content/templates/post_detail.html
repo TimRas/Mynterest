@@ -34,47 +34,64 @@ Post Details
             <div class="card border-0">
                 <div class="card-body post-card-body text-white">
                     <div class="card-title">
-                        <div class="row mx-0 pl-1">
-                            <h4><strong>{{ post.title }}</strong></h4>
+                        <div class="row mx-0 pl-1 d-flex justify-content-around">
+                            <div class="col">
+                                <h4><strong>{{ post.title }}</strong></h4>
+                            </div>
+                            <div class="post-likes col-1 text-right">
+                                {% if user.is_authenticated %}
+                                <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if liked %}
+                                    <button type="submit" name="blogpost_id" value="{{post.slug}}"
+                                        class="btn-like border-0"><i class="fas fa-heart"></i></button>
+                                    {% else %}
+                                    <button type="submit" name="blogpost_id" value="{{post.slug}}"
+                                        class="btn-like border-0"><i class="far fa-heart"></i></button>
+                                    {% endif %}
+                                </form>
+                                {% else %}
+                                <span class="text-secondary"><i class="far fa-heart"></i></span>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="post-body pl-1">
-                        {{ post.content|safe }}
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="post-likes col-1">
-                            <p class="card-text text-muted">{{ post.likes.count }} likes</p>
-                            {% if user.is_authenticated %}
-                            <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
-                                {% csrf_token %}
-                                {% if liked %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}"
-                                    class="btn-like border-0"><i class="fas fa-heart"></i></button>
-                                {% else %}
-                                <button type="submit" name="blogpost_id" value="{{post.slug}}"
-                                    class="btn-like border-0"><i class="far fa-heart"></i></button>
-                                {% endif %}
-                            </form>
-                            {% else %}
-                            <span class="text-secondary"><i class="far fa-heart"></i></span>
-                            {% endif %}
+                        {% if post.image %}
+                        <div class="col-6 post-body pl-4">
+                            <p class="pl-2">{{ post.content|safe }}</p>
                         </div>
-                        <div class="col-3 pt-2 pl-1">
-                            <h6><strong>{{ post.author }}</strong></h6>
-                            <p class="card-text text-muted">{{ post.created_date }}</p>
+                        <div class="col-6">
+                            <div class="post-image-container">
+                                <img src="{{ post.image.url }}" alt="Post Image" class="post-image pr-2">
+                            </div>
                         </div>
-                        {% if post.author == request.user %}
-                        <div class="col-8 pt-4">
+                        {% else %}
+                        <div class="col-12 post-body pl-4">
+                            <p class="pl-2">{{ post.content|safe }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-3">
+                            <h6 class="pl-3"><strong>{{ post.author }}</strong></h6>
+                            <p class="card-text text-muted pl-3">{{ post.likes.count }} likes</p>
+                        </div>
+                        <div class="col-9">
+                            {% if post.author == request.user %}
                             <button class="button post-detail-buttons float-right">
                                 <a href="{% url 'edit_post' slug=post.slug %}">Edit Post</a>
                             </button>
-                            <button class="button post-detail-buttons float-right mr-3">
+                            <button class="button post-detail-buttons mr-2 float-right">
                                 <a href="{% url 'delete_post' slug=post.slug %}">Delete Post</a>
                             </button>
+                            {% endif %}
                         </div>
-                        {% endif %}
+                    </div>
+                    <div class="row float-right">
+                        <p class="card-text text-muted pr-4">{{ post.created_date }}</p>
                     </div>
                 </div>
             </div>
@@ -125,22 +142,38 @@ Post Details
             <p class="text-white">No comments yet.</p>
             {% endfor %}
 
-            <div class="pagination">
-                <div class="row mx-auto pagination-container">
-                    <div class="col-12 text-center">
+            <div class="pagination container">
+                <div class="mx-auto row pagination-container">
+
+                    <div class="col-2 no-padding-left">
+                        {% if comments.has_previous %}
+                        <a href="?page=1" class="pagination-link">first</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-2 no-padding-left">
+                        {% if comments.has_previous %}
+                        <a href="?page={{ comments.previous_page_number }}" class="pagination-link">prev</a>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="col-4 purple-background pagination-counter">
                         <span class="current-page">{{ comments.start_index }} - {{ comments.end_index }} of
                             {{ comments.paginator.count }}</span>
                     </div>
-                    <div class="col-12 text-center">
+
+
+                    <div class="col-2">
                         {% if comments.has_next %}
                         <a href="?page={{ comments.next_page_number }}" class="pagination-link">next</a>
-                        <a href="?page={{ comments.paginator.num_pages }}" class="pagination-link">last</a>
-                        {% endif %}
-                        {% if comments.has_previous %}
-                        <a href="?page=1" class="pagination-link">first</a>
-                        <a href="?page={{ comments.previous_page_number }}" class="pagination-link">previous</a>
                         {% endif %}
                     </div>
+                    <div class="col-2">
+                        {% if comments.has_next %}
+                        <a href="?page={{ comments.paginator.num_pages }}" class="pagination-link">last</a>
+                        {% endif %}
+                    </div>
+
                 </div>
             </div>
 

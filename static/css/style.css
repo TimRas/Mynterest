@@ -102,6 +102,7 @@ hr {
     display: flex;
     flex-direction: column;
     font-family: 'Comic Neue', cursive;
+    background-color: #0c2020;
 }
 
 .main-section {
@@ -317,7 +318,7 @@ hr {
 
 .pagination-container {
     height: 3em;
-    width: 18em;
+    width: 22em;
     border-radius: 5px;
     font-family: 'Bitter', serif;
     color: white;
@@ -329,7 +330,8 @@ hr {
 }
 
 .pagination-counter {
-    min-width: 6em;
+    min-width: 7em;
+    text-align: center;
     border-radius: 5px;
 }
 
@@ -438,7 +440,6 @@ hr {
     color: white;
     border-radius: 5px;
 }
-
 
 .post-card-body {
     background-color: #292828;
