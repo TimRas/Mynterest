@@ -21,12 +21,12 @@ Sign Out
     </div>
     <div class="row mx-auto">
       <div class="col mt-3">
-        <form class="signup ml-5 pl-2" method="POST" action="{% url 'account_logout' %}">
+        <form class="signup" method="POST" action="{% url 'account_logout' %}">
           {% csrf_token %}
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
-          <button class="allauth-buttons mb-3 mr-3 text-white float-right" type="submit">{% trans 'Sign Out' %}</button>
+          <button class="allauth-buttons sign-out-button mb-3 text-white" type="submit">{% trans 'Sign Out' %}</button>
         </form>
       </div>
     </div>

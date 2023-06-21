@@ -98,7 +98,7 @@ hr {
 /* ---- Main content container ----*/
 
 .main-content {
-    min-height: calc(100vh - 113.59px);  
+    min-height: calc(100vh - 105.59px);  
     display: flex;
     flex-direction: column;
     font-family: 'Comic Neue', cursive;
@@ -160,18 +160,6 @@ hr {
     height: 100%;
     padding-bottom: 1em;
 }
-
-/* .topic-text {
-    font-size: 2em;
-    color: white;
-    font-family: 'Bitter', serif;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    height: 100%;
-    padding-bottom: 1em;
-    z-index: -9999;
-} */
 
 
 /* ---- Footer container ----*/
@@ -464,20 +452,6 @@ hr {
     font-weight: 600;
 }
 
-
-/* .signup-button {
-    padding: 7px 15px;
-    border-radius: 8px;
-    border: 2px solid grey;
-    display: block;
-    margin: 0 auto;
-    text-decoration: none;
-    transition-duration: 0.4s;
-    background-color: white;
-    font-family: 'Bitter', serif;
-    font-weight: 600;
-} */
-
 .allauth-buttons {
     background-color: purple;
     border-radius: 5px;
@@ -494,11 +468,6 @@ hr {
 .registration-text>h3 {
     font-family: 'Bitter', serif;
     font-weight: 800;
-}
-
-.main-section-comment-form {
-    background-color: #081616;
-    min-height: 86vh;
 }
 
 
@@ -560,6 +529,12 @@ hr {
     width: 70%;
     border-radius: 5px;
     background-color: #081616;   
+}
+
+/* ---- Forms ----*/
+
+.post-form {
+    width: 50%;
 }
 
 /* ---- 404 Page ----*/
@@ -691,5 +666,54 @@ hr {
     .post-image {
         width: 75%;
         height: 4em;
+    }
+}
+
+/* ---- Allauth ----*/
+
+/* ---- Sign Out Page ----*/
+
+@media (max-width: 100vw) {
+    .sign-out-button {
+        float: right;
+    }
+}
+
+@media (max-width: 415px) {
+    .signup {
+        width: 100%;
+    }
+    .sign-out-button {
+        width: 100%;
+        margin-right: 5em;
+        float: none;
+    }
+    
+}
+
+/* ---- Forms ----*/
+
+@media (max-width: 990px) {
+    .post-form {
+        width: 75%;
+    }
+}
+
+@media (max-width: 100vw) {
+    .comment-section {
+        background-color: #0c2020;
+        margin: auto;
+    }
+}
+
+@media (max-width: 100vw) {
+    .comment-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 990px) {
+    .comment-form {
+        width: 75%;
     }
 }
