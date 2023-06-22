@@ -104,6 +104,7 @@ class PostDetail(View):
                 comment.post = post
                 comment.author = request.user
                 comment.save()
+                messages.success(request, "Your comment has successfully been added to the post!")
             else:
                 comment_form = CommentForm()
 
@@ -149,6 +150,7 @@ class CreatePost(View):
                     post.image = image_file
                 post.save()
 
+                messages.success(request, "Your post has been created")
                 return redirect(reverse("posts", kwargs={"topic": topic}))
             else:
                 return render(request, "create_post.html", {"form": post_form})
@@ -169,7 +171,7 @@ class EditPost(View):
             raise Http404('The requested post does not exist.') from exc
 
     def post(self, request, slug, *args, **kwargs): 
-        try:     
+        try: 
             post = get_object_or_404(Post, slug=slug)
             post_form = PostForm(request.POST, instance=post)
 
@@ -177,6 +179,7 @@ class EditPost(View):
                 post_form.instance.name = request.user.username
                 post_form.save()
                 post_form = PostForm()
+                messages.success(request, "Your post has been successfully edited!")
             else:
                 post_form = PostForm(request.POST, instance=post)
 
@@ -216,6 +219,7 @@ class EditComment(View):
                 comment_form.instance.name = request.user.username
                 comment_form.save()
                 comment_form = CommentForm()
+                messages.success(request, "Your comment has been successfully edited!")
             else:
                 comment_form = CommentForm(request.POST, instance=comment)
 
@@ -253,6 +257,7 @@ class DeletePost(View):
 
             if request.user == post.author: 
                 post.delete()
+                messages.success(request, "Your post has been successfully deleted!")
                 return redirect(reverse("posts", kwargs={"topic": topic}))
             else:
                 return HttpResponse("Cannot delete this post.")  
@@ -272,6 +277,7 @@ class DeleteComment(View):
 
             if request.user == comment.author:
                 comment.delete()
+                messages.success(request, "Your comment has been successfully deleted!")
                 return redirect(reverse("post_detail", kwargs={"slug": slug}))
             else:
                 return HttpResponse("You are not authorized to delete this comment.")

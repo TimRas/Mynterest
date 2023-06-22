@@ -556,44 +556,6 @@ hr {
     font-weight: 800;
 }
 
-/* ---- Error messages ----*/
-
-.messages-container {
-    position: fixed;
-    top: 4.5em;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-}
-
-/* Success message */
-.messages .alert-success {
-    background-color: #0a8a0e;
-    border-color: #388E3C;
-    color: #FFFFFF;
-}
-
-/* Info message */
-.messages .alert-info {
-    background-color: #067ada;
-    border-color: #1976D2;
-    color: #FFFFFF;
-}
-
-/* Warning message */
-.messages .alert-warning {
-    background-color: #fcbe03;
-    border-color: #FFA000;
-    color: #FFFFFF;
-}
-
-/* Error message */
-.messages .alert-danger {
-    background-color: #b61105;
-    border-color: #E53935;
-    color: #FFFFFF;
-}
-
 
 /* ---- Media Queries  ----*/
 
