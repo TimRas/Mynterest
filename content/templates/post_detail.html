@@ -123,7 +123,7 @@ Post Details
                                             <p class="card-text text-muted">{{ comment.created_date }}</p>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            {% if post.author == request.user %}
+                                            {% if comment.author == request.user %}
                                                 <div class="align-buttons-right float-right">
                                                     <button class="button post-detail-buttons comment-buttons-width">
                                                         <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit Comment</a>

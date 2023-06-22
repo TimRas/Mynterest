@@ -26,6 +26,7 @@ class PostList(View):
 
     def get(self, request, topic, *args, **kwargs):
         try:
+            get_object_or_404(Topic, slug=topic)
             queryset = Post.objects.filter(topic__slug=topic)
             most_liked = request.GET.get('most_liked', False) == 'true'
 
@@ -105,6 +106,7 @@ class PostDetail(View):
                 comment.author = request.user
                 comment.save()
                 messages.success(request, "Your comment has successfully been added to the post!")
+                return redirect("post_detail", slug=slug)
             else:
                 comment_form = CommentForm()
 
