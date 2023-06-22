@@ -1,0 +1,22 @@
+{
+  "name": "mynterest",
+  "version": "1.0.0",
+  "description": "This Project is not yet finished. I've used some snippets of code for the i think therefor i blog project and will specify which parts at the final submission.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimRas/Mynterest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimRas/Mynterest/issues"
+  },
+  "homepage": "https://github.com/TimRas/Mynterest#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
