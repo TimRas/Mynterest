@@ -1,8 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
-from django.http import Http404, HttpResponse
-from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 from django.http import HttpResponseNotAllowed
 from django.views import View, generic
 from django.http import HttpResponseRedirect
@@ -47,8 +46,8 @@ class PostList(View):
                     "most_liked": most_liked,
                 },
             )
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested topic does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
 
 class AuthCheckPost(View):
@@ -89,8 +88,8 @@ class PostDetail(View):
                     "comment_form": CommentForm()
                 },
             )
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested post does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
     def post(self, request, slug, *args, **kwargs):
         try:
@@ -117,8 +116,8 @@ class PostDetail(View):
                     "comment_form": comment_form,
                 },
             )
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested post does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
 
 class AuthCheckLike(View):
@@ -144,8 +143,8 @@ class CreatePost(View):
             post_form = PostForm(initial={"topic": topic_field})  
 
             return render(request, "create_post.html", {"topic": topic_field, "post_form": post_form})
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested topic does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
     def post(self, request, topic, *args, **kwargs):
         try:
@@ -163,8 +162,8 @@ class CreatePost(View):
                 return redirect(reverse("posts", kwargs={"topic": topic}))
             else:
                 return render(request, "create_post.html", {"form": post_form})
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested topic does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
 
 class EditPost(View):
@@ -176,8 +175,8 @@ class EditPost(View):
             post_form = PostForm(instance=post)
 
             return render(request, "edit_post.html", {"post_form": post_form, "post": post})
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested post does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
     def post(self, request, slug, *args, **kwargs): 
         try: 
@@ -203,8 +202,8 @@ class EditPost(View):
                     "topic": post.topic.slug,
                 },
             )
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested post does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
 
 class EditComment(View):
@@ -216,8 +215,8 @@ class EditComment(View):
             comment_form = CommentForm(instance=comment)
 
             return render(request, "edit_comment.html", {"comment_form": comment_form, "comment": comment})
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested comment does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
     def post(self, request, comment_id, *args, **kwargs):
         try:
@@ -235,8 +234,8 @@ class EditComment(View):
             post = comment.post
 
             return redirect("post_detail", slug=post.slug)
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested comment does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
 
 class PostLike(View):
@@ -252,8 +251,8 @@ class PostLike(View):
                 post.likes.add(request.user)
 
             return HttpResponseRedirect(reverse('post_detail', args=[slug]))
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested post does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
 
 class DeletePost(View):
@@ -268,11 +267,9 @@ class DeletePost(View):
                 post.delete()
                 messages.success(request, "Your post has been successfully deleted!")
                 return redirect(reverse("posts", kwargs={"topic": topic}))
-            else:
-                return HttpResponse("Cannot delete this post.")  
-
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested post does not exist.') from exc
+                
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
 
 
 class DeleteComment(View):
@@ -289,7 +286,8 @@ class DeleteComment(View):
                 messages.success(request, "Your comment has been successfully deleted!")
                 return redirect(reverse("post_detail", kwargs={"slug": slug}))
             else:
-                return HttpResponse("You are not authorized to delete this comment.")
+                return HttpResponse(["DELETE"])
 
-        except ObjectDoesNotExist as exc:
-            raise Http404('The requested comment does not exist.') from exc
+        except Exception as exception:
+            raise type(exception)(str(exception)) from exception
+

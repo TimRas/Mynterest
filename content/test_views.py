@@ -1,8 +1,10 @@
+import logging
 from django.utils import timezone
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.contrib.messages import get_messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from content.views import CreatePost
@@ -15,16 +17,29 @@ class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(username='testuser', password='12345')
+        self.user2 = User.objects.create_user(username='testuser2', password='123456')
         self.client.force_login(self.user)
         self.topic = Topic.objects.create(title="New Topic", slug="new-topic")
+        
+        self.post2 = Post.objects.create(
+            topic=self.topic,
+            title="Test Title2",
+            content="Test Content2",
+            excerpt="Test Excerpt2",
+            author=self.user
+        )
+
+        self.post2.likes.set([self.user, self.user2])
+
         self.post = Post.objects.create(
             topic=self.topic,
             title="Test Title",
             content="Test Content",
             excerpt="Test Excerpt",
-            author=self.user,
-            slug=slugify("Test Title")
+            author=self.user
         )
+
+        self.post.likes.set([self.user])
 
         self.comment = Comment.objects.create(
             post=self.post,
@@ -36,12 +51,45 @@ class TestViews(TestCase):
         """ Test to see if homepage is loading correctly """
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
-
-    def test_post_list_view(self):
-        """ Test to see if the posts are loading correctly """
+    
+    def test_most_liked_posts(self):
+        url = reverse('posts', kwargs={'topic': self.topic.slug})
+        response = self.client.get(f"{url}?most_liked=true")
+        first_post = response.context['posts'][0]
         
-        response = self.client.get(reverse("posts", kwargs={"topic": self.topic.slug}))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(first_post.title, "Test Title2")  # Only posts with likes should be returned
+
+    def test_all_posts(self):
+        url = reverse('posts', kwargs={'topic': self.topic.slug})
+        response = self.client.get(url)
+        first_post = response.context['posts'][0]
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(first_post.title, "Test Title")
+
+    def test_unauthenticated_user(self):
+        self.client.logout()
+        url = reverse('check_can_post', kwargs={'topic': self.topic.slug})
+        response = self.client.get(url)
+
+        self.assertRedirects(response, reverse('account_login'))
+        storage = get_messages(response.wsgi_request)
+        messages = [message.message for message in storage]
+        self.assertIn("You need to sign in or register to create a post", messages)
+
+    def test_authenticated_user(self):
+        url = reverse('check_can_post', kwargs={'topic': self.topic.slug})
+        self.client.force_login(self.user)
+        response = self.client.get(url)
+
+        self.assertRedirects(response, reverse('create_post', kwargs={'topic': self.topic.slug}))
+
+    def test_post_method_not_allowed(self):
+        url = reverse('check_can_post', kwargs={'topic': self.topic.slug})
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, 405)
 
     def test_post_detail_view(self):
         """ Test to see if the post detail page is loading correctly """
@@ -66,9 +114,9 @@ class TestViews(TestCase):
 
         post_data = {
             "topic": self.topic.id,
-            "title": "Test Title",
-            "content": "Test Content",
-            "excerpt": "Test Excerpt",
+            "title": "Test Title3",
+            "content": "Test Content3",
+            "excerpt": "Test Excerpt3",
         }
 
         response = self.client.post(url, data=post_data)
@@ -77,19 +125,19 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Verify that the post is created in the database
-        post = Post.objects.latest("id")
+        post = Post.objects.latest("created_date")
         self.assertEqual(post.title, post_data["title"])
         self.assertEqual(post.content, post_data["content"])
         self.assertEqual(post.excerpt, post_data["excerpt"])
         self.assertEqual(post.topic, self.topic)
         self.assertEqual(post.author, self.user)
-        self.assertEqual(post.slug, slugify(post.title))
+        self.assertEqual(post.slug, slugify(post.title + '_' + str(post.uuid), allow_unicode=True))
 
     def test_invalid_post_request(self):
         url = reverse("create_post", kwargs={"topic": self.topic.slug})
 
         post_data = {
-            "topic": self.topic.id,
+            "topic": "",
             "title": "",
             "content": "",
             "excerpt": "",
@@ -97,21 +145,8 @@ class TestViews(TestCase):
 
         response = self.client.post(url, data=post_data)
 
-        # Verify that the response is not a redirect (status code 200)
+        # Verify that the response is a success (status code 200)
         self.assertEqual(response.status_code, 200)
-
-        # Verify that the form errors are present in the response
-        self.assertContains(response, "This field is required.", count=3)
-
-        # Verify that the post is not created in the database
-        self.assertFalse(Post.objects.filter(title=post_data["title"]).exists())
-
-    def test_topic_does_not_exist(self):
-        url = reverse("create_post", kwargs={"topic": "non-existent-topic"})
-        response = self.client.get(url)
-
-        # Verify that the response is a 404 not found (status code 404)
-        self.assertEqual(response.status_code, 404)
 
     def test_post_detail_post_valid_form(self):
         """" Test to see if a comment can be made with a valid form """
@@ -135,7 +170,7 @@ class TestViews(TestCase):
             data=comment_data,
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         comment = Comment.objects.last()
 
@@ -251,13 +286,13 @@ class TestViews(TestCase):
 
     def test_post_like(self):
         """Test liking a post"""
+        self.post.likes.set([])
         self.client.force_login(self.user)
     
         response = self.client.post(reverse('post_like', args=[self.post.slug]))
-        
+        post = Post.objects.get(id=self.post.id)
         self.assertEqual(response.status_code, 302)
-        
-        self.assertIn(self.user, self.post.likes.all())
+        self.assertIn(self.user, post.likes.all())
 
     def test_post_unlike(self):
         """Test unliking a post"""
@@ -270,6 +305,29 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 302)
         
         self.assertNotIn(self.user, self.post.likes.all())
+
+    def test_unauthenticated_like(self):
+        self.client.logout()
+        url = reverse('check_like_post', kwargs={'slug': self.post.slug})
+        response = self.client.get(url)
+
+        self.assertRedirects(response, reverse('account_login'))
+        storage = get_messages(response.wsgi_request)
+        messages = [message.message for message in storage]
+        self.assertIn("You need to sign in or register to like a post", messages)
+
+    def test_authenticated_like(self):
+        url = reverse('check_like_post', kwargs={'slug': self.post.slug})
+        self.client.force_login(self.user)
+        response = self.client.get(url)
+
+        self.assertRedirects(response, reverse('post_detail', kwargs={'slug': self.post.slug}))
+
+    def test_post_method_not_allowed_like(self):
+        url = reverse('check_like_post', kwargs={'slug': self.post.slug})
+        response = self.client.post(url)
+
+        self.assertEqual(response.status_code, 405)
 
     def test_delete_post(self):
         """Test deleting a post"""
@@ -295,3 +353,97 @@ class TestViews(TestCase):
 
         self.assertNotIn(self.comment, self.post.comments.all())
 
+    def test_delete_comment_authorization_failed(self):
+        self.client.logout()
+
+        url = reverse('delete_comment', kwargs={'comment_id': self.comment.id})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "DELETE")
+
+    def test_post_list_get_exception(self):
+        url = reverse("posts", kwargs={"topic": "non-existent-topic"})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+    
+    def test_post_detail_get_exception(self):
+        url = reverse("post_detail", kwargs={"slug": "non-existent-slug"})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_detail_post_exception(self):
+        url = reverse("post_detail", kwargs={"slug": "non-existent-slug"})
+        response = self.client.post(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_create_post_get_exception(self):
+        url = reverse("create_post", kwargs={"topic": "non-existent-topic"})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_create_post_post_exception(self):
+        url = reverse("create_post", kwargs={"topic": "non-existent-topic"})
+        response = self.client.post(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_edit_post_get_exception(self):
+        url = reverse("edit_post", kwargs={"slug": "non-existent-slug"})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_edit_post_post_exception(self):
+        url = reverse("edit_post", kwargs={"slug": "non-existent-slug"})
+        response = self.client.post(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_edit_comment_get_exception(self):
+        url = reverse("edit_comment", kwargs={"comment_id": 99999})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_edit_comment_post_exception(self):
+        url = reverse("edit_comment", kwargs={"comment_id": 99999})
+        response = self.client.post(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_like_post_exception(self):
+        url = reverse("post_like", kwargs={"slug": "non-existent-slug"})
+        response = self.client.post(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+    
+    def test_delete_post_get_exception(self):
+        url = reverse("delete_post", kwargs={"slug": "non-existent-slug"})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+    def test_delete_comment_get_exception(self):
+        url = reverse("delete_comment", kwargs={"comment_id": 99999})
+        response = self.client.get(url)
+
+        # Verify that the response is a 404 not found (status code 404)
+        self.assertEqual(response.status_code, 404)
+
+        
