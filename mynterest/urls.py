@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import handler404
 
 
 urlpatterns = [
@@ -9,4 +8,3 @@ urlpatterns = [
     path('', include("content.urls"), name="home"),
     path('summernote/', include('django_summernote.urls')),
 ]
-handler404 = 'mynterest.views.handler404'
