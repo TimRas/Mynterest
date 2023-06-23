@@ -51,7 +51,7 @@ class PostList(View):
             raise Http404('The requested topic does not exist.') from exc
 
 
-class AuthCheck(View):
+class AuthCheckPost(View):
     """ Checks if user in logged in when trying to post. If not will redirect to login page else it will open up the post form."""
     
     def get(self, request, topic, *args, **kwargs):
@@ -61,7 +61,7 @@ class AuthCheck(View):
         else:
             return redirect(reverse("create_post", kwargs={"topic": topic}))
 
-    def post(self, request, *args, **kwargs):
+    def post(self, *args, **kwargs):
         return HttpResponseNotAllowed(['GET'])
 
 
@@ -119,6 +119,20 @@ class PostDetail(View):
             )
         except ObjectDoesNotExist as exc:
             raise Http404('The requested post does not exist.') from exc
+
+
+class AuthCheckLike(View):
+    """ Checks if user in logged in when trying to like. If not will redirect to login page else it will like the post."""
+    
+    def get(self, request, slug, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, "You need to sign in or register to like a post")
+            return redirect('account_login')
+        else:
+            return redirect(reverse("post_detail", kwargs={"slug": slug}))
+
+    def post(self, *args, **kwargs):
+        return HttpResponseNotAllowed(['POST'])
 
 
 class CreatePost(View):

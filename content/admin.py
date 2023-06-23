@@ -7,10 +7,10 @@ from .models import Post, Comment, Topic
 class PostAdmin(SummernoteModelAdmin):
 
     prepopulated_fields = {'slug': ('title',)}
-    summernote_fields = ('content')
+    summernote_fields = ('content', 'excerpt')
     list_filter = ('created_date',)
     search_fields = ['title', 'content']
-    list_display = ('title', 'slug', 'topic', 'created_date')
+    list_display = ('title', 'author', 'topic', 'created_date')
 
 
 @admin.register(Comment)
@@ -19,7 +19,7 @@ class CommentAdmin(SummernoteModelAdmin):
     summernote_fields = ('body')
     list_filter = ('created_date',)
     search_fields = ['body']
-    list_display = ('author', 'body', 'created_date')
+    list_display = ('author', 'post', 'body', 'created_date')
 
 
 @admin.register(Topic)

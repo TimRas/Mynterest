@@ -51,7 +51,7 @@ Post Details
                                     {% endif %}
                                 </form>
                                 {% else %}
-                                <span class="text-secondary"><i class="far fa-heart"></i></span>
+                                    <span class="text-secondary"><i class="far fa-heart" onclick="location.href='{% url 'check_like_post' slug=post.slug %}'"></i></span>                             
                                 {% endif %}
                             </div>
                         </div>

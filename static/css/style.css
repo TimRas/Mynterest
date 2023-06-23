@@ -537,25 +537,6 @@ hr {
     width: 50%;
 }
 
-/* ---- 404 Page ----*/
-
-.four-oh-four-image {
-    width: 100%;
-    padding-top: 4.5em;
-
-    background-image: url('https://res.cloudinary.com/timr/image/upload/v1685404573/static/images/art_404.e5fc6018e909.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.four-oh-four-button {
-    background-color: purple;
-    border-radius: 5px;
-    border-style: none;
-    height: 2.8em;
-    font-weight: 800;
-}
-
 
 /* ---- Media Queries  ----*/
 
