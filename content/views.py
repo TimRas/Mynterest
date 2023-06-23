@@ -1,5 +1,4 @@
 from django.core.paginator import Paginator
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
 from django.http import Http404, HttpResponse
@@ -7,7 +6,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseNotAllowed
 from django.views import View, generic
 from django.http import HttpResponseRedirect
-from django.utils.text import slugify
 from django.db.models import Count
 from .models import Topic, Post, Comment
 from .forms import CommentForm, PostForm
@@ -144,12 +142,7 @@ class CreatePost(View):
             if post_form.is_valid():
                 post = post_form.save(commit=False)
                 post.author = request.user
-                post.slug = slugify(post.title)
                 post.topic = topic_field
-
-                image_file = request.FILES.get('image')
-                if image_file:
-                    post.image = image_file
                 post.save()
 
                 messages.success(request, "Your post has been created")

@@ -106,20 +106,9 @@
                             </div>
                             <hr>
                             <div class="row">
-                                {% if post.image %}
-                                <div class="col-lg-6 col-md-12 post-excerpt pl-4">
-                                    <p>{{ post.excerpt|safe }}</p>
-                                </div>
-                                <div class="col-lg-6 col-md-12">
-                                    <div class="post-image-container">
-                                        <img src="{{ post.image.url }}" alt="Post Image" class="img-fluid post-image pr-2">
-                                    </div>
-                                </div>
-                                {% else %}
                                 <div class="col-12 post-excerpt pl-4">
                                     <p>{{ post.excerpt|safe }}</p>
                                 </div>
-                                {% endif %}
                             </div>
                             <hr>
                             <div class="row">
