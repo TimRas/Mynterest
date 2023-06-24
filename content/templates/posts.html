@@ -2,7 +2,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
 {% block extra_title %}
 {{ topic.title }}
 {% endblock %}
@@ -42,27 +41,21 @@
 </div>
 {% endif %}
 
-
 <section class="main-section">
     <div class="post-container mt-3 w-75 mx-auto">
         <div class="row mx-0 pt-2">
             {% if most_liked %}
             <div class="col">
-                <button class="most-liked-buttons">
-                    <a href="{% url 'posts' topic=topic %}">Show All Posts</a>
-                </button>
+                <a href="{% url 'posts' topic=topic %}" class="most-liked-buttons px-1">Show All Posts</a>
             </div>
             {% else %}
             <div class="col">
-                <button class="most-liked-buttons">
-                    <a href="{% url 'posts' topic=topic %}?most_liked=true">Show Most Liked</a>
-                </button>
+                <a href="{% url 'posts' topic=topic %}?most_liked=true" class="most-liked-buttons">Show Most Liked</a>
             </div>
             {% endif %}
             <div class="col">
-                <button class="post-create-button float-right" onclick="location.href='{% url 'check_can_post' topic=topic %}'">
-                    <a href="#" >Create Post</a>
-                </button>
+                <a href="#" onclick="location.href='{% url 'check_can_post' topic=topic %}'"
+                    class="post-create-button float-right px-3">Create Post</a>
             </div>
         </div>
         {% if posts|length == 0 %}
@@ -81,13 +74,9 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-4 pt-2 pl-3">
-                                <h6 class="pl-3"><strong>{{ post.author }}</strong></h6>
-                            </div>
-                            <div class="col-8">
-                                <button class="post-create-button float-right" onclick="location.href='{% url 'check_can_post' topic=topic %}'">
-                                    <a href="#" >Create Post</a>
-                                </button>
+                            <div class="col">
+                                <a href="#" onclick="location.href='{% url 'check_can_post' topic=topic %}'"
+                                    class="post-create-button float-right px-3">Create Post</a>
                             </div>
                         </div>
                     </div>
@@ -107,7 +96,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-12 post-excerpt pl-4">
-                                    <p>{{ post.excerpt|safe }}</p>
+                                    {{ post.excerpt|safe }}
                                 </div>
                             </div>
                             <hr>
@@ -117,9 +106,8 @@
                                     <p class="card-text text-muted pl-3">{{ post.likes.count }} likes</p>
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-12">
-                                    <button class="button post-detail-buttons float-right">
-                                        <a href="{% url 'post_detail' slug=post.slug %}">View post</a>
-                                    </button>
+                                    <a href="{% url 'post_detail' slug=post.slug %}"
+                                        class="button post-detail-buttons float-right px-3">View Post</a>
                                 </div>
                             </div>
                             <div class="row float-right">
@@ -135,38 +123,32 @@
 
     <div class="pagination container">
         <div class="mx-auto row pagination-container">
-            
-            <div class="col-2">   
-                {% if posts.has_previous %}            
+            <div class="col-2">
+                {% if posts.has_previous %}
                 <a href="?page=1" class="pagination-link">first</a>
-                {% endif %} 
+                {% endif %}
             </div>
             <div class="col-2 no-padding-left">
                 {% if posts.has_previous %}
-                <a href="?page={{ posts.previous_page_number }}" class="pagination-link">prev</a>  
-                {% endif %}               
-            </div>   
-                        
-                
+                <a href="?page={{ posts.previous_page_number }}" class="pagination-link">prev</a>
+                {% endif %}
+            </div>
             <div class="col-4 purple-background pagination-counter">
                 <span class="current-page">{{ posts.start_index }} - {{ posts.end_index }} of
                     {{ posts.paginator.count }}</span>
             </div>
-
-            
-            <div class="col-2">    
-                {% if posts.has_next %}           
+            <div class="col-2">
+                {% if posts.has_next %}
                 <a href="?page={{ posts.next_page_number }}" class="pagination-link">next</a>
-                {% endif %} 
+                {% endif %}
             </div>
             <div class="col-2 no-padding-left">
                 {% if posts.has_next %}
-                <a href="?page={{ posts.paginator.num_pages }}" class="pagination-link">last</a>    
-                {% endif %}            
+                <a href="?page={{ posts.paginator.num_pages }}" class="pagination-link">last</a>
+                {% endif %}
             </div>
-                                     
         </div>
     </div>
-
 </section>
+
 {% endblock %}

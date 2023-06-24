@@ -34,7 +34,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
     </script>
-
     {% endblock%}
 
     <title>Mynterest | {% block extra_title %}{% endblock %}</title>
@@ -49,14 +48,11 @@
                             class="brand log-item text-white">Mynterest</span></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <div class="navbar-toggler-icon">
-                            <img src="data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32'
-                                xmlns='http://www.w3.org/2000/svg' %3E%3Cpath stroke='rgba(255,255,255, 1)'
-                                stroke-width='2' stroke-linecap='round' stroke-miterlimit='10'
-                                d='M4 8h24M4 16h24M4 24h24' /%3E%3C/svg%3E">
-                        </div>
+                        <span class="navbar-toggler-icon">
+                            <img src="data:image/svg+xml;charset=utf8,%3Csvg%20viewBox='0%200%2032%2032'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20stroke='rgba(255,255,255,%201)'%20stroke-width='2'%20stroke-linecap='round'%20stroke-miterlimit='10'%20d='M4%208h24M4%2016h24M4%2024h24'%20/%3E%3C/svg%3E"
+                                alt="Burger Icon">
+                        </span>
                     </button>
-
                     <div class="collapse navbar-collapse nav-items" id="navbarText">
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link home-link nav-padding" aria-current="page"
@@ -68,7 +64,6 @@
                             <li class="nav-item"><a class="nav-link home-link nav-padding" aria-current="page"
                                     href="{% url 'posts' topic='nature' %}">Nature</a></li>
                         </ul>
-
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             {% if user.is_authenticated %}
                             <li class="nav-item nav-padding">
@@ -103,10 +98,10 @@
             </div>
         </div>
 
-        <section class="main-content">
+        <div class="main-content">
             {% block content %}
             {% endblock %}
-        </section>
+        </div>
 
         <footer class="footer-container">
             <div class="col-6">
@@ -126,19 +121,25 @@
 
         {% block postload_js %}
         <script>
+            /*
+            Grabs the msg element.
+            Runs the alert message.
+            Closes the message after 1500ms.
+           */
             setTimeout(function () {
                 let messages = document.getElementById('msg');
                 let alert = new bootstrap.Alert(messages);
                 alert.close();
             }, 1500);
         </script>
-
         <script>
-            // Wait for the document to be fully loaded
+            /*
+              Waits for the document to be fully loaded.
+              Grabs back to top element.
+              Scrolls back to the top when the button is clicked.
+            */
             document.addEventListener('DOMContentLoaded', function () {
-                // Get the "Back to Top" button element
                 var backToTopButton = document.querySelector('.back-to-top-button');
-                // Scroll to the top when the button is clicked
                 backToTopButton.addEventListener('click', function (e) {
                     e.preventDefault();
                     window.scrollTo({
@@ -149,7 +150,6 @@
             });
         </script>
         {% endblock %}
-
     </div>
 </body>
 

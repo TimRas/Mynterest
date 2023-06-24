@@ -3,7 +3,6 @@
 {% load crispy_forms_tags %}
 {% load custom_filters %}
 
-
 {% block extra_title %}
 Post Details
 {% endblock %}
@@ -51,7 +50,8 @@ Post Details
                                     {% endif %}
                                 </form>
                                 {% else %}
-                                    <span class="text-secondary"><i class="far fa-heart" onclick="location.href='{% url 'check_like_post' slug=post.slug %}'"></i></span>                             
+                                <span class="text-secondary"><i class="far fa-heart"
+                                        onclick="location.href='{% url 'check_like_post' slug=post.slug %}'"></i></span>
                                 {% endif %}
                             </div>
                         </div>
@@ -59,7 +59,7 @@ Post Details
                     <hr>
                     <div class="row">
                         <div class="col-12 post-body pl-4">
-                            <p class="pl-2">{{ post.content|safe }}</p>
+                            {{ post.content|safe }}
                         </div>
                     </div>
                     <hr>
@@ -70,12 +70,8 @@ Post Details
                         </div>
                         <div class="col-lg-6 col-md-9">
                             {% if post.author == request.user %}
-                            <button class="button post-detail-buttons float-right">
-                                <a href="{% url 'edit_post' slug=post.slug %}">Edit Post</a>
-                            </button>
-                            <button class="button post-detail-buttons mr-2 float-right">
-                                <a href="{% url 'delete_post' slug=post.slug %}">Delete Post</a>
-                            </button>
+                            <a href="{% url 'edit_post' slug=post.slug %}" class="button post-detail-buttons float-right px-3">Edit Post</a>
+                            <a href="{% url 'delete_post' slug=post.slug %}" class="button post-detail-buttons mr-2 float-right px-3">Delete Post</a>
                             {% endif %}
                         </div>
                     </div>
@@ -86,7 +82,6 @@ Post Details
                     </div>
                 </div>
             </div>
-            
 
             <div class="row mt-3">
                 <div class="col-6">
@@ -113,14 +108,10 @@ Post Details
                                         </div>
                                         <div class="col-12 col-md-9">
                                             {% if comment.author == request.user %}
-                                                <div class="align-buttons-right float-right">
-                                                    <button class="button post-detail-buttons comment-buttons-width">
-                                                        <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit Comment</a>
-                                                    </button>
-                                                    <button class="button post-detail-buttons comment-buttons-width">
-                                                        <a href="{% url 'delete_comment' comment_id=comment.id %}">Delete Comment</a>
-                                                    </button>
-                                                </div>
+                                            <div class="align-buttons-right">
+                                                <a href="{% url 'edit_comment' comment_id=comment.id %}" class="button post-detail-buttons comment-buttons-width float-right">Edit Comment</a>
+                                                <a href="{% url 'delete_comment' comment_id=comment.id %}" class="button post-detail-buttons comment-buttons-width float-right mr-2">Delete Comment</a>
+                                            </div>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -133,47 +124,9 @@ Post Details
             {% empty %}
             <p class="text-white">No comments yet.</p>
             {% endfor %}
-            <!-- {% for comment in comments %}
-            <div class="card mt-2 mb-3 border-0">
-                <div class="card-body post-card-body text-white">
-                    <div>
-                        <ul class="list-unstyled my-0">
-                            <li class="media">
-                                <div class="media-body">
-                                    <h6 class="mt-0"><strong>{{ comment.author.username }}</strong></h6>
-                                    <hr>
-                                    <div class="comment-body">{{ comment.body|safe }}</div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-3 pt-2">
-                                            <p class="card-text text-muted">{{ comment.created_date }}</p>
-                                        </div>
-                                        <div class="col-9">
-                                            {% if post.author == request.user %}
-                                            <button class="button post-detail-buttons float-right">
-                                                <a href="{% url 'edit_comment' comment_id=comment.id %}">Edit
-                                                    Comment</a>
-                                            </button>
-                                            <button class="button post-detail-buttons float-right mr-3">
-                                                <a href="{% url 'delete_comment' comment_id=comment.id %}">Delete
-                                                    Comment</a>
-                                            </button>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <p class="text-white">No comments yet.</p>
-            {% endfor %} -->
 
             <div class="pagination container">
                 <div class="mx-auto row pagination-container">
-
                     <div class="col-2 no-padding-left">
                         {% if comments.has_previous %}
                         <a href="?page=1" class="pagination-link">first</a>
@@ -184,14 +137,10 @@ Post Details
                         <a href="?page={{ comments.previous_page_number }}" class="pagination-link">prev</a>
                         {% endif %}
                     </div>
-
-
                     <div class="col-4 purple-background pagination-counter">
                         <span class="current-page">{{ comments.start_index }} - {{ comments.end_index }} of
                             {{ comments.paginator.count }}</span>
                     </div>
-
-
                     <div class="col-2">
                         {% if comments.has_next %}
                         <a href="?page={{ comments.next_page_number }}" class="pagination-link">next</a>
@@ -219,9 +168,7 @@ Post Details
                         </form>
                         {% else %}
                         <h3>Sign up now and join us in the comments!</h3>
-                        <button class="button post-register-button ml-5 float-right">
-                            <a href="{% url 'account_signup' %}">Register</a>
-                        </button>
+                        <a href="{% url 'account_signup' %}" class="button post-register-button ml-5 float-right pt-2">Register</a>
                         {% endif %}
                     </div>
                 </div>
@@ -229,4 +176,5 @@ Post Details
         </div>
     </div>
 </section>
+
 {% endblock %}

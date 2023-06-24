@@ -9,11 +9,15 @@ User = get_user_model()
 class TestForms(TestCase):
 
     def test_comment_form_valid_data(self):
-        """" Test to see if commentform is valid with valid data and that the comment can be saved with the valid data """
+        """"
+        Test to see if commentform is valid with valid data
+        and that the comment can be saved with the valid data.
+        """
 
         user = User.objects.create_user(username='testuser', password='12345')
         topic = Topic.objects.create(title="example", slug="example")
-        post = topic.posts.create(title="test post", content="test content", excerpt="excerpt", author=user)       
+        post = topic.posts.create(title="test post", content="test content",
+                                  excerpt="excerpt", author=user)
         form = CommentForm(data={'body': 'test comment'})
         self.assertTrue(form.is_valid())
         comment = form.save(commit=False)
@@ -30,7 +34,10 @@ class TestForms(TestCase):
         self.assertEqual(len(form.errors), 1)
 
     def test_post_form_valid_data(self):
-        """" Test to see if postform is valid with valid data and that the post can be saved with the valid data """
+        """
+        Test to see if postform is valid with valid data
+        and that the post can be saved with the valid data.
+        """
 
         user = User.objects.create_user(username='testuser', password='12345')
         topic = Topic.objects.create(title="example", slug="example")
@@ -48,7 +55,7 @@ class TestForms(TestCase):
 
     def test_post_form_empty_data(self):
         """ Test to see if the form is invalid when provided with zero data """
-        
+
         form = PostForm(data={})
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 4)

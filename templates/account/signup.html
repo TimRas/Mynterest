@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 
 {% block extra_title %}
@@ -8,7 +7,6 @@ Sign Up
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
-
 {% block content %}
 
 <section class="allauth-section">
@@ -16,9 +14,9 @@ Sign Up
     <div class="row pb-4 mb-4">
       <div class="col mt-3 registration-text">
         <h3 class="ml-3">{% trans "Sign Up" %}</h3>
-          <hr>
-        <p class="ml-3 mr-3">{% blocktrans %}Welcome back to the Mynterest blog. Do you already have an account? Then please <a class="link"
-            href="{{ login_url }}">sign in</a> instead.{% endblocktrans %}</p>
+        <hr>
+        <p class="ml-3 mr-3">{% blocktrans %}Welcome back to the Mynterest blog. Do you already have an account? Then
+          please <a class="link" href="{{ login_url }}">sign in</a> instead.{% endblocktrans %}</p>
       </div>
     </div>
 

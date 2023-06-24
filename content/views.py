@@ -19,7 +19,12 @@ class TopicList(generic.ListView):
 
 
 class PostList(View):
-    """ Renders all all posts related to the given topic. Validates the submitted form, saves the new post in the database and redirects the user back to the post page with the given topic and handles the most-liked functionality"""
+    """
+    Renders all all posts related to the given topic.
+    Validates the submitted form, saves the new post in the database
+    and redirects the user back to the post page
+    with the given topic and handles the most-liked functionality
+    """
 
     def get(self, request, topic, *args, **kwargs):
         try:
@@ -28,7 +33,13 @@ class PostList(View):
             most_liked = request.GET.get('most_liked', False) == 'true'
 
             if most_liked:
-                queryset = queryset.annotate(num_likes=Count('likes')).filter(num_likes__gt=0).order_by('-num_likes')[:5]
+                queryset = (
+                    queryset
+                    .annotate(num_likes=Count('likes'))
+                    .filter(num_likes__gt=0)
+                    .order_by('-num_likes')
+                    [:5]
+                )
             else:
                 queryset = Post.objects.filter(topic__slug=topic)
 
@@ -51,21 +62,29 @@ class PostList(View):
 
 
 class AuthCheckPost(View):
-    """ Checks if user in logged in when trying to post. If not will redirect to login page else it will open up the post form."""
-    
+    """
+    Checks if user in logged in when trying to post.
+    If not will redirect to login page else it will open up the post form.
+    """
+
     def get(self, request, topic, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.error(request, "You need to sign in or register to create a post")
+            messages.error(request,
+                           "You need to sign in or register to create a post")
             return redirect('account_login')
-        else:
-            return redirect(reverse("create_post", kwargs={"topic": topic}))
+
+        return redirect(reverse("create_post", kwargs={"topic": topic}))
 
     def post(self, *args, **kwargs):
         return HttpResponseNotAllowed(['GET'])
 
 
 class PostDetail(View):
-    """ Renders post retreived form database and renders comment form. Validates the submitted form, saves the comment and redirects user to the details page of given post"""
+    """
+    Renders post retreived form database and renders comment form.
+    Validates the submitted form, saves the comment and
+    redirects user to the details page of given post.
+    """
 
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.all()
@@ -102,7 +121,8 @@ class PostDetail(View):
                 comment.post = post
                 comment.author = request.user
                 comment.save()
-                messages.success(request, "Your comment has successfully been added to the post!")
+                messages.success(request,
+                                 "Your comment has been added to the post!")
                 return redirect("post_detail", slug=slug)
             else:
                 comment_form = CommentForm()
@@ -121,11 +141,15 @@ class PostDetail(View):
 
 
 class AuthCheckLike(View):
-    """ Checks if user in logged in when trying to like. If not will redirect to login page else it will like the post."""
-    
+    """
+    Checks if user in logged in when trying to like.
+    If not will redirect to login page else it will like the post.
+    """
+
     def get(self, request, slug, *args, **kwargs):
         if not request.user.is_authenticated:
-            messages.error(request, "You need to sign in or register to like a post")
+            messages.error(request,
+                           "You need to sign in or register to like a post")
             return redirect('account_login')
         else:
             return redirect(reverse("post_detail", kwargs={"slug": slug}))
@@ -135,20 +159,24 @@ class AuthCheckLike(View):
 
 
 class CreatePost(View):
-    """Render a post form in the given URL. Validate the submitted form, update the database, and redirect to the given topic page."""
+    """
+    Render a post form in the given URL.
+    Validate the submitted form, update the database
+    and redirect to the given topic page.
+    """
 
     def get(self, request, topic, *args, **kwargs):
         try:
             topic_field = get_object_or_404(Topic, slug=topic)
-            post_form = PostForm(initial={"topic": topic_field})  
+            post_form = PostForm(initial={"topic": topic_field})
 
-            return render(request, "create_post.html", {"topic": topic_field, "post_form": post_form})
+            return render(request, "create_post.html",
+                          {"topic": topic_field, "post_form": post_form})
         except Exception as exception:
             raise type(exception)(str(exception)) from exception
 
     def post(self, request, topic, *args, **kwargs):
         try:
-            
             topic_field = get_object_or_404(Topic, slug=topic)
             post_form = PostForm(request.POST, request.FILES)
 
@@ -167,19 +195,24 @@ class CreatePost(View):
 
 
 class EditPost(View):
-    """ Render a form in the edit post html of the given post. Validates the submitted form, update in the database and redirects to the given topic page"""
+    """
+    Render a form in the edit post html of the given post.
+    Validates the submitted form, update in the database
+    and redirects to the given topic page.
+    """
 
     def get(self, request, slug, *args, **kwargs):
         try:
             post = get_object_or_404(Post, slug=slug)
             post_form = PostForm(instance=post)
 
-            return render(request, "edit_post.html", {"post_form": post_form, "post": post})
+            return render(request, "edit_post.html",
+                          {"post_form": post_form, "post": post})
         except Exception as exception:
             raise type(exception)(str(exception)) from exception
 
-    def post(self, request, slug, *args, **kwargs): 
-        try: 
+    def post(self, request, slug, *args, **kwargs):
+        try:
             post = get_object_or_404(Post, slug=slug)
             post_form = PostForm(request.POST, instance=post)
 
@@ -187,7 +220,8 @@ class EditPost(View):
                 post_form.instance.name = request.user.username
                 post_form.save()
                 post_form = PostForm()
-                messages.success(request, "Your post has been successfully edited!")
+                messages.success(request,
+                                 "Your post has been edited!")
             else:
                 post_form = PostForm(request.POST, instance=post)
 
@@ -207,14 +241,19 @@ class EditPost(View):
 
 
 class EditComment(View):
-    """ Renders a form in the edit comment html of the given comment. validates the submitted form, update in the database and redirects to the post the comments belongs to"""
+    """
+    Renders a form in the edit comment html of the given comment.
+    validates the submitted form, update in the database
+    and redirects to the post the comments belongs to.
+    """
 
     def get(self, request, comment_id, *args, **kwargs):
         try:
             comment = get_object_or_404(Comment, id=comment_id)
             comment_form = CommentForm(instance=comment)
 
-            return render(request, "edit_comment.html", {"comment_form": comment_form, "comment": comment})
+            return render(request, "edit_comment.html",
+                          {"comment_form": comment_form, "comment": comment})
         except Exception as exception:
             raise type(exception)(str(exception)) from exception
 
@@ -227,7 +266,8 @@ class EditComment(View):
                 comment_form.instance.name = request.user.username
                 comment_form.save()
                 comment_form = CommentForm()
-                messages.success(request, "Your comment has been successfully edited!")
+                messages.success(request,
+                                 "Your comment has been edited!")
             else:
                 comment_form = CommentForm(request.POST, instance=comment)
 
@@ -263,11 +303,12 @@ class DeletePost(View):
             post = get_object_or_404(Post, slug=slug)
             topic = post.topic.slug
 
-            if request.user == post.author: 
+            if request.user == post.author:
                 post.delete()
-                messages.success(request, "Your post has been successfully deleted!")
+                messages.success(request,
+                                 "Your post has been deleted!")
                 return redirect(reverse("posts", kwargs={"topic": topic}))
-                
+
         except Exception as exception:
             raise type(exception)(str(exception)) from exception
 
@@ -283,11 +324,11 @@ class DeleteComment(View):
 
             if request.user == comment.author:
                 comment.delete()
-                messages.success(request, "Your comment has been successfully deleted!")
+                messages.success(request,
+                                 "Your comment has been deleted!")
                 return redirect(reverse("post_detail", kwargs={"slug": slug}))
             else:
-                return HttpResponse(["DELETE"])
+                return HttpResponse(["POST"])
 
         except Exception as exception:
             raise type(exception)(str(exception)) from exception
-

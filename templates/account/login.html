@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% load i18n %}
 {% load account socialaccount %}
 
@@ -17,7 +16,8 @@ Sign In
       <div class="col mx-auto">
         <h3 class="ml-3 mt-3">{% trans "Sign In" %}</h3>
         <hr>
-        <p class="registration-text ml-3">{% blocktrans %}Welcome back to the Mynterest blog. To leave a comment or like a post, please log in. If you
+        <p class="registration-text ml-3">{% blocktrans %}Welcome back to the Mynterest blog. To leave a comment or like
+          a post, please log in. If you
           have not created an account yet, then <a class="link" href="{{ signup_url }}">sign up</a>
           first.{% endblocktrans %}</p>
       </div>

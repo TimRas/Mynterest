@@ -1,14 +1,17 @@
 from django.test import TestCase
 from django.db import IntegrityError
-from datetime import datetime
 from .models import Topic, Post, Comment, User
- 
+
 
 class TopicModelTest(TestCase):
-    """" Test class for Topic model. Checks if title field requirements work properly """
+    """
+    Test class for Topic model.
+    Checks if title field requirements work properly.
+    """
 
     def setUp(self):
-        self.topic = Topic.objects.create(title='Test Topic', slug='test-topic')
+        self.topic = Topic.objects.create(title='Test Topic',
+                                          slug='test-topic')
 
     def test_title_field_filled_required(self):
         topic = Topic.objects.get(id=1)
@@ -20,11 +23,17 @@ class TopicModelTest(TestCase):
 
 
 class PostModelTest(TestCase):
-    """" Test class for Post model. Checks if several field requirements work properly """
+    """
+    Test class for Post model.
+    Checks if several field requirements work properly
+    and if __str__ and amount of likes method work properly.
+    """
 
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.topic = Topic.objects.create(title='Test Topic', slug='test-topic')
+        self.user = User.objects.create_user(username='testuser',
+                                             password='testpassword')
+        self.topic = Topic.objects.create(title='Test Topic',
+                                          slug='test-topic')
         self.post = Post.objects.create(
             topic=self.topic,
             title='Test Post',
@@ -47,20 +56,25 @@ class PostModelTest(TestCase):
         self.assertEqual(post.excerpt, 'Test excerpt')
 
     def test_str_method(self):
-        """Test the __str__ method of the Post model"""
         expected_str = self.post.title
         self.assertEqual(str(self.post), expected_str)
 
     def test_amount_of_likes(self):
-        """Test the amount_of_likes method of the Post model"""
         expected_likes_count = 1
         self.assertEqual(self.post.amount_of_likes(), expected_likes_count)
 
 
 class CommentModelTest(TestCase):
+    """
+    Test class for comment model.
+    Checks if __str__ method is able to print the proper values.
+    """
+
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.topic = Topic.objects.create(title='Test Topic', slug='test-topic')
+        self.user = User.objects.create_user(username='testuser',
+                                             password='testpassword')
+        self.topic = Topic.objects.create(title='Test Topic',
+                                          slug='test-topic')
         self.post = Post.objects.create(
             topic=self.topic,
             title='Test Post',
@@ -75,8 +89,5 @@ class CommentModelTest(TestCase):
         )
 
     def test_str_method(self):
-        """Test the __str__ method of the Comment model"""
         expected_str = f'Comment {self.comment.body} by {self.comment.author}'
         self.assertEqual(str(self.comment), expected_str)
-
-
