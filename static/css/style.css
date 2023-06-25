@@ -412,8 +412,10 @@ hr {
     border-style: none;
     height: 3em;
     width: 5em;
+    margin: 0.3em;
     font-weight: 800;
     text-align: center;
+    float: right;
     text-decoration: none;
     color: white;
 }
@@ -575,8 +577,6 @@ hr {
 
 @media (max-width: 585px) {
     .post-detail-buttons {
-        max-height: 2.2em;
-        padding: 0.3em;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
     }
@@ -589,14 +589,10 @@ hr {
 }
 
 @media (max-width: 415px) {
-    .align-buttons-right {
-        text-align: right;
-    }
-}
-
-@media (max-width: 415px) {
-    .comment-buttons-width {
+    .buttons-full-width {
         width: 100%;
+        max-height: 2.2em;
+        padding: 0.3em;
     }
 }
 

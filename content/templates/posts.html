@@ -60,7 +60,7 @@
         </div>
         {% if posts|length == 0 %}
         <div class="row pt-2 mb-3 w-75 mx-auto">
-            <div class="col-12 pt-2">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-12">
                 <div class="card border-0">
                     <div class="card-body post-card-body text-white">
                         <div class="row mx-0 pl-1">
@@ -68,15 +68,15 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-6 post-excerpt pl-3">
+                            <div class="col-12 post-excerpt pl-3">
                                 <p>Be the first to write a post on this topic!</p>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12 pt-2 pl-2">
                                 <a href="#" onclick="location.href='{% url 'check_can_post' topic=topic %}'"
-                                    class="post-create-button float-right px-3">Create Post</a>
+                                    class="post-create-button buttons-full-width float-right px-3">Create Post</a>
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-6 col-12">
                                     <a href="{% url 'post_detail' slug=post.slug %}"
-                                        class="button post-detail-buttons float-right px-3">View Post</a>
+                                        class="button post-detail-buttons buttons-full-width float-right px-3">View Post</a>
                                 </div>
                             </div>
                             <div class="row float-right">

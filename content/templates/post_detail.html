@@ -70,8 +70,8 @@ Post Details
                         </div>
                         <div class="col-lg-6 col-md-9">
                             {% if post.author == request.user %}
-                            <a href="{% url 'edit_post' slug=post.slug %}" class="button post-detail-buttons float-right px-3">Edit Post</a>
-                            <a href="{% url 'delete_post' slug=post.slug %}" class="button post-detail-buttons mr-2 float-right px-3">Delete Post</a>
+                            <a href="{% url 'edit_post' slug=post.slug %}" class="button post-detail-buttons buttons-full-width px-3">Edit Post</a>
+                            <a href="{% url 'delete_post' slug=post.slug %}" class="button post-detail-buttons buttons-full-width px-3">Delete Post</a>
                             {% endif %}
                         </div>
                     </div>
@@ -108,9 +108,9 @@ Post Details
                                         </div>
                                         <div class="col-12 col-md-9">
                                             {% if comment.author == request.user %}
-                                            <div class="align-buttons-right">
-                                                <a href="{% url 'edit_comment' comment_id=comment.id %}" class="button post-detail-buttons comment-buttons-width float-right">Edit Comment</a>
-                                                <a href="{% url 'delete_comment' comment_id=comment.id %}" class="button post-detail-buttons comment-buttons-width float-right mr-2">Delete Comment</a>
+                                            <div>
+                                                <a href="{% url 'edit_comment' comment_id=comment.id %}" class="button post-detail-buttons buttons-full-width">Edit Comment</a>
+                                                <a href="{% url 'delete_comment' comment_id=comment.id %}" class="button post-detail-buttons buttons-full-width">Delete Comment</a>
                                             </div>
                                             {% endif %}
                                         </div>
