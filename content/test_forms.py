@@ -42,7 +42,6 @@ class TestForms(TestCase):
         user = User.objects.create_user(username='testuser', password='12345')
         topic = Topic.objects.create(title="example", slug="example")
         form = PostForm(data={
-            'topic': topic.id,
             'title': 'test title',
             'excerpt': 'test excerpt',
             'content': 'test content'
@@ -50,6 +49,7 @@ class TestForms(TestCase):
         self.assertTrue(form.is_valid())
         post = form.save(commit=False)
         post.author = user
+        post.topic = topic
         post.save()
         self.assertEqual(post.title, 'test title')
 
@@ -58,4 +58,4 @@ class TestForms(TestCase):
 
         form = PostForm(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 4)
+        self.assertEqual(len(form.errors), 3)

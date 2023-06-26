@@ -43,6 +43,10 @@ class PostModelTest(TestCase):
         )
         self.post.likes.add(self.user)
 
+    def test_topic_field_filled(self):
+        post = Post.objects.get(id=1)
+        self.assertEqual(str(post.topic), 'Test Topic')
+
     def test_title_field_filled_in(self):
         post = Post.objects.get(id=1)
         self.assertEqual(post.title, 'Test Post')

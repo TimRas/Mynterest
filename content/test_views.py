@@ -436,7 +436,11 @@ class TestViews(TestCase):
         url = reverse("create_post", kwargs={"topic": "non-existent-topic"})
         response = self.client.post(url)
 
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
+        storage = get_messages(response.wsgi_request)
+        messages = [message.message for message in storage]
+        self.assertIn("Form is invalid. No Topic matches the given query.",
+                      messages)
 
     def test_edit_post_get_exception(self):
         """ Test the exception handling for EditPost view get method. """

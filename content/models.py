@@ -15,7 +15,7 @@ class Topic(models.Model):
 
 class Post(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE,
-                              related_name='posts')
+                              related_name='posts', editable=False)
     title = models.CharField(max_length=70, unique=True, null=False,
                              blank=False)
     slug = models.SlugField(max_length=70, unique=True)

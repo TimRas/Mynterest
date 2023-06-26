@@ -189,9 +189,10 @@ class CreatePost(View):
                 messages.success(request, "Your post has been created")
                 return redirect(reverse("posts", kwargs={"topic": topic}))
             else:
-                return render(request, "create_post.html", {"form": post_form})
+                raise Exception()
         except Exception as exception:
-            raise type(exception)(str(exception)) from exception
+            messages.error(request, f'Form is invalid. {exception}')
+            return HttpResponse(['POST'])
 
 
 class EditPost(View):
