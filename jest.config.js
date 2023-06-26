@@ -1,5 +1,5 @@
 module.exports = {
     testEnvironment: 'jsdom',
-    testMatch: ['**/tests/**/base_test.js'],
+    testMatch: ['**/templates/tests/js/test_base.js'], 
   };
   
