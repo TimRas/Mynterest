@@ -16,7 +16,7 @@ class Topic(models.Model):
 class Post(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE,
                               related_name='posts', editable=False)
-    title = models.CharField(max_length=70, unique=True, null=False,
+    title = models.CharField(max_length=70, null=False,
                              blank=False)
     slug = models.SlugField(max_length=70, unique=True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
