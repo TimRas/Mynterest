@@ -192,7 +192,7 @@ class CreatePost(View):
                 raise Exception()
         except Exception as exception:
             messages.error(request, f'Form is invalid. {exception}')
-            return HttpResponse(['POST'])
+            return HttpResponse()
 
 
 class EditPost(View):
