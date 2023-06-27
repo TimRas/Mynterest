@@ -62,7 +62,7 @@ class TestViews(TestCase):
 
     def test_all_posts(self):
         """
-        Test to check that all post are displayed
+        Test to check that all posts are displayed
         correctly for their given topic.
         """
         url = reverse('posts', kwargs={'topic': self.topic.slug})

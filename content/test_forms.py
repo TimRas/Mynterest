@@ -10,7 +10,7 @@ class TestForms(TestCase):
 
     def test_comment_form_valid_data(self):
         """"
-        Test to see if commentform is valid with valid data
+        Test to see if comment form is valid with valid data
         and that the comment can be saved with the valid data.
         """
 
@@ -27,7 +27,7 @@ class TestForms(TestCase):
         self.assertEqual(comment.body, 'test comment')
 
     def test_comment_form_empty_data(self):
-        """ Test to see if the form is invalid when provided with zero data """
+        """ Test to see if the comment form is invalid when provided with zero data """
 
         form = CommentForm(data={})
         self.assertFalse(form.is_valid())
@@ -35,7 +35,7 @@ class TestForms(TestCase):
 
     def test_post_form_valid_data(self):
         """
-        Test to see if postform is valid with valid data
+        Test to see if post form is valid with valid data
         and that the post can be saved with the valid data.
         """
 
@@ -54,7 +54,7 @@ class TestForms(TestCase):
         self.assertEqual(post.title, 'test title')
 
     def test_post_form_empty_data(self):
-        """ Test to see if the form is invalid when provided with zero data """
+        """ Test to see if the post form is invalid when provided with zero data """
 
         form = PostForm(data={})
         self.assertFalse(form.is_valid())
